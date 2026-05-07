@@ -55,6 +55,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;display:inline-block;}
 .bok{background:var(--green-bg);color:var(--green-text);}
 .bwarn{background:var(--amber-bg);color:var(--amber-text);}
+.brisk{background:var(--red-bg);color:var(--red-text);}
 .rb{height:5px;background:var(--surface2);border-radius:3px;overflow:hidden;}
 .rf{height:100%;border-radius:3px;}
 .chv{font-size:13px;color:var(--text3);transition:transform .2s;text-align:right;user-select:none;}
@@ -126,15 +127,46 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 .acttext{font-size:13px;color:var(--text);line-height:1.4;}
 .owpill{font-size:11px;font-weight:700;color:var(--nalashaa);background:var(--nalashaa-light);padding:3px 10px;border-radius:20px;display:inline-block;}
 
+/* Trends tab styles */
+.delta-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:1.75rem;}
+.delta-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;}
+.delta-card .dl{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
+.delta-card .dv{font-size:22px;font-weight:600;color:var(--text);letter-spacing:-.02em;}
+.delta-card .dd{font-size:12px;margin-top:4px;font-weight:600;}
+.dd.up{color:var(--green);}
+.dd.down{color:var(--red);}
+.dd.flat{color:var(--text3);}
+
+.health-timeline{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.75rem;}
+.ht-hdr{display:grid;gap:0;padding:10px 16px;background:var(--surface2);font-size:11px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;}
+.ht-row{display:grid;gap:0;padding:10px 16px;border-top:1px solid var(--border);align-items:center;}
+.ht-name{font-size:13px;font-weight:600;color:var(--text);}
+.ht-cell{text-align:center;}
+.ht-dot{display:inline-block;width:22px;height:22px;border-radius:50%;line-height:22px;font-size:10px;font-weight:700;color:#fff;}
+.ht-dot.on-track{background:var(--green);}
+.ht-dot.attention{background:var(--amber);}
+.ht-dot.at-risk{background:var(--red);}
+
+.sparkline-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:1.75rem;}
+.spark-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;}
+.spark-card h4{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px;}
+.spark-card .spark-val{font-size:18px;font-weight:600;color:var(--text);margin-bottom:8px;}
+.spark-card .spark-delta{font-size:12px;font-weight:600;margin-bottom:8px;}
+.spark-wrap{height:60px;position:relative;}
+
+.week-selector{display:flex;align-items:center;gap:12px;margin-bottom:1.75rem;flex-wrap:wrap;}
+.week-selector label{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.04em;}
+.week-selector select{font-size:13px;padding:6px 12px;border:1px solid var(--border-md);border-radius:var(--radius-sm);background:var(--surface);color:var(--text);cursor:pointer;}
+
 @media(max-width:900px){
   .asm{grid-template-columns:1fr 1fr 80px 20px;}
   .hide-sm{display:none;}
-  .metric-row,.chart-grid,.fg,.mining-grid{grid-template-columns:1fr 1fr;}
+  .metric-row,.chart-grid,.fg,.mining-grid,.delta-row,.sparkline-grid{grid-template-columns:1fr 1fr;}
   .cc.full,.fc.s2{grid-column:1/-1;}
   .di{grid-template-columns:1fr;}
 }
 @media(max-width:600px){
-  .metric-row,.chart-grid,.fg,.mining-grid{grid-template-columns:1fr;}
+  .metric-row,.chart-grid,.fg,.mining-grid,.delta-row,.sparkline-grid{grid-template-columns:1fr;}
   .main{padding:1rem;}
 }
 </style>
@@ -143,7 +175,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 
 <nav class="nav">
   <div class="nav-brand">Nalashaa Solutions <span>Portfolio Review</span></div>
-  <div class="nav-meta">Period: Apr 15 – May 5, 2026 &nbsp;·&nbsp; Prepared May 5, 2026</div>
+  <div class="nav-meta" id="nav-meta">Period: Apr 15 – May 5, 2026 &nbsp;·&nbsp; Prepared May 5, 2026</div>
 </nav>
 
 <div class="tabs">
@@ -152,19 +184,14 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
   <div class="tab" onclick="showTab('revenue',this)">Revenue</div>
   <div class="tab" onclick="showTab('mining',this)">Mining &amp; Pipeline</div>
   <div class="tab" onclick="showTab('flags',this)">Priority Flags</div>
+  <div class="tab" onclick="showTab('trends',this)">Trends</div>
 </div>
 
 <div class="main">
 
   <!-- OVERVIEW -->
   <div class="view active" id="view-overview">
-    <div class="metric-row">
-      <div class="mc hi"><div class="ml">3-month forecast</div><div class="mv">$393,680</div><div class="ms">6 accounts · May–July 2026</div></div>
-      <div class="mc"><div class="ml">Team deployed</div><div class="mv">44+</div><div class="ms">Across 6 accounts</div></div>
-      <div class="mc"><div class="ml">Tickets resolved</div><div class="mv">114 / 130</div><div class="ms">88% completion rate</div></div>
-      <div class="mc"><div class="ml">Pipeline upside</div><div class="mv">+$10,400</div><div class="ms">Aculocity 2 roles if closed</div></div>
-      <div class="mc"><div class="ml">Accounts at risk</div><div class="mv">3 / 6</div><div class="ms">Cascade · Fabricut · Aculocity</div></div>
-    </div>
+    <div class="metric-row" id="overview-metrics"></div>
     <div class="sh"><h2>Account snapshot</h2><span class="hint">Click any row to expand</span></div>
     <div class="at" id="acct-overview"></div>
     <div class="sh"><h2>Top actions for this week</h2></div>
@@ -182,42 +209,30 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 
   <!-- REVENUE -->
   <div class="view" id="view-revenue">
-    <div class="metric-row">
-      <div class="mc hi"><div class="ml">Total 3M forecast</div><div class="mv">$393,680</div><div class="ms">All 6 accounts</div></div>
-      <div class="mc"><div class="ml">Largest account</div><div class="mv">$129,080</div><div class="ms">Cascade · 33% of portfolio</div></div>
-      <div class="mc"><div class="ml">Revenue at risk</div><div class="mv">~$108K</div><div class="ms">Billing gaps + Cascade shortfall</div></div>
-      <div class="mc"><div class="ml">Fully billed</div><div class="mv">3 / 6</div><div class="ms">Flatiron · Red Gold · Select Medical</div></div>
-      <div class="mc"><div class="ml">Pipeline upside</div><div class="mv">+$10,400</div><div class="ms">Aculocity 2 new roles/mo</div></div>
-    </div>
+    <div class="metric-row" id="rev-metrics"></div>
     <div class="chart-grid">
       <div class="cc full">
         <h3>Monthly revenue by account</h3>
-        <p>May, June, July 2026 forecast — all 6 accounts</p>
+        <p>3-month forecast — all accounts</p>
         <div class="legrow" id="rev-legend"></div>
-        <div class="cwt"><canvas id="revGrouped" role="img" aria-label="Grouped bar chart of monthly revenue per account May June July 2026">Revenue by account across three months.</canvas></div>
+        <div class="cwt"><canvas id="revGrouped"></canvas></div>
       </div>
       <div class="cc">
         <h3>Portfolio share — 3-month total</h3>
         <p>Contribution by account</p>
-        <div class="cw"><canvas id="portPie" role="img" aria-label="Donut chart of portfolio share by account">Cascade 33%, Fabricut 32%, Aculocity 13%, Flatiron 12%, Red Gold 6%, Select Medical 4%.</canvas></div>
+        <div class="cw"><canvas id="portPie"></canvas></div>
       </div>
       <div class="cc">
         <h3>Cascade — revenue vs commitment</h3>
-        <p>22% decline May to July vs $73,320/mo committed rate</p>
-        <div class="cw"><canvas id="cascadeChart" role="img" aria-label="Line chart showing Cascade revenue declining vs commitment line">Cascade actual vs committed rate.</canvas></div>
+        <p>Forecast vs $73,320/mo committed rate</p>
+        <div class="cw"><canvas id="cascadeChart"></canvas></div>
       </div>
     </div>
   </div>
 
   <!-- MINING -->
   <div class="view" id="view-mining">
-    <div class="metric-row">
-      <div class="mc hi"><div class="ml">Active mining threads</div><div class="mv">5 / 6</div><div class="ms">Flatiron only account with none</div></div>
-      <div class="mc"><div class="ml">Aculocity upside</div><div class="mv">+$10,400</div><div class="ms">2 roles · $4,800 + $5,600/mo</div></div>
-      <div class="mc"><div class="ml">Red Gold pilot window</div><div class="mv">4–8 wks</div><div class="ms">1 resource = 8 wks · 2 = 4 wks</div></div>
-      <div class="mc"><div class="ml">Cascade ROI pitch</div><div class="mv">Live</div><div class="ms">2024–2026 savings narrative active</div></div>
-      <div class="mc"><div class="ml">Select Medical</div><div class="mv">$5,600</div><div class="ms">Billed · TFS analysis in progress</div></div>
-    </div>
+    <div class="metric-row" id="mining-metrics"></div>
     <div class="sh"><h2>Mining detail by account</h2></div>
     <div class="mining-grid" id="mining-grid"></div>
   </div>
@@ -225,295 +240,428 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
   <!-- FLAGS -->
   <div class="view" id="view-flags">
     <div class="sh"><h2>Priority flags — meeting agenda</h2></div>
-    <div class="fg">
+    <div class="fg" id="flags-grid"></div>
+  </div>
 
-      <div class="fc">
-        <div class="fhdr"><div class="fd red"></div><div class="fht"><h3>Cascade — $36K/mo contract gap</h3><p>Immediate · AM action</p></div></div>
-        <div class="fb">Committed $73,320/mo. July forecast $37,240 — 51% of commitment. Both DafoNow and App Consolidation declining. ROI deck (2024–2026 Gateway/Ops→Shipping savings) is now the lever to unlock approved project funding and close this gap.</div>
-        <div class="fa">
-          <div class="far"><span class="ow">AM</span>Urgent contract review — clarify rate vs actuals and document scope changes</div>
-          <div class="far"><span class="ow">AM</span>Use ROI deck to position approved project as incremental savings — accelerate signoff</div>
-        </div>
-      </div>
-
-      <div class="fc">
-        <div class="fhdr"><div class="fd red"></div><div class="fht"><h3>Billing gaps — 3 accounts</h3><p>Immediate · Revenue recognition risk</p></div></div>
-        <div class="fb">Aculocity (4 people), Fabricut (9 people), and Cascade have unbilled resources across May–July. Revenue is not being captured despite strong delivery. Combined exposure is material.</div>
-        <div class="fa">
-          <div class="far"><span class="ow">AM</span>Reconcile all 3 accounts — bill all resources for May–July this week</div>
-          <div class="far"><span class="ow">DM</span>Confirm Fabricut 9-resource deployment and align to billing actuals</div>
-        </div>
-      </div>
-
-      <div class="fc">
-        <div class="fhdr"><div class="fd amber"></div><div class="fht"><h3>Aculocity — 2 roles in hiring + Monday demo</h3><p>This week · DM + Rec-Team</p></div></div>
-        <div class="fb">Client wants AI Implementation Engineer ($4,800/mo) and AI Solution Specialist ($5,600/mo). Rec-Team pursuing both — 6–8 week close. Monday demo needs engineering resource confirmed today. Closing both roles adds $10,400/mo.</div>
-        <div class="fa">
-          <div class="far"><span class="ow">DM</span>Confirm engineering resource for Monday AI demo — today</div>
-          <div class="far"><span class="ow">AM</span>Track Rec-Team weekly — target role close in 6 weeks</div>
-        </div>
-      </div>
-
-      <div class="fc">
-        <div class="fhdr"><div class="fd amber"></div><div class="fht"><h3>Fabricut — July go-live blockers</h3><p>Monitor · DM escalation</p></div></div>
-        <div class="fb">Parallel workstreams active: NetSuite mapping + 180+ normalized tables. Hemant's 1,000-record first draft needs review and scale. VM infrastructure and data retention exec decision remain on critical path to July go-live.</div>
-        <div class="fa">
-          <div class="far"><span class="ow">DM</span>Escalate VM blockers + obtain exec decision on data retention this week</div>
-          <div class="far"><span class="ow">PM</span>Review Hemant's draft and plan scale-out to full dataset</div>
-        </div>
-      </div>
-
-      <div class="fc">
-        <div class="fhdr"><div class="fd blue"></div><div class="fht"><h3>Red Gold — AI pilot SOW forming</h3><p>Opportunity · 4–8 week window</p></div></div>
-        <div class="fb">AI POC list presented — awaiting client response. 1 resource = 6–8 weeks; 2 resources = ~4 weeks. Shapes into a formal SOW. CSAT 3.86 and CROP delivery give strong credibility. Speed of resourcing determines timeline.</div>
-        <div class="fa">
-          <div class="far"><span class="ow">AM</span>Follow up on POC list — push for go/no-go this week</div>
-          <div class="far"><span class="ow">DM</span>Pre-identify 1–2 resources so we can start within days of approval</div>
-        </div>
-      </div>
-
-      <div class="fc">
-        <div class="fhdr"><div class="fd blue"></div><div class="fht"><h3>Select Medical — TFS backlog → expansion pitch</h3><p>Opportunity · QA upsell play</p></div></div>
-        <div class="fb">Currently billed $5,600/mo. TFS data extraction underway — identifying highest-backlog departments. Analysis output will determine where to pitch additional resources including QA engagement. Evidence-led upsell approach.</div>
-        <div class="fa">
-          <div class="far"><span class="ow">AM</span>Complete TFS analysis and prepare department-level pitch including QA engagement</div>
-          <div class="far"><span class="ow">AM</span>Frame upsell as faster backlog clearance + quality improvement narrative</div>
-        </div>
-      </div>
-
-      <div class="fc s2">
-        <div class="fhdr"><div class="fd green"></div><div class="fht"><h3>Flatiron — only account with zero pipeline threads</h3><p>This month · Growth conversation needed</p></div></div>
-        <div class="fb">98% completion, Thursday live deployment, 85–90.5% hands-on-keyboard efficiency — and no mining activity. Strongest delivery account in the portfolio with no pipeline conversation. Thursday deployment is the natural trigger. Adjacent scope opportunities: COOP expansion, scheduler, billing modules.</div>
-        <div class="fa">
-          <div class="far"><span class="ow">AM</span>Initiate expansion conversation using Thursday deployment as the proof point</div>
-          <div class="far"><span class="ow">AM</span>Identify 1–2 adjacent workstreams to scope as follow-on engagement</div>
-        </div>
-      </div>
-
+  <!-- TRENDS -->
+  <div class="view" id="view-trends">
+    <div class="week-selector">
+      <label>Showing data for:</label>
+      <select id="trend-range" onchange="renderTrends()">
+        <option value="all">All weeks</option>
+        <option value="8" selected>Last 8 weeks</option>
+        <option value="4">Last 4 weeks</option>
+      </select>
     </div>
+
+    <div class="sh"><h2>Week-over-week changes</h2></div>
+    <div class="delta-row" id="delta-cards"></div>
+
+    <div class="chart-grid">
+      <div class="cc full">
+        <h3>Portfolio forecast trend</h3>
+        <p>Total 3-month forecast over time</p>
+        <div class="legrow" id="forecast-legend"></div>
+        <div class="cwt"><canvas id="forecastTrend"></canvas></div>
+      </div>
+      <div class="cc">
+        <h3>Revenue by account trend</h3>
+        <p>Per-account forecast over weeks</p>
+        <div class="cw"><canvas id="acctRevTrend"></canvas></div>
+      </div>
+      <div class="cc">
+        <h3>Team size trend</h3>
+        <p>Total people deployed over weeks</p>
+        <div class="cw"><canvas id="teamTrend"></canvas></div>
+      </div>
+    </div>
+
+    <div class="sh"><h2>Ticket completion rate</h2></div>
+    <div class="chart-grid">
+      <div class="cc full">
+        <h3>Completion rate trend</h3>
+        <p>Tickets resolved / total across weeks</p>
+        <div class="cwt"><canvas id="ticketTrend"></canvas></div>
+      </div>
+    </div>
+
+    <div class="sh"><h2>Account forecast sparklines</h2></div>
+    <div class="sparkline-grid" id="sparkline-grid"></div>
+
+    <div class="sh"><h2>Health status history</h2></div>
+    <div class="health-timeline" id="health-timeline"></div>
   </div>
 
 </div>
 
 <script>
-const ACCOUNTS = [
+// ─── HISTORICAL DATA (auto-updated by /weekly-meeting skill) ───
+const HISTORY = [
   {
-    id:'cascade',name:'Cascade',sub:'NHS · DafoNow + App Consolidation',
-    health:'Attention',badge:'bwarn',team:23,forecast:'$129,080',
-    billing:'Billing gaps',billingOk:false,tickets:'61 / 74',
-    rev:[48000,43840,37240],billed:['Yes','Yes','Yes'],
-    wins:['Release 2.10: 93 tickets, 45 features, zero post-release regressions','82% completion velocity; zero client validation backlog','DafoNow June 15 soft launch target maintained'],
-    concerns:['Revenue declining 22% May→July; July at 51% of $73,320/mo — $36K gap','Client flagged 3-week 2.10 delay — cannot repeat for 2.11 or Q4 at risk','Dual SOWs (Dafo + Website) stuck; pipeline 3+ months stale'],
-    mining:['ROI presentation live: 2024–2026 $ savings from Gateway + Ops→Shipping consolidation','Pitching approved project continuation as path to additional $ savings','Dafo SOW awaiting client signature · Website SOW pending internal signoff']
-  },
-  {
-    id:'fabricut',name:'Fabricut',sub:'Data Migration · AS400 → NetSuite / Power BI',
-    health:'Attention',badge:'bwarn',team:9,forecast:'$127,200',
-    billing:'Unbilled gaps',billingOk:false,tickets:'N/A',
-    rev:[42400,42400,42400],billed:['No','No','No'],
-    wins:['360 tables loaded to MySQL RAW zone from 2,800+ AS400 sources','Master entity sign-off complete: customer, vendor, product domains','42 executive reports mapped for Power BI; 11 FSDs and 6 NetSuite templates done'],
-    concerns:['Unbilled resources across all 3 months — $127,200 forecast at risk','July go-live blocked by VM infrastructure + unresolved data retention exec decision','Mining thread 97 days stale — no SOW or defined opportunity in pipeline'],
-    mining:['Parallel approach: NetSuite mapping + 180+ normalized tables across Product, Vendor, Customer and additional master entities','Hemant completed first draft from 1,000-record data analysis — needs review and scale to full dataset','Strong technical foundation built; natural expansion path post go-live']
-  },
-  {
-    id:'flatiron',name:'Flatiron',sub:'Healthcare QA & Automation',
-    health:'On Track',badge:'bok',team:5,forecast:'$47,040',
-    billing:'100% billed',billingOk:true,tickets:'52 / 53',
-    rev:[15680,15680,15680],billed:['Yes','Yes','Yes'],
-    wins:['98% completion rate; 85–90.5% hands-on-keyboard efficiency across 7 modules','Thursday live deployment scheduled; CRC alert banner confirmed for 3rd-week release','4–5 regression cycles (90–100 tests) with zero client validation backlog'],
-    concerns:['ONC Carespace access issue needs resolution to protect Thursday deployment','Zero mining threads — growth left on strongest client relationship in portfolio','No expansion discussion initiated despite exceptional delivery metrics'],
-    mining:['No active mining threads — only account in portfolio with no pipeline activity','Thursday live deployment is the natural expansion conversation trigger','Adjacent scope: COOP expansion, scheduler enhancements, billing module improvements']
-  },
-  {
-    id:'aculocity',name:'Aculocity',sub:'DataSystems · CRM & AI Solutions',
-    health:'Attention',badge:'bwarn',team:4,forecast:'$51,840',
-    billing:'Billing gaps',billingOk:false,tickets:'N/A',
-    rev:[15680,15680,20480],billed:['No','No','No'],
-    wins:['88.93% utilization, zero post-production incidents, 100% business acceptance','July revenue spikes to $20,480 (+30.6%) via DataSystems expansion','Critical fixes: EPC model year, MDM BOMs decimals, NetSuite API performance'],
-    concerns:['Billing gaps May–July — 4-person team not fully billed','Monday AI demo has no confirmed engineering resource — needs action today','Pipeline stale since Jan 8 despite active client interest in AI/CRM'],
-    mining:['Client wants AI Implementation Engineer ($4,800/mo) — Rec-Team pursuing · 6–8 week close','Client wants AI Solution Specialist ($5,600/mo) — Rec-Team pursuing · 6–8 week close','Both roles close = +$10,400/mo added to $15,680 baseline','Monday AI agent demo scheduled — engineering resource must be confirmed immediately']
-  },
-  {
-    id:'redgold',name:'Red Gold',sub:'AS400 Modernization · Agriculture',
-    health:'On Track',badge:'bok',team:2,forecast:'$21,760',
-    billing:'100% billed',billingOk:true,tickets:'1 / 3',
-    rev:[5920,7920,7920],billed:['Yes','Yes','Yes'],
-    wins:['CSAT recovered to 3.86 (77.1%) in Q1 2026, up +0.14 from Q4 2025','CROP Field Master Maintenance deployed to production (17 database tasks)','34% revenue growth: May $5,920 → June/July $7,920'],
-    concerns:['Grower listing ticket blocked by variable clearing/overflow bug','Client flagged testing gaps — F-key and feature validation needs improvement','AI pilot client response awaited — momentum could stall without follow-up'],
-    mining:['AI POC list presented to client — awaiting go/no-go decision','1 resource: 6–8 weeks to complete full pilot · 2 resources: ~4 weeks','Pilot shapes into formal SOW — expected within weeks of approval','CSAT recovery and CROP delivery provide strong credibility for AI pitch']
-  },
-  {
-    id:'selectmedical',name:'Select Medical',sub:'TFS Backlog Analysis · QA Expansion',
-    health:'On Track',badge:'bok',team:1,forecast:'$16,800',
-    billing:'100% billed',billingOk:true,tickets:'N/A',
-    rev:[5600,5600,5600],billed:['Yes','Yes','Yes'],
-    wins:['Consistent $5,600/mo billing with full resource utilization','TFS data extraction underway — highest-backlog departments being identified','QA engagement opportunity identified as part of expansion pitch'],
-    concerns:['Single resource — low account penetration relative to client size','No formal SOW or mining thread in pipeline yet','Expansion pitch dependent on completing TFS backlog analysis first'],
-    mining:['Extracting and reviewing TFS data to identify which departments have the most backlog','Analysis output determines where to pitch additional resources','QA engagement included in pitch — quality + velocity improvement narrative','No timeline yet — dependent on completion of TFS review']
+    "week_id":"2026-W19","date":"2026-05-05","period":"Apr 15 – May 5, 2026",
+    "portfolio_forecast":393680,"team_deployed":44,"tickets_resolved":114,"tickets_total":130,
+    "pipeline_upside":10400,"accounts_at_risk":3,
+    "accounts":[
+      {"id":"cascade","name":"Cascade","sub":"NHS · DafoNow + App Consolidation","health":"Attention","team":23,"forecast":129080,"billing":"Billing gaps","billingOk":false,"tickets_resolved":61,"tickets_total":74,"rev":[48000,43840,37240],"billed":["Yes","Yes","Yes"],"wins":["Release 2.10: 93 tickets, 45 features, zero post-release regressions","82% completion velocity; zero client validation backlog","DafoNow June 15 soft launch target maintained"],"concerns":["Revenue declining 22% May→July; July at 51% of $73,320/mo — $36K gap","Client flagged 3-week 2.10 delay — cannot repeat for 2.11 or Q4 at risk","Dual SOWs (Dafo + Website) stuck; pipeline 3+ months stale"],"mining":["ROI presentation live: 2024–2026 $ savings from Gateway + Ops→Shipping consolidation","Pitching approved project continuation as path to additional $ savings","Dafo SOW awaiting client signature · Website SOW pending internal signoff"]},
+      {"id":"fabricut","name":"Fabricut","sub":"Data Migration · AS400 → NetSuite / Power BI","health":"Attention","team":9,"forecast":127200,"billing":"Unbilled gaps","billingOk":false,"tickets_resolved":null,"tickets_total":null,"rev":[42400,42400,42400],"billed":["No","No","No"],"wins":["360 tables loaded to MySQL RAW zone from 2,800+ AS400 sources","Master entity sign-off complete: customer, vendor, product domains","42 executive reports mapped for Power BI; 11 FSDs and 6 NetSuite templates done"],"concerns":["Unbilled resources across all 3 months — $127,200 forecast at risk","July go-live blocked by VM infrastructure + unresolved data retention exec decision","Mining thread 97 days stale — no SOW or defined opportunity in pipeline"],"mining":["Parallel approach: NetSuite mapping + 180+ normalized tables across Product, Vendor, Customer and additional master entities","Hemant completed first draft from 1,000-record data analysis — needs review and scale to full dataset","Strong technical foundation built; natural expansion path post go-live"]},
+      {"id":"flatiron","name":"Flatiron","sub":"Healthcare QA & Automation","health":"On Track","team":5,"forecast":47040,"billing":"100% billed","billingOk":true,"tickets_resolved":52,"tickets_total":53,"rev":[15680,15680,15680],"billed":["Yes","Yes","Yes"],"wins":["98% completion rate; 85–90.5% hands-on-keyboard efficiency across 7 modules","Thursday live deployment scheduled; CRC alert banner confirmed for 3rd-week release","4–5 regression cycles (90–100 tests) with zero client validation backlog"],"concerns":["ONC Carespace access issue needs resolution to protect Thursday deployment","Zero mining threads — growth left on strongest client relationship in portfolio","No expansion discussion initiated despite exceptional delivery metrics"],"mining":["No active mining threads — only account in portfolio with no pipeline activity","Thursday live deployment is the natural expansion conversation trigger","Adjacent scope: COOP expansion, scheduler enhancements, billing module improvements"]},
+      {"id":"aculocity","name":"Aculocity","sub":"DataSystems · CRM & AI Solutions","health":"Attention","team":4,"forecast":51840,"billing":"Billing gaps","billingOk":false,"tickets_resolved":null,"tickets_total":null,"rev":[15680,15680,20480],"billed":["No","No","No"],"wins":["88.93% utilization, zero post-production incidents, 100% business acceptance","July revenue spikes to $20,480 (+30.6%) via DataSystems expansion","Critical fixes: EPC model year, MDM BOMs decimals, NetSuite API performance"],"concerns":["Billing gaps May–July — 4-person team not fully billed","Monday AI demo has no confirmed engineering resource — needs action today","Pipeline stale since Jan 8 despite active client interest in AI/CRM"],"mining":["Client wants AI Implementation Engineer ($4,800/mo) — Rec-Team pursuing · 6–8 week close","Client wants AI Solution Specialist ($5,600/mo) — Rec-Team pursuing · 6–8 week close","Both roles close = +$10,400/mo added to $15,680 baseline","Monday AI agent demo scheduled — engineering resource must be confirmed immediately"]},
+      {"id":"redgold","name":"Red Gold","sub":"AS400 Modernization · Agriculture","health":"On Track","team":2,"forecast":21760,"billing":"100% billed","billingOk":true,"tickets_resolved":1,"tickets_total":3,"rev":[5920,7920,7920],"billed":["Yes","Yes","Yes"],"wins":["CSAT recovered to 3.86 (77.1%) in Q1 2026, up +0.14 from Q4 2025","CROP Field Master Maintenance deployed to production (17 database tasks)","34% revenue growth: May $5,920 → June/July $7,920"],"concerns":["Grower listing ticket blocked by variable clearing/overflow bug","Client flagged testing gaps — F-key and feature validation needs improvement","AI pilot client response awaited — momentum could stall without follow-up"],"mining":["AI POC list presented to client — awaiting go/no-go decision","1 resource: 6–8 weeks to complete full pilot · 2 resources: ~4 weeks","Pilot shapes into formal SOW — expected within weeks of approval","CSAT recovery and CROP delivery provide strong credibility for AI pitch"]},
+      {"id":"selectmedical","name":"Select Medical","sub":"TFS Backlog Analysis · QA Expansion","health":"On Track","team":1,"forecast":16800,"billing":"100% billed","billingOk":true,"tickets_resolved":null,"tickets_total":null,"rev":[5600,5600,5600],"billed":["Yes","Yes","Yes"],"wins":["Consistent $5,600/mo billing with full resource utilization","TFS data extraction underway — highest-backlog departments being identified","QA engagement opportunity identified as part of expansion pitch"],"concerns":["Single resource — low account penetration relative to client size","No formal SOW or mining thread in pipeline yet","Expansion pitch dependent on completing TFS backlog analysis first"],"mining":["Extracting and reviewing TFS data to identify which departments have the most backlog","Analysis output determines where to pitch additional resources","QA engagement included in pitch — quality + velocity improvement narrative","No timeline yet — dependent on completion of TFS review"]}
+    ],
+    "actions":[
+      {"text":"Cascade: Urgent contract review — clarify $73,320/mo commitment vs $37,240 July forecast; use ROI deck to unlock approved project funding","owner":"AM"},
+      {"text":"Aculocity: Confirm engineering resource for Monday AI demo — critical for landing CRM/AI expansion with new client leadership","owner":"DM"},
+      {"text":"Billing reconciliation — Aculocity, Fabricut, Cascade: bill all resources for May–July to prevent revenue leakage","owner":"AM"},
+      {"text":"Fabricut: Escalate VM blockers + get exec decision on data retention; review Hemant's 1,000-record draft and plan scale-out","owner":"DM"},
+      {"text":"Red Gold: Follow up on AI POC list — push for go/no-go this week; pre-identify 1–2 resources for immediate start on approval","owner":"AM"},
+      {"text":"Select Medical: Complete TFS backlog analysis and prepare department-level pitch including QA engagement upsell","owner":"AM"},
+      {"text":"Flatiron: Initiate account expansion conversation using Thursday live deployment — identify adjacent scope for follow-on engagement","owner":"AM"}
+    ],
+    "mining_data":[
+      {"name":"Aculocity","status":"Hiring in Progress","priority":"strong","items":[{"tag":"Role 1","text":"AI Implementation Engineer — $4,800/mo · Rec-Team pursuing · 6–8 week close"},{"tag":"Role 2","text":"AI Solution Specialist — $5,600/mo · Rec-Team pursuing · 6–8 week close"},{"tag":"Upside","text":"Both roles close = +$10,400/mo on top of $15,680 baseline"},{"tag":"Demo","text":"Monday AI agent demo — engineering resource must be confirmed today"}]},
+      {"name":"Cascade","status":"ROI Pitch Active","priority":"active","items":[{"tag":"Narrative","text":"ROI presentation built: 2024–2026 $ savings from Gateway + Operations → Shipping consolidation"},{"tag":"Pitch","text":"Approved project positioned as path to additional $ savings — client's own data as proof"},{"tag":"Dafo SOW","text":"Awaiting client signature · Owner: Rohan"},{"tag":"Website SOW","text":"Pending internal stakeholder signoff via Delivery — no timeline set"}]},
+      {"name":"Red Gold","status":"Awaiting Client Response","priority":"watch","items":[{"tag":"POCs","text":"AI POC list presented — waiting for client go/no-go"},{"tag":"1 resource","text":"6–8 weeks to complete all POCs"},{"tag":"2 resources","text":"~4 weeks — preferred path for faster SOW"},{"tag":"Next step","text":"Pilot shapes into formal SOW within weeks of approval"}]},
+      {"name":"Fabricut","status":"Embedded in Delivery","priority":"active","items":[{"tag":"Approach","text":"Parallel: NetSuite mapping + 180+ normalized tables across Product, Vendor, Customer and additional master entities"},{"tag":"Analysis","text":"Hemant's 1,000-record first draft complete — needs review and scale to full dataset"},{"tag":"Foundation","text":"Strong technical credibility; natural expansion path post July go-live"}]},
+      {"name":"Select Medical","status":"Analysis in Progress","priority":"watch","items":[{"tag":"Current","text":"Extracting TFS data — reviewing which departments have the highest backlog"},{"tag":"Pitch","text":"Backlog analysis determines where to pitch additional resources"},{"tag":"QA play","text":"QA engagement included in resource pitch — quality + velocity narrative"},{"tag":"Billing","text":"$5,600/mo · 100% billed · full resource utilization"}]},
+      {"name":"Flatiron","status":"No Active Threads","priority":"none","items":[{"tag":"Status","text":"No mining activity — only account in portfolio with no pipeline"},{"tag":"Trigger","text":"Thursday live deployment is the natural opening for an expansion conversation"},{"tag":"Scope","text":"Adjacent opportunities: COOP expansion, scheduler, billing module"},{"tag":"Action","text":"AM to initiate growth conversation this week using 98% delivery metrics"}]}
+    ],
+    "flags":[
+      {"severity":"red","title":"Cascade — $36K/mo contract gap","subtitle":"Immediate · AM action","body":"Committed $73,320/mo. July forecast $37,240 — 51% of commitment. Both DafoNow and App Consolidation declining. ROI deck (2024–2026 Gateway/Ops→Shipping savings) is now the lever to unlock approved project funding and close this gap.","actions":[{"owner":"AM","text":"Urgent contract review — clarify rate vs actuals and document scope changes"},{"owner":"AM","text":"Use ROI deck to position approved project as incremental savings — accelerate signoff"}]},
+      {"severity":"red","title":"Billing gaps — 3 accounts","subtitle":"Immediate · Revenue recognition risk","body":"Aculocity (4 people), Fabricut (9 people), and Cascade have unbilled resources across May–July. Revenue is not being captured despite strong delivery. Combined exposure is material.","actions":[{"owner":"AM","text":"Reconcile all 3 accounts — bill all resources for May–July this week"},{"owner":"DM","text":"Confirm Fabricut 9-resource deployment and align to billing actuals"}]},
+      {"severity":"amber","title":"Aculocity — 2 roles in hiring + Monday demo","subtitle":"This week · DM + Rec-Team","body":"Client wants AI Implementation Engineer ($4,800/mo) and AI Solution Specialist ($5,600/mo). Rec-Team pursuing both — 6–8 week close. Monday demo needs engineering resource confirmed today. Closing both roles adds $10,400/mo.","actions":[{"owner":"DM","text":"Confirm engineering resource for Monday AI demo — today"},{"owner":"AM","text":"Track Rec-Team weekly — target role close in 6 weeks"}]},
+      {"severity":"amber","title":"Fabricut — July go-live blockers","subtitle":"Monitor · DM escalation","body":"Parallel workstreams active: NetSuite mapping + 180+ normalized tables. Hemant's 1,000-record first draft needs review and scale. VM infrastructure and data retention exec decision remain on critical path to July go-live.","actions":[{"owner":"DM","text":"Escalate VM blockers + obtain exec decision on data retention this week"},{"owner":"PM","text":"Review Hemant's draft and plan scale-out to full dataset"}]},
+      {"severity":"blue","title":"Red Gold — AI pilot SOW forming","subtitle":"Opportunity · 4–8 week window","body":"AI POC list presented — awaiting client response. 1 resource = 6–8 weeks; 2 resources = ~4 weeks. Shapes into a formal SOW. CSAT 3.86 and CROP delivery give strong credibility. Speed of resourcing determines timeline.","actions":[{"owner":"AM","text":"Follow up on POC list — push for go/no-go this week"},{"owner":"DM","text":"Pre-identify 1–2 resources so we can start within days of approval"}]},
+      {"severity":"blue","title":"Select Medical — TFS backlog → expansion pitch","subtitle":"Opportunity · QA upsell play","body":"Currently billed $5,600/mo. TFS data extraction underway — identifying highest-backlog departments. Analysis output will determine where to pitch additional resources including QA engagement. Evidence-led upsell approach.","actions":[{"owner":"AM","text":"Complete TFS analysis and prepare department-level pitch including QA engagement"},{"owner":"AM","text":"Frame upsell as faster backlog clearance + quality improvement narrative"}]},
+      {"severity":"green","title":"Flatiron — only account with zero pipeline threads","subtitle":"This month · Growth conversation needed","body":"98% completion, Thursday live deployment, 85–90.5% hands-on-keyboard efficiency — and no mining activity. Strongest delivery account in the portfolio with no pipeline conversation. Thursday deployment is the natural trigger. Adjacent scope opportunities: COOP expansion, scheduler, billing modules.","actions":[{"owner":"AM","text":"Initiate expansion conversation using Thursday deployment as the proof point"},{"owner":"AM","text":"Identify 1–2 adjacent workstreams to scope as follow-on engagement"}]}
+    ]
   }
 ];
 
-const ACTIONS = [
-  {t:'Cascade: Urgent contract review — clarify $73,320/mo commitment vs $37,240 July forecast; use ROI deck to unlock approved project funding',o:'AM'},
-  {t:'Aculocity: Confirm engineering resource for Monday AI demo — critical for landing CRM/AI expansion with new client leadership',o:'DM'},
-  {t:'Billing reconciliation — Aculocity, Fabricut, Cascade: bill all resources for May–July to prevent revenue leakage',o:'AM'},
-  {t:'Fabricut: Escalate VM blockers + get exec decision on data retention; review Hemant\'s 1,000-record draft and plan scale-out',o:'DM'},
-  {t:'Red Gold: Follow up on AI POC list — push for go/no-go this week; pre-identify 1–2 resources for immediate start on approval',o:'AM'},
-  {t:'Select Medical: Complete TFS backlog analysis and prepare department-level pitch including QA engagement upsell',o:'AM'},
-  {t:'Flatiron: Initiate account expansion conversation using Thursday live deployment — identify adjacent scope for follow-on engagement',o:'AM'}
-];
-
-const MINING_DATA = [
-  {name:'Aculocity',status:'Hiring in Progress',pc:'p-strong',items:[
-    {tag:'Role 1',text:'AI Implementation Engineer — $4,800/mo · Rec-Team pursuing · 6–8 week close'},
-    {tag:'Role 2',text:'AI Solution Specialist — $5,600/mo · Rec-Team pursuing · 6–8 week close'},
-    {tag:'Upside',text:'Both roles close = +$10,400/mo on top of $15,680 baseline'},
-    {tag:'Demo',text:'Monday AI agent demo — engineering resource must be confirmed today'}
-  ]},
-  {name:'Cascade',status:'ROI Pitch Active',pc:'p-active',items:[
-    {tag:'Narrative',text:'ROI presentation built: 2024–2026 $ savings from Gateway + Operations → Shipping consolidation'},
-    {tag:'Pitch',text:'Approved project positioned as path to additional $ savings — client\'s own data as proof'},
-    {tag:'Dafo SOW',text:'Awaiting client signature · Owner: Rohan'},
-    {tag:'Website SOW',text:'Pending internal stakeholder signoff via Delivery — no timeline set'}
-  ]},
-  {name:'Red Gold',status:'Awaiting Client Response',pc:'p-watch',items:[
-    {tag:'POCs',text:'AI POC list presented — waiting for client go/no-go'},
-    {tag:'1 resource',text:'6–8 weeks to complete all POCs'},
-    {tag:'2 resources',text:'~4 weeks — preferred path for faster SOW'},
-    {tag:'Next step',text:'Pilot shapes into formal SOW within weeks of approval'}
-  ]},
-  {name:'Fabricut',status:'Embedded in Delivery',pc:'p-active',items:[
-    {tag:'Approach',text:'Parallel: NetSuite mapping + 180+ normalized tables across Product, Vendor, Customer and additional master entities'},
-    {tag:'Analysis',text:'Hemant\'s 1,000-record first draft complete — needs review and scale to full dataset'},
-    {tag:'Foundation',text:'Strong technical credibility; natural expansion path post July go-live'}
-  ]},
-  {name:'Select Medical',status:'Analysis in Progress',pc:'p-watch',items:[
-    {tag:'Current',text:'Extracting TFS data — reviewing which departments have the highest backlog'},
-    {tag:'Pitch',text:'Backlog analysis determines where to pitch additional resources'},
-    {tag:'QA play',text:'QA engagement included in resource pitch — quality + velocity narrative'},
-    {tag:'Billing',text:'$5,600/mo · 100% billed · full resource utilization'}
-  ]},
-  {name:'Flatiron',status:'No Active Threads',pc:'p-none',items:[
-    {tag:'Status',text:'No mining activity — only account in portfolio with no pipeline'},
-    {tag:'Trigger',text:'Thursday live deployment is the natural opening for an expansion conversation'},
-    {tag:'Scope',text:'Adjacent opportunities: COOP expansion, scheduler, billing module'},
-    {tag:'Action',text:'AM to initiate growth conversation this week using 98% delivery metrics'}
-  ]}
-];
-
+// ─── CURRENT WEEK (latest entry) ───
+const CURRENT = HISTORY[HISTORY.length - 1];
+const ACCOUNTS = CURRENT.accounts;
+const ACTIONS = CURRENT.actions;
+const MINING_DATA = CURRENT.mining_data;
+const FLAGS = CURRENT.flags;
 const COLORS = ['#1a3c6e','#BA7517','#3B6D11','#993556','#5F5E5A','#185fa5'];
-const MAX_REV = 129080;
+const MAX_REV = Math.max(...ACCOUNTS.map(a => a.forecast));
 
+// ─── NAV META ───
+document.getElementById('nav-meta').innerHTML = `Period: ${CURRENT.period} &nbsp;·&nbsp; Prepared ${CURRENT.date}`;
+
+// ─── OVERVIEW METRICS ───
+function buildOverviewMetrics() {
+  const el = document.getElementById('overview-metrics');
+  const ticketPct = CURRENT.tickets_total ? Math.round((CURRENT.tickets_resolved / CURRENT.tickets_total) * 100) : 0;
+  const riskAccts = ACCOUNTS.filter(a => a.health !== 'On Track');
+  el.innerHTML = `
+    <div class="mc hi"><div class="ml">3-month forecast</div><div class="mv">$${CURRENT.portfolio_forecast.toLocaleString()}</div><div class="ms">${ACCOUNTS.length} accounts</div></div>
+    <div class="mc"><div class="ml">Team deployed</div><div class="mv">${CURRENT.team_deployed}+</div><div class="ms">Across ${ACCOUNTS.length} accounts</div></div>
+    <div class="mc"><div class="ml">Tickets resolved</div><div class="mv">${CURRENT.tickets_resolved} / ${CURRENT.tickets_total}</div><div class="ms">${ticketPct}% completion rate</div></div>
+    <div class="mc"><div class="ml">Pipeline upside</div><div class="mv">+$${CURRENT.pipeline_upside.toLocaleString()}</div><div class="ms">New roles if closed</div></div>
+    <div class="mc"><div class="ml">Accounts at risk</div><div class="mv">${riskAccts.length} / ${ACCOUNTS.length}</div><div class="ms">${riskAccts.map(a=>a.name).join(' · ')}</div></div>`;
+}
+
+// ─── ACCOUNT TABLE ───
 function buildTable(id) {
   const c = document.getElementById(id);
   if (!c) return;
-  ACCOUNTS.forEach((a,i) => {
-    const pct = Math.round((a.rev[0]/MAX_REV)*100);
+  ACCOUNTS.forEach((a, i) => {
+    const pct = Math.round((a.forecast / MAX_REV) * 100);
+    const badgeCls = a.health === 'On Track' ? 'bok' : a.health === 'At Risk' ? 'brisk' : 'bwarn';
     const row = document.createElement('div');
-    row.className='ar';
-    row.innerHTML=`
+    row.className = 'ar';
+    const tickets = a.tickets_resolved != null ? `${a.tickets_resolved} / ${a.tickets_total}` : 'N/A';
+    row.innerHTML = `
       <div class="asm">
         <div><div class="an">${a.name}</div><div class="asub">${a.sub}</div></div>
-        <div><div class="sl">3M Forecast</div><div class="sv">${a.forecast}</div></div>
+        <div><div class="sl">3M Forecast</div><div class="sv">$${a.forecast.toLocaleString()}</div></div>
         <div class="hide-sm"><div class="sl">Team</div><div class="sv">${a.team} people</div></div>
-        <div><span class="badge ${a.badge}">${a.health}</span></div>
-        <div class="hide-sm"><div class="sl">Billing</div><div class="sv" style="font-size:12px;color:${a.billingOk?'var(--green)':'var(--red)'}">${a.billing}</div></div>
-        <div class="hide-sm"><div class="sl">Tickets</div><div class="sv">${a.tickets}</div></div>
-        <div><div class="rb"><div class="rf" style="width:${pct}%;background:${COLORS[i]}"></div></div></div>
+        <div><span class="badge ${badgeCls}">${a.health}</span></div>
+        <div class="hide-sm"><div class="sl">Billing</div><div class="sv" style="font-size:12px;color:${a.billingOk ? 'var(--green)' : 'var(--red)'}">${a.billing}</div></div>
+        <div class="hide-sm"><div class="sl">Tickets</div><div class="sv">${tickets}</div></div>
+        <div><div class="rb"><div class="rf" style="width:${pct}%;background:${COLORS[i % COLORS.length]}"></div></div></div>
         <div class="chv">▾</div>
       </div>
       <div class="ad">
         <div class="di">
-          <div class="dc">
-            <h4>Wins this period</h4>
-            ${a.wins.map(w=>`<div class="bl"><span class="bi w">✓</span>${w}</div>`).join('')}
-          </div>
-          <div class="dc">
-            <h4>Concerns &amp; risks</h4>
-            ${a.concerns.map(x=>`<div class="bl"><span class="bi r">▲</span>${x}</div>`).join('')}
-          </div>
-          <div class="dc">
-            <h4>Mining &amp; pipeline</h4>
-            ${a.mining.map(m=>`<div class="bl"><span class="bi m">◆</span>${m}</div>`).join('')}
+          <div class="dc"><h4>Wins this period</h4>${a.wins.map(w => `<div class="bl"><span class="bi w">✓</span>${w}</div>`).join('')}</div>
+          <div class="dc"><h4>Concerns &amp; risks</h4>${a.concerns.map(x => `<div class="bl"><span class="bi r">▲</span>${x}</div>`).join('')}</div>
+          <div class="dc"><h4>Mining &amp; pipeline</h4>${a.mining.map(m => `<div class="bl"><span class="bi m">◆</span>${m}</div>`).join('')}
             <div style="margin-top:10px;"><div class="sl">Monthly revenue</div>
-            <div class="rms">
-              ${['May','Jun','Jul'].map((mo,mi)=>`<div class="rm"><div class="rml">${mo}</div><div class="rmv">$${a.rev[mi].toLocaleString()}</div><div class="rmb ${a.billed[mi]==='Yes'?'rmy':'rmn'}">${a.billed[mi]==='Yes'?'✓ Billed':'✗ Gap'}</div></div>`).join('')}
-            </div></div>
+            <div class="rms">${['Mo 1', 'Mo 2', 'Mo 3'].map((mo, mi) => `<div class="rm"><div class="rml">${mo}</div><div class="rmv">$${a.rev[mi].toLocaleString()}</div><div class="rmb ${a.billed[mi] === 'Yes' ? 'rmy' : 'rmn'}">${a.billed[mi] === 'Yes' ? '✓ Billed' : '✗ Gap'}</div></div>`).join('')}</div></div>
           </div>
         </div>
       </div>`;
-    row.addEventListener('click',()=>row.classList.toggle('open'));
+    row.addEventListener('click', () => row.classList.toggle('open'));
     c.appendChild(row);
   });
 }
 
+// ─── REVENUE METRICS ───
+function buildRevMetrics() {
+  const el = document.getElementById('rev-metrics');
+  const largest = ACCOUNTS.reduce((a, b) => a.forecast > b.forecast ? a : b);
+  const largestPct = Math.round((largest.forecast / CURRENT.portfolio_forecast) * 100);
+  const fullyBilled = ACCOUNTS.filter(a => a.billingOk).length;
+  el.innerHTML = `
+    <div class="mc hi"><div class="ml">Total 3M forecast</div><div class="mv">$${CURRENT.portfolio_forecast.toLocaleString()}</div><div class="ms">All ${ACCOUNTS.length} accounts</div></div>
+    <div class="mc"><div class="ml">Largest account</div><div class="mv">$${largest.forecast.toLocaleString()}</div><div class="ms">${largest.name} · ${largestPct}% of portfolio</div></div>
+    <div class="mc"><div class="ml">Revenue at risk</div><div class="mv">~$${Math.round(ACCOUNTS.filter(a=>!a.billingOk).reduce((s,a)=>s+a.forecast,0)/1000)}K</div><div class="ms">Billing gaps + shortfalls</div></div>
+    <div class="mc"><div class="ml">Fully billed</div><div class="mv">${fullyBilled} / ${ACCOUNTS.length}</div><div class="ms">${ACCOUNTS.filter(a=>a.billingOk).map(a=>a.name).join(' · ')}</div></div>
+    <div class="mc"><div class="ml">Pipeline upside</div><div class="mv">+$${CURRENT.pipeline_upside.toLocaleString()}</div><div class="ms">New roles/mo</div></div>`;
+}
+
+// ─── MINING METRICS ───
+function buildMiningMetrics() {
+  const el = document.getElementById('mining-metrics');
+  const activeThreads = MINING_DATA.filter(m => m.priority !== 'none').length;
+  el.innerHTML = `
+    <div class="mc hi"><div class="ml">Active mining threads</div><div class="mv">${activeThreads} / ${MINING_DATA.length}</div><div class="ms">${MINING_DATA.filter(m=>m.priority==='none').map(m=>m.name).join(', ')||'All active'} ${MINING_DATA.some(m=>m.priority==='none')?'only with none':''}</div></div>
+    <div class="mc"><div class="ml">Pipeline upside</div><div class="mv">+$${CURRENT.pipeline_upside.toLocaleString()}</div><div class="ms">If all roles close</div></div>
+    <div class="mc"><div class="ml">Accounts</div><div class="mv">${ACCOUNTS.length}</div><div class="ms">In portfolio</div></div>
+    <div class="mc"><div class="ml">Team size</div><div class="mv">${CURRENT.team_deployed}+</div><div class="ms">People deployed</div></div>
+    <div class="mc"><div class="ml">Forecast</div><div class="mv">$${CURRENT.portfolio_forecast.toLocaleString()}</div><div class="ms">3-month total</div></div>`;
+}
+
+// ─── ACTIONS ───
 function buildActions() {
   const c = document.getElementById('actions-list');
-  ACTIONS.forEach((a,i)=>{
+  ACTIONS.forEach((a, i) => {
     const row = document.createElement('div');
-    row.className='actrow';
-    row.innerHTML=`<div class="actnum">${i+1}</div><div class="acttext">${a.t}</div><div><span class="owpill">${a.o}</span></div>`;
+    row.className = 'actrow';
+    row.innerHTML = `<div class="actnum">${i + 1}</div><div class="acttext">${a.text}</div><div><span class="owpill">${a.owner}</span></div>`;
     c.appendChild(row);
   });
 }
 
+// ─── MINING GRID ───
 function buildMining() {
   const g = document.getElementById('mining-grid');
-  MINING_DATA.forEach(m=>{
+  const pcMap = {strong:'p-strong',active:'p-active',watch:'p-watch',none:'p-none'};
+  MINING_DATA.forEach(m => {
     const card = document.createElement('div');
-    card.className='mcard';
-    card.innerHTML=`
-      <div class="mhdr">
-        <div class="mhdr-l"><h3>${m.name}</h3><p>Mining &amp; pipeline update</p></div>
-        <span class="mpill ${m.pc}">${m.status}</span>
-      </div>
-      ${m.items.map(it=>`<div class="mrow"><span class="micon">◆</span><div><span class="mtag">${it.tag}:</span>${it.text}</div></div>`).join('')}`;
+    card.className = 'mcard';
+    card.innerHTML = `
+      <div class="mhdr"><div class="mhdr-l"><h3>${m.name}</h3><p>Mining &amp; pipeline update</p></div><span class="mpill ${pcMap[m.priority] || 'p-none'}">${m.status}</span></div>
+      ${m.items.map(it => `<div class="mrow"><span class="micon">◆</span><div><span class="mtag">${it.tag}:</span>${it.text}</div></div>`).join('')}`;
     g.appendChild(card);
   });
 }
 
+// ─── FLAGS ───
+function buildFlags() {
+  const g = document.getElementById('flags-grid');
+  FLAGS.forEach((f, i) => {
+    const card = document.createElement('div');
+    card.className = 'fc' + (i === FLAGS.length - 1 && FLAGS.length % 2 === 1 ? ' s2' : '');
+    card.innerHTML = `
+      <div class="fhdr"><div class="fd ${f.severity}"></div><div class="fht"><h3>${f.title}</h3><p>${f.subtitle}</p></div></div>
+      <div class="fb">${f.body}</div>
+      <div class="fa">${f.actions.map(a => `<div class="far"><span class="ow">${a.owner}</span>${a.text}</div>`).join('')}</div>`;
+    g.appendChild(card);
+  });
+}
+
+// ─── REVENUE CHARTS ───
 function buildCharts() {
-  const months = ['May','June','July'];
-  new Chart(document.getElementById('revGrouped'),{
-    type:'bar',
-    data:{labels:months,datasets:ACCOUNTS.map((a,i)=>({label:a.name,data:a.rev,backgroundColor:COLORS[i],borderRadius:3,borderSkipped:false}))},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`}}},
-      scales:{x:{grid:{display:false},ticks:{font:{size:12}}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{font:{size:11},callback:v=>'$'+(v>=1000?(v/1000).toFixed(0)+'K':v)}}}}
+  const months = ['Month 1', 'Month 2', 'Month 3'];
+  new Chart(document.getElementById('revGrouped'), {
+    type: 'bar',
+    data: {labels: months, datasets: ACCOUNTS.map((a, i) => ({label: a.name, data: a.rev, backgroundColor: COLORS[i % COLORS.length], borderRadius: 3, borderSkipped: false}))},
+    options: {responsive: true, maintainAspectRatio: false,
+      plugins: {legend: {display: false}, tooltip: {callbacks: {label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`}}},
+      scales: {x: {grid: {display: false}, ticks: {font: {size: 12}}}, y: {grid: {color: 'rgba(128,128,128,0.08)'}, ticks: {font: {size: 11}, callback: v => '$' + (v >= 1000 ? (v / 1000).toFixed(0) + 'K' : v)}}}}
   });
-  const leg=document.getElementById('rev-legend');
-  ACCOUNTS.forEach((a,i)=>{const el=document.createElement('div');el.className='li';el.innerHTML=`<span class="lsq" style="background:${COLORS[i]}"></span>${a.name}`;leg.appendChild(el);});
+  const leg = document.getElementById('rev-legend');
+  ACCOUNTS.forEach((a, i) => {const el = document.createElement('div'); el.className = 'li'; el.innerHTML = `<span class="lsq" style="background:${COLORS[i % COLORS.length]}"></span>${a.name}`; leg.appendChild(el);});
 
-  new Chart(document.getElementById('portPie'),{
-    type:'doughnut',
-    data:{labels:ACCOUNTS.map(a=>a.name),datasets:[{data:ACCOUNTS.map(a=>a.rev.reduce((s,v)=>s+v,0)),backgroundColor:COLORS,borderWidth:2,borderColor:'#fff'}]},
-    options:{responsive:true,maintainAspectRatio:false,cutout:'58%',
-      plugins:{legend:{position:'right',labels:{font:{size:12},padding:12}},tooltip:{callbacks:{label:ctx=>` ${ctx.label}: $${ctx.parsed.toLocaleString()}`}}}}
+  new Chart(document.getElementById('portPie'), {
+    type: 'doughnut',
+    data: {labels: ACCOUNTS.map(a => a.name), datasets: [{data: ACCOUNTS.map(a => a.rev.reduce((s, v) => s + v, 0)), backgroundColor: COLORS, borderWidth: 2, borderColor: '#fff'}]},
+    options: {responsive: true, maintainAspectRatio: false, cutout: '58%',
+      plugins: {legend: {position: 'right', labels: {font: {size: 12}, padding: 12}}, tooltip: {callbacks: {label: ctx => ` ${ctx.label}: $${ctx.parsed.toLocaleString()}`}}}}
   });
 
-  new Chart(document.getElementById('cascadeChart'),{
-    type:'line',
-    data:{labels:months,datasets:[
-      {label:'Actual',data:[48000,43840,37240],borderColor:'#1a3c6e',backgroundColor:'rgba(26,60,110,0.07)',fill:true,tension:0.3,pointRadius:5,pointBackgroundColor:'#1a3c6e'},
-      {label:'Commitment',data:[73320,73320,73320],borderColor:'#A32D2D',borderDash:[6,3],pointRadius:0,fill:false,tension:0}
-    ]},
-    options:{responsive:true,maintainAspectRatio:false,
-      plugins:{legend:{position:'bottom',labels:{font:{size:11},padding:10}},tooltip:{callbacks:{label:ctx=>` ${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`}}},
-      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'}}}}
-  });
+  const cascadeAcct = ACCOUNTS.find(a => a.id === 'cascade');
+  if (cascadeAcct) {
+    new Chart(document.getElementById('cascadeChart'), {
+      type: 'line',
+      data: {labels: months, datasets: [
+        {label: 'Actual', data: cascadeAcct.rev, borderColor: '#1a3c6e', backgroundColor: 'rgba(26,60,110,0.07)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#1a3c6e'},
+        {label: 'Commitment', data: [73320, 73320, 73320], borderColor: '#A32D2D', borderDash: [6, 3], pointRadius: 0, fill: false, tension: 0}
+      ]},
+      options: {responsive: true, maintainAspectRatio: false,
+        plugins: {legend: {position: 'bottom', labels: {font: {size: 11}, padding: 10}}, tooltip: {callbacks: {label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`}}},
+        scales: {x: {grid: {display: false}}, y: {grid: {color: 'rgba(128,128,128,0.08)'}, ticks: {callback: v => '$' + (v / 1000).toFixed(0) + 'K'}}}}
+    });
+  }
 }
 
-function showTab(name,el){
-  document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('view-'+name).classList.add('active');
-  if(el)el.classList.add('active');
+// ─── TRENDS TAB ───
+let trendCharts = [];
+
+function getFilteredHistory() {
+  const range = document.getElementById('trend-range').value;
+  if (range === 'all') return HISTORY;
+  const n = parseInt(range);
+  return HISTORY.slice(-n);
 }
 
+function destroyTrendCharts() {
+  trendCharts.forEach(c => c.destroy());
+  trendCharts = [];
+}
+
+function renderTrends() {
+  destroyTrendCharts();
+  const weeks = getFilteredHistory();
+  const labels = weeks.map(w => w.week_id);
+  const allAcctIds = [...new Set(weeks.flatMap(w => w.accounts.map(a => a.id)))];
+  const allAcctNames = [...new Set(weeks.flatMap(w => w.accounts.map(a => a.name)))];
+
+  // ─ Delta cards (compare last 2 weeks) ─
+  const deltaEl = document.getElementById('delta-cards');
+  deltaEl.innerHTML = '';
+  if (weeks.length >= 2) {
+    const curr = weeks[weeks.length - 1];
+    const prev = weeks[weeks.length - 2];
+    const deltas = [
+      {label: 'Portfolio Forecast', curr: curr.portfolio_forecast, prev: prev.portfolio_forecast, fmt: v => '$' + v.toLocaleString()},
+      {label: 'Team Deployed', curr: curr.team_deployed, prev: prev.team_deployed, fmt: v => v + '+'},
+      {label: 'Ticket Completion', curr: curr.tickets_total ? Math.round((curr.tickets_resolved / curr.tickets_total) * 100) : 0, prev: prev.tickets_total ? Math.round((prev.tickets_resolved / prev.tickets_total) * 100) : 0, fmt: v => v + '%'},
+      {label: 'Accounts at Risk', curr: curr.accounts_at_risk, prev: prev.accounts_at_risk, fmt: v => v + ' / ' + curr.accounts.length, invert: true}
+    ];
+    deltas.forEach(d => {
+      const diff = d.curr - d.prev;
+      const isGood = d.invert ? diff <= 0 : diff >= 0;
+      const arrow = diff > 0 ? '↑' : diff < 0 ? '↓' : '—';
+      const cls = diff === 0 ? 'flat' : isGood ? 'up' : 'down';
+      deltaEl.innerHTML += `<div class="delta-card"><div class="dl">${d.label}</div><div class="dv">${d.fmt(d.curr)}</div><div class="dd ${cls}">${arrow} ${diff !== 0 ? (d.invert ? '' : (diff > 0 ? '+' : '')) + (d.fmt ? d.fmt(Math.abs(diff)).replace(/\+$/, '') : Math.abs(diff)) : 'No change'} vs prev week</div></div>`;
+    });
+  } else {
+    deltaEl.innerHTML = '<div class="delta-card" style="grid-column:1/-1;text-align:center;color:var(--text3);">Need at least 2 weeks of data for comparisons</div>';
+  }
+
+  // ─ Portfolio forecast trend ─
+  trendCharts.push(new Chart(document.getElementById('forecastTrend'), {
+    type: 'line',
+    data: {labels, datasets: [{
+      label: 'Portfolio Forecast', data: weeks.map(w => w.portfolio_forecast),
+      borderColor: '#1a3c6e', backgroundColor: 'rgba(26,60,110,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#1a3c6e'
+    }]},
+    options: {responsive: true, maintainAspectRatio: false,
+      plugins: {legend: {display: false}, tooltip: {callbacks: {label: ctx => ` $${ctx.parsed.y.toLocaleString()}`}}},
+      scales: {x: {grid: {display: false}}, y: {grid: {color: 'rgba(128,128,128,0.08)'}, ticks: {callback: v => '$' + (v / 1000).toFixed(0) + 'K'}}}}
+  }));
+
+  // ─ Revenue by account trend ─
+  trendCharts.push(new Chart(document.getElementById('acctRevTrend'), {
+    type: 'line',
+    data: {labels, datasets: allAcctIds.map((aid, i) => ({
+      label: allAcctNames[i],
+      data: weeks.map(w => {const a = w.accounts.find(x => x.id === aid); return a ? a.forecast : 0;}),
+      borderColor: COLORS[i % COLORS.length], backgroundColor: 'transparent', tension: 0.3, pointRadius: 4, pointBackgroundColor: COLORS[i % COLORS.length]
+    }))},
+    options: {responsive: true, maintainAspectRatio: false,
+      plugins: {legend: {position: 'bottom', labels: {font: {size: 10}, padding: 8}}, tooltip: {callbacks: {label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`}}},
+      scales: {x: {grid: {display: false}}, y: {grid: {color: 'rgba(128,128,128,0.08)'}, ticks: {callback: v => '$' + (v / 1000).toFixed(0) + 'K'}}}}
+  }));
+
+  // ─ Team size trend ─
+  trendCharts.push(new Chart(document.getElementById('teamTrend'), {
+    type: 'bar',
+    data: {labels, datasets: [{
+      label: 'Team Size', data: weeks.map(w => w.team_deployed),
+      backgroundColor: 'rgba(26,60,110,0.7)', borderRadius: 4, borderSkipped: false
+    }]},
+    options: {responsive: true, maintainAspectRatio: false,
+      plugins: {legend: {display: false}},
+      scales: {x: {grid: {display: false}}, y: {grid: {color: 'rgba(128,128,128,0.08)'}, beginAtZero: true}}}
+  }));
+
+  // ─ Ticket completion trend ─
+  trendCharts.push(new Chart(document.getElementById('ticketTrend'), {
+    type: 'line',
+    data: {labels, datasets: [{
+      label: 'Completion %',
+      data: weeks.map(w => w.tickets_total ? Math.round((w.tickets_resolved / w.tickets_total) * 100) : null),
+      borderColor: '#3B6D11', backgroundColor: 'rgba(59,109,17,0.08)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#3B6D11', spanGaps: true
+    }, {
+      label: 'Resolved', data: weeks.map(w => w.tickets_resolved),
+      borderColor: '#185fa5', backgroundColor: 'transparent', tension: 0.3, pointRadius: 4, pointBackgroundColor: '#185fa5', yAxisID: 'y1'
+    }]},
+    options: {responsive: true, maintainAspectRatio: false,
+      plugins: {legend: {position: 'bottom', labels: {font: {size: 11}}}, tooltip: {callbacks: {label: ctx => ctx.dataset.label === 'Completion %' ? ` ${ctx.parsed.y}%` : ` ${ctx.parsed.y} tickets`}}},
+      scales: {x: {grid: {display: false}}, y: {grid: {color: 'rgba(128,128,128,0.08)'}, min: 0, max: 100, ticks: {callback: v => v + '%'}}, y1: {position: 'right', grid: {display: false}, ticks: {font: {size: 10}}}}}
+  }));
+
+  // ─ Sparkline cards ─
+  const sparkGrid = document.getElementById('sparkline-grid');
+  sparkGrid.innerHTML = '';
+  allAcctIds.forEach((aid, i) => {
+    const name = allAcctNames[i];
+    const forecasts = weeks.map(w => {const a = w.accounts.find(x => x.id === aid); return a ? a.forecast : 0;});
+    const latest = forecasts[forecasts.length - 1];
+    const prev = forecasts.length >= 2 ? forecasts[forecasts.length - 2] : latest;
+    const diff = latest - prev;
+    const arrow = diff > 0 ? '↑' : diff < 0 ? '↓' : '—';
+    const cls = diff === 0 ? 'flat' : diff > 0 ? 'up' : 'down';
+    const canvasId = `spark-${aid}`;
+    const card = document.createElement('div');
+    card.className = 'spark-card';
+    card.innerHTML = `<h4>${name}</h4><div class="spark-val">$${latest.toLocaleString()}</div><div class="spark-delta ${cls}">${arrow} $${Math.abs(diff).toLocaleString()} vs prev</div><div class="spark-wrap"><canvas id="${canvasId}"></canvas></div>`;
+    sparkGrid.appendChild(card);
+
+    requestAnimationFrame(() => {
+      const canvas = document.getElementById(canvasId);
+      if (canvas) {
+        trendCharts.push(new Chart(canvas, {
+          type: 'line',
+          data: {labels: weeks.map(w => w.week_id), datasets: [{data: forecasts, borderColor: COLORS[i % COLORS.length], borderWidth: 2, pointRadius: 0, fill: false, tension: 0.4}]},
+          options: {responsive: true, maintainAspectRatio: false, plugins: {legend: {display: false}, tooltip: {enabled: false}}, scales: {x: {display: false}, y: {display: false}}}
+        }));
+      }
+    });
+  });
+
+  // ─ Health timeline ─
+  const htEl = document.getElementById('health-timeline');
+  const cols = weeks.length + 1;
+  let html = `<div class="ht-hdr" style="grid-template-columns:140px repeat(${weeks.length},1fr)"><div>Account</div>${weeks.map(w => `<div class="ht-cell">${w.week_id}</div>`).join('')}</div>`;
+  allAcctIds.forEach((aid, i) => {
+    html += `<div class="ht-row" style="grid-template-columns:140px repeat(${weeks.length},1fr)"><div class="ht-name">${allAcctNames[i]}</div>`;
+    weeks.forEach(w => {
+      const a = w.accounts.find(x => x.id === aid);
+      const h = a ? a.health : 'N/A';
+      const dotCls = h === 'On Track' ? 'on-track' : h === 'At Risk' ? 'at-risk' : h === 'Attention' ? 'attention' : '';
+      const label = h === 'On Track' ? '✓' : h === 'Attention' ? '!' : h === 'At Risk' ? '✗' : '?';
+      html += `<div class="ht-cell"><span class="ht-dot ${dotCls}" title="${h}">${label}</span></div>`;
+    });
+    html += '</div>';
+  });
+  htEl.innerHTML = html;
+}
+
+// ─── TAB SWITCHING ───
+function showTab(name, el) {
+  document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('view-' + name).classList.add('active');
+  if (el) el.classList.add('active');
+  if (name === 'trends') renderTrends();
+}
+
+// ─── INIT ───
+buildOverviewMetrics();
 buildTable('acct-overview');
 buildTable('acct-accounts');
+buildRevMetrics();
 buildActions();
 buildMining();
+buildMiningMetrics();
+buildFlags();
 buildCharts();
 </script>
 </body>

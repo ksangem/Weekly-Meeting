@@ -1,0 +1,249 @@
+{
+  "weeks": [
+    {
+      "week_id": "2026-W19",
+      "date": "2026-05-05",
+      "period": "Apr 15 – May 5, 2026",
+      "portfolio_forecast": 393680,
+      "team_deployed": 44,
+      "tickets_resolved": 114,
+      "tickets_total": 130,
+      "pipeline_upside": 10400,
+      "accounts_at_risk": 3,
+      "accounts": [
+        {
+          "id": "cascade",
+          "name": "Cascade",
+          "sub": "NHS · DafoNow + App Consolidation",
+          "health": "Attention",
+          "team": 23,
+          "forecast": 129080,
+          "billing": "Billing gaps",
+          "billingOk": false,
+          "tickets_resolved": 61,
+          "tickets_total": 74,
+          "rev": [48000, 43840, 37240],
+          "billed": ["Yes", "Yes", "Yes"],
+          "wins": [
+            "Release 2.10: 93 tickets, 45 features, zero post-release regressions",
+            "82% completion velocity; zero client validation backlog",
+            "DafoNow June 15 soft launch target maintained"
+          ],
+          "concerns": [
+            "Revenue declining 22% May→July; July at 51% of $73,320/mo — $36K gap",
+            "Client flagged 3-week 2.10 delay — cannot repeat for 2.11 or Q4 at risk",
+            "Dual SOWs (Dafo + Website) stuck; pipeline 3+ months stale"
+          ],
+          "mining": [
+            "ROI presentation live: 2024–2026 $ savings from Gateway + Ops→Shipping consolidation",
+            "Pitching approved project continuation as path to additional $ savings",
+            "Dafo SOW awaiting client signature · Website SOW pending internal signoff"
+          ]
+        },
+        {
+          "id": "fabricut",
+          "name": "Fabricut",
+          "sub": "Data Migration · AS400 → NetSuite / Power BI",
+          "health": "Attention",
+          "team": 9,
+          "forecast": 127200,
+          "billing": "Unbilled gaps",
+          "billingOk": false,
+          "tickets_resolved": null,
+          "tickets_total": null,
+          "rev": [42400, 42400, 42400],
+          "billed": ["No", "No", "No"],
+          "wins": [
+            "360 tables loaded to MySQL RAW zone from 2,800+ AS400 sources",
+            "Master entity sign-off complete: customer, vendor, product domains",
+            "42 executive reports mapped for Power BI; 11 FSDs and 6 NetSuite templates done"
+          ],
+          "concerns": [
+            "Unbilled resources across all 3 months — $127,200 forecast at risk",
+            "July go-live blocked by VM infrastructure + unresolved data retention exec decision",
+            "Mining thread 97 days stale — no SOW or defined opportunity in pipeline"
+          ],
+          "mining": [
+            "Parallel approach: NetSuite mapping + 180+ normalized tables across Product, Vendor, Customer and additional master entities",
+            "Hemant completed first draft from 1,000-record data analysis — needs review and scale to full dataset",
+            "Strong technical foundation built; natural expansion path post go-live"
+          ]
+        },
+        {
+          "id": "flatiron",
+          "name": "Flatiron",
+          "sub": "Healthcare QA & Automation",
+          "health": "On Track",
+          "team": 5,
+          "forecast": 47040,
+          "billing": "100% billed",
+          "billingOk": true,
+          "tickets_resolved": 52,
+          "tickets_total": 53,
+          "rev": [15680, 15680, 15680],
+          "billed": ["Yes", "Yes", "Yes"],
+          "wins": [
+            "98% completion rate; 85–90.5% hands-on-keyboard efficiency across 7 modules",
+            "Thursday live deployment scheduled; CRC alert banner confirmed for 3rd-week release",
+            "4–5 regression cycles (90–100 tests) with zero client validation backlog"
+          ],
+          "concerns": [
+            "ONC Carespace access issue needs resolution to protect Thursday deployment",
+            "Zero mining threads — growth left on strongest client relationship in portfolio",
+            "No expansion discussion initiated despite exceptional delivery metrics"
+          ],
+          "mining": [
+            "No active mining threads — only account in portfolio with no pipeline activity",
+            "Thursday live deployment is the natural expansion conversation trigger",
+            "Adjacent scope: COOP expansion, scheduler enhancements, billing module improvements"
+          ]
+        },
+        {
+          "id": "aculocity",
+          "name": "Aculocity",
+          "sub": "DataSystems · CRM & AI Solutions",
+          "health": "Attention",
+          "team": 4,
+          "forecast": 51840,
+          "billing": "Billing gaps",
+          "billingOk": false,
+          "tickets_resolved": null,
+          "tickets_total": null,
+          "rev": [15680, 15680, 20480],
+          "billed": ["No", "No", "No"],
+          "wins": [
+            "88.93% utilization, zero post-production incidents, 100% business acceptance",
+            "July revenue spikes to $20,480 (+30.6%) via DataSystems expansion",
+            "Critical fixes: EPC model year, MDM BOMs decimals, NetSuite API performance"
+          ],
+          "concerns": [
+            "Billing gaps May–July — 4-person team not fully billed",
+            "Monday AI demo has no confirmed engineering resource — needs action today",
+            "Pipeline stale since Jan 8 despite active client interest in AI/CRM"
+          ],
+          "mining": [
+            "Client wants AI Implementation Engineer ($4,800/mo) — Rec-Team pursuing · 6–8 week close",
+            "Client wants AI Solution Specialist ($5,600/mo) — Rec-Team pursuing · 6–8 week close",
+            "Both roles close = +$10,400/mo added to $15,680 baseline",
+            "Monday AI agent demo scheduled — engineering resource must be confirmed immediately"
+          ]
+        },
+        {
+          "id": "redgold",
+          "name": "Red Gold",
+          "sub": "AS400 Modernization · Agriculture",
+          "health": "On Track",
+          "team": 2,
+          "forecast": 21760,
+          "billing": "100% billed",
+          "billingOk": true,
+          "tickets_resolved": 1,
+          "tickets_total": 3,
+          "rev": [5920, 7920, 7920],
+          "billed": ["Yes", "Yes", "Yes"],
+          "wins": [
+            "CSAT recovered to 3.86 (77.1%) in Q1 2026, up +0.14 from Q4 2025",
+            "CROP Field Master Maintenance deployed to production (17 database tasks)",
+            "34% revenue growth: May $5,920 → June/July $7,920"
+          ],
+          "concerns": [
+            "Grower listing ticket blocked by variable clearing/overflow bug",
+            "Client flagged testing gaps — F-key and feature validation needs improvement",
+            "AI pilot client response awaited — momentum could stall without follow-up"
+          ],
+          "mining": [
+            "AI POC list presented to client — awaiting go/no-go decision",
+            "1 resource: 6–8 weeks to complete full pilot · 2 resources: ~4 weeks",
+            "Pilot shapes into formal SOW — expected within weeks of approval",
+            "CSAT recovery and CROP delivery provide strong credibility for AI pitch"
+          ]
+        },
+        {
+          "id": "selectmedical",
+          "name": "Select Medical",
+          "sub": "TFS Backlog Analysis · QA Expansion",
+          "health": "On Track",
+          "team": 1,
+          "forecast": 16800,
+          "billing": "100% billed",
+          "billingOk": true,
+          "tickets_resolved": null,
+          "tickets_total": null,
+          "rev": [5600, 5600, 5600],
+          "billed": ["Yes", "Yes", "Yes"],
+          "wins": [
+            "Consistent $5,600/mo billing with full resource utilization",
+            "TFS data extraction underway — highest-backlog departments being identified",
+            "QA engagement opportunity identified as part of expansion pitch"
+          ],
+          "concerns": [
+            "Single resource — low account penetration relative to client size",
+            "No formal SOW or mining thread in pipeline yet",
+            "Expansion pitch dependent on completing TFS backlog analysis first"
+          ],
+          "mining": [
+            "Extracting and reviewing TFS data to identify which departments have the most backlog",
+            "Analysis output determines where to pitch additional resources",
+            "QA engagement included in pitch — quality + velocity improvement narrative",
+            "No timeline yet — dependent on completion of TFS review"
+          ]
+        }
+      ],
+      "actions": [
+        {"text": "Cascade: Urgent contract review — clarify $73,320/mo commitment vs $37,240 July forecast; use ROI deck to unlock approved project funding", "owner": "AM"},
+        {"text": "Aculocity: Confirm engineering resource for Monday AI demo — critical for landing CRM/AI expansion with new client leadership", "owner": "DM"},
+        {"text": "Billing reconciliation — Aculocity, Fabricut, Cascade: bill all resources for May–July to prevent revenue leakage", "owner": "AM"},
+        {"text": "Fabricut: Escalate VM blockers + get exec decision on data retention; review Hemant's 1,000-record draft and plan scale-out", "owner": "DM"},
+        {"text": "Red Gold: Follow up on AI POC list — push for go/no-go this week; pre-identify 1–2 resources for immediate start on approval", "owner": "AM"},
+        {"text": "Select Medical: Complete TFS backlog analysis and prepare department-level pitch including QA engagement upsell", "owner": "AM"},
+        {"text": "Flatiron: Initiate account expansion conversation using Thursday live deployment — identify adjacent scope for follow-on engagement", "owner": "AM"}
+      ],
+      "mining_data": [
+        {"name": "Aculocity", "status": "Hiring in Progress", "priority": "strong", "items": [
+          {"tag": "Role 1", "text": "AI Implementation Engineer — $4,800/mo · Rec-Team pursuing · 6–8 week close"},
+          {"tag": "Role 2", "text": "AI Solution Specialist — $5,600/mo · Rec-Team pursuing · 6–8 week close"},
+          {"tag": "Upside", "text": "Both roles close = +$10,400/mo on top of $15,680 baseline"},
+          {"tag": "Demo", "text": "Monday AI agent demo — engineering resource must be confirmed today"}
+        ]},
+        {"name": "Cascade", "status": "ROI Pitch Active", "priority": "active", "items": [
+          {"tag": "Narrative", "text": "ROI presentation built: 2024–2026 $ savings from Gateway + Operations → Shipping consolidation"},
+          {"tag": "Pitch", "text": "Approved project positioned as path to additional $ savings — client's own data as proof"},
+          {"tag": "Dafo SOW", "text": "Awaiting client signature · Owner: Rohan"},
+          {"tag": "Website SOW", "text": "Pending internal stakeholder signoff via Delivery — no timeline set"}
+        ]},
+        {"name": "Red Gold", "status": "Awaiting Client Response", "priority": "watch", "items": [
+          {"tag": "POCs", "text": "AI POC list presented — waiting for client go/no-go"},
+          {"tag": "1 resource", "text": "6–8 weeks to complete all POCs"},
+          {"tag": "2 resources", "text": "~4 weeks — preferred path for faster SOW"},
+          {"tag": "Next step", "text": "Pilot shapes into formal SOW within weeks of approval"}
+        ]},
+        {"name": "Fabricut", "status": "Embedded in Delivery", "priority": "active", "items": [
+          {"tag": "Approach", "text": "Parallel: NetSuite mapping + 180+ normalized tables across Product, Vendor, Customer and additional master entities"},
+          {"tag": "Analysis", "text": "Hemant's 1,000-record first draft complete — needs review and scale to full dataset"},
+          {"tag": "Foundation", "text": "Strong technical credibility; natural expansion path post July go-live"}
+        ]},
+        {"name": "Select Medical", "status": "Analysis in Progress", "priority": "watch", "items": [
+          {"tag": "Current", "text": "Extracting TFS data — reviewing which departments have the highest backlog"},
+          {"tag": "Pitch", "text": "Backlog analysis determines where to pitch additional resources"},
+          {"tag": "QA play", "text": "QA engagement included in resource pitch — quality + velocity narrative"},
+          {"tag": "Billing", "text": "$5,600/mo · 100% billed · full resource utilization"}
+        ]},
+        {"name": "Flatiron", "status": "No Active Threads", "priority": "none", "items": [
+          {"tag": "Status", "text": "No mining activity — only account in portfolio with no pipeline"},
+          {"tag": "Trigger", "text": "Thursday live deployment is the natural opening for an expansion conversation"},
+          {"tag": "Scope", "text": "Adjacent opportunities: COOP expansion, scheduler, billing module"},
+          {"tag": "Action", "text": "AM to initiate growth conversation this week using 98% delivery metrics"}
+        ]}
+      ],
+      "flags": [
+        {"severity": "red", "title": "Cascade — $36K/mo contract gap", "subtitle": "Immediate · AM action", "body": "Committed $73,320/mo. July forecast $37,240 — 51% of commitment. Both DafoNow and App Consolidation declining. ROI deck (2024–2026 Gateway/Ops→Shipping savings) is now the lever to unlock approved project funding and close this gap.", "actions": [{"owner": "AM", "text": "Urgent contract review — clarify rate vs actuals and document scope changes"}, {"owner": "AM", "text": "Use ROI deck to position approved project as incremental savings — accelerate signoff"}]},
+        {"severity": "red", "title": "Billing gaps — 3 accounts", "subtitle": "Immediate · Revenue recognition risk", "body": "Aculocity (4 people), Fabricut (9 people), and Cascade have unbilled resources across May–July. Revenue is not being captured despite strong delivery. Combined exposure is material.", "actions": [{"owner": "AM", "text": "Reconcile all 3 accounts — bill all resources for May–July this week"}, {"owner": "DM", "text": "Confirm Fabricut 9-resource deployment and align to billing actuals"}]},
+        {"severity": "amber", "title": "Aculocity — 2 roles in hiring + Monday demo", "subtitle": "This week · DM + Rec-Team", "body": "Client wants AI Implementation Engineer ($4,800/mo) and AI Solution Specialist ($5,600/mo). Rec-Team pursuing both — 6–8 week close. Monday demo needs engineering resource confirmed today. Closing both roles adds $10,400/mo.", "actions": [{"owner": "DM", "text": "Confirm engineering resource for Monday AI demo — today"}, {"owner": "AM", "text": "Track Rec-Team weekly — target role close in 6 weeks"}]},
+        {"severity": "amber", "title": "Fabricut — July go-live blockers", "subtitle": "Monitor · DM escalation", "body": "Parallel workstreams active: NetSuite mapping + 180+ normalized tables. Hemant's 1,000-record first draft needs review and scale. VM infrastructure and data retention exec decision remain on critical path to July go-live.", "actions": [{"owner": "DM", "text": "Escalate VM blockers + obtain exec decision on data retention this week"}, {"owner": "PM", "text": "Review Hemant's draft and plan scale-out to full dataset"}]},
+        {"severity": "blue", "title": "Red Gold — AI pilot SOW forming", "subtitle": "Opportunity · 4–8 week window", "body": "AI POC list presented — awaiting client response. 1 resource = 6–8 weeks; 2 resources = ~4 weeks. Shapes into a formal SOW. CSAT 3.86 and CROP delivery give strong credibility. Speed of resourcing determines timeline.", "actions": [{"owner": "AM", "text": "Follow up on POC list — push for go/no-go this week"}, {"owner": "DM", "text": "Pre-identify 1–2 resources so we can start within days of approval"}]},
+        {"severity": "blue", "title": "Select Medical — TFS backlog → expansion pitch", "subtitle": "Opportunity · QA upsell play", "body": "Currently billed $5,600/mo. TFS data extraction underway — identifying highest-backlog departments. Analysis output will determine where to pitch additional resources including QA engagement. Evidence-led upsell approach.", "actions": [{"owner": "AM", "text": "Complete TFS analysis and prepare department-level pitch including QA engagement"}, {"owner": "AM", "text": "Frame upsell as faster backlog clearance + quality improvement narrative"}]},
+        {"severity": "green", "title": "Flatiron — only account with zero pipeline threads", "subtitle": "This month · Growth conversation needed", "body": "98% completion, Thursday live deployment, 85–90.5% hands-on-keyboard efficiency — and no mining activity. Strongest delivery account in the portfolio with no pipeline conversation. Thursday deployment is the natural trigger. Adjacent scope opportunities: COOP expansion, scheduler, billing modules.", "actions": [{"owner": "AM", "text": "Initiate expansion conversation using Thursday deployment as the proof point"}, {"owner": "AM", "text": "Identify 1–2 adjacent workstreams to scope as follow-on engagement"}]}
+      ]
+    }
+  ]
+}
