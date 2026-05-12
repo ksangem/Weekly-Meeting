@@ -250,12 +250,12 @@
       "week_id": "2026-W20",
       "date": "2026-05-12",
       "period": "May 1 – May 12, 2026",
-      "portfolio_forecast": 289240,
-      "team_deployed": 29,
-      "tickets_resolved": 74,
-      "tickets_total": 87,
-      "pipeline_upside": 16560,
-      "accounts_at_risk": 4,
+      "portfolio_forecast": 275640,
+      "team_deployed": 28,
+      "tickets_resolved": 83,
+      "tickets_total": 96,
+      "pipeline_upside": 6160,
+      "accounts_at_risk": 3,
       "forecast_months": 2,
       "accounts": [
         {
@@ -380,23 +380,24 @@
           "name": "Red Gold",
           "sub": "AS400 Modernization · Agriculture",
           "health": "On Track",
-          "team": 2,
-          "forecast": 15840,
+          "team": 1,
+          "forecast": 11840,
           "billing": "100% billed",
           "billingOk": true,
-          "tickets_resolved": 1,
-          "tickets_total": 3,
-          "rev": [7920, 7920],
+          "tickets_resolved": 4,
+          "tickets_total": 5,
+          "rev": [5920, 5920],
           "billed": ["Yes", "Yes"],
           "wins": [
-            "5 development tasks delivered maintaining velocity of 6: order acknowledgment, CROP enhancements, EDI updates, GTIN generator",
-            "Client expressing strong interest in AI/ML for code optimization — POC demo being prepared with VS Code + Copilot",
-            "Perfect billing: 100% billed at $7,920/month with stable revenue and CSAT holding at 3.86"
+            "R5723: CROP Scale Ticket Maint Managerial Screen across Facilities delivered successfully",
+            "R5661 Sprint 2: Modernize RGE103B Ord Ack Report delivered — overcame multiple technical and formatting challenges",
+            "R5760: Update CROP Fields by Grower Listing completed with modernization enhancements and moved to Done",
+            "R5726: Item Master Screen4 for Label Class Items initiated — BA/requirement understanding in progress"
           ],
           "concerns": [
-            "Quality concerns in RG-247 testing — enhanced QA processes needed to sustain CSAT improvement trajectory",
-            "67% deliverables pending client validation — slow feedback loops may delay future sprints",
-            "No active mining threads despite client AI interest — missing opportunity to convert satisfaction into expansion"
+            "Additional testing cycles and validation activities impacting timelines for modernization tasks",
+            "Complex report formatting (RGE103B) required multiple iterations — risk of similar delays on future modernization work",
+            "Ongoing BA discussions and requirement clarifications pending for remaining enhancement tasks"
           ],
           "mining": [
             "AI/ML POC demonstration in preparation: VS Code + Copilot extension showcasing AS400 optimization",
@@ -407,25 +408,25 @@
         {
           "id": "selectmedical",
           "name": "Select Medical",
-          "sub": "Support · BA Expansion",
-          "health": "Attention",
+          "sub": "TFS Reporting · Support",
+          "health": "On Track",
           "team": 1,
-          "forecast": 20800,
-          "billing": "Unbilled gaps",
-          "billingOk": false,
-          "tickets_resolved": null,
-          "tickets_total": null,
-          "rev": [10400, 10400],
-          "billed": ["No", "No"],
+          "forecast": 11200,
+          "billing": "100% billed",
+          "billingOk": true,
+          "tickets_resolved": 6,
+          "tickets_total": 7,
+          "rev": [5600, 5600],
+          "billed": ["Yes", "Yes"],
           "wins": [
-            "Revenue nearly doubled: $5,600/mo → $10,400/mo ($20,800 total Jun-Jul) — demonstrating growing client engagement",
-            "Active BA mining opportunity: customer needs discussion completed, project documents received",
-            "Zero escalations or CSAT issues — smooth operational delivery and strong customer satisfaction"
+            "CDRNFL report completed and submitted for QA testing; Medhost Summary of Top Procedures report ready for Production with Excel/pivot table download",
+            "Turn off daily email of Medhost Procedure Edit & LOA Reports to CIRH — ready for Production deployment",
+            "Revenue Usage Report and Medhost Contract Management Reporting Updates moved through QA pipeline; strong delivery cadence maintained"
           ],
           "concerns": [
-            "Critical billing gap: both June ($10,400) and July ($10,400) flagged as not fully billed — $20,800 revenue at risk",
-            "Pipeline thread stalled 10 weeks at rate negotiation — client requesting 10% increase to $6,160 but no SOW finalized",
-            "No committed monthly baseline ($0/month contracted) — revenue predictability risk despite stable forecast"
+            "Fewer tickets as most tasks currently in QA testing — velocity dip is pipeline timing, not capacity issue",
+            "Next task dependent on completing RH Greenville physician group (Vituity) data file with patient stay information",
+            "BA mining thread stalled 10 weeks at rate negotiation ($6,160) — needs escalation to unblock SOW"
           ],
           "mining": [
             "BA opportunity: customer needs discussion completed, project documents received — rate negotiation at $6,160",
@@ -437,7 +438,7 @@
       "actions": [
         {"text": "Cascade: Validate engagement continuation — secure client commitment on Q3/Q4 support team via email response; accelerate Warehouse management POC scoping", "owner": "AM"},
         {"text": "Aculocity: WIN — 2 AI Engineers confirmed by client; track interview progress weekly and target onboarding within 4-6 weeks", "owner": "DM"},
-        {"text": "Billing reconciliation — Aculocity + Select Medical: resolve $56,960 combined unbilled exposure across Jun-Jul immediately (Fabricut now billing)", "owner": "AM"},
+        {"text": "Billing reconciliation — Aculocity: resolve $36,160 unbilled exposure across Jun-Jul immediately (Fabricut + Select Medical now fully billed)", "owner": "AM"},
         {"text": "Fabricut: Unblock validation sign-off to recover ~2-3 week schedule impact; coordinate parallel ETL/Validation/PBI/NetSuite streams tightly", "owner": "DM"},
         {"text": "Select Medical: Escalate 10-week stalled BA rate negotiation to executive sponsor; present 6-month ticket analysis to unblock SOW", "owner": "AM"},
         {"text": "Red Gold: Leverage AI/ML client interest — complete POC demo prep (VS Code + Copilot) and schedule client presentation this week", "owner": "DM"},
@@ -482,11 +483,11 @@
         ]}
       ],
       "flags": [
-        {"severity": "red", "title": "Billing gaps — $57K unbilled across 2 accounts", "subtitle": "Immediate · AM + DM action", "body": "Aculocity ($36,160) and Select Medical ($20,800) have unbilled resources across Jun-Jul. Combined $56,960 unbilled exposure. Fabricut billing resolved (now $52K/mo fully billed). Select Medical newly at risk (was 100% billed W19). Revenue recognition needs attention on these 2 accounts.", "actions": [{"owner": "AM", "text": "Reconcile Aculocity + Select Medical billing — confirm resource allocation and complete billing entries"}, {"owner": "DM", "text": "Verify Select Medical support team billing status and formalize $10,400/month contract"}]},
+        {"severity": "amber", "title": "Aculocity billing — $36K unbilled", "subtitle": "This week · AM action", "body": "Aculocity ($36,160) has unbilled resources across Jun-Jul. Down from $127K W19 (3 accounts) — Fabricut and Select Medical billing now resolved. Only 1 account with billing gaps remaining.", "actions": [{"owner": "AM", "text": "Reconcile Aculocity billing — confirm resource allocation and complete billing entries for Jun-Jul"}, {"owner": "DM", "text": "Track billing resolution alongside AI Engineer onboarding timeline"}]},
         {"severity": "red", "title": "Cascade — engagement wind-down risk", "subtitle": "Immediate · AM action", "body": "Revenue declining 15% MoM (June $43,840 → July $37,240). Zero active resources in system. Team halved from 23 to 10.5. Client email on Q3/Q4 support continuation is the make-or-break signal. Warehouse management POC is new but unscoped. Without confirmed continuation, Cascade faces structured ramp-down.", "actions": [{"owner": "AM", "text": "Secure client confirmation on Q3/Q4 support team continuation immediately"}, {"owner": "AM", "text": "Scope Warehouse management POC and position as next engagement phase"}]},
         {"severity": "amber", "title": "Aculocity — 2 AI Engineers WIN but billing unresolved", "subtitle": "This week · DM tracking", "body": "Major pipeline win: client confirmed 2 AI Engineers. Interviews ongoing — potential +$10,400/mo. But $36,160 Jun-Jul forecast remains unbilled. Team Center dependency (Rob out) risks delivery delays on 400 BOM discrepancies.", "actions": [{"owner": "DM", "text": "Track AI Engineer interview progress weekly — target onboarding in 4-6 weeks"}, {"owner": "AM", "text": "Resolve Jun-Jul billing immediately — $36,160 exposure cannot persist"}]},
         {"severity": "amber", "title": "Fabricut — validation delays + parallel stream coordination", "subtitle": "Monitor · DM + PM", "body": "Strong delivery execution (43% normalization, 40+ support tickets, revenue growing to $52K/mo) but validation delayed ~2-3 weeks pending Fabricut sign-off and sample import availability. Four parallel streams (ETL, Validation, Power BI, NetSuite) require tight coordination. Power BI blocked until Data Mart readiness. Support ticket routing not following planned bucket process.", "actions": [{"owner": "DM", "text": "Unblock validation sign-off with Fabricut — recover 2-3 week schedule impact"}, {"owner": "PM", "text": "Tighten cross-stream coordination; resolve support ticket routing to planned bucket process"}]},
-        {"severity": "amber", "title": "Select Medical — health degraded to Attention", "subtitle": "New this week · Revenue + pipeline stall", "body": "Select Medical dropped from On Track to Attention. Revenue doubled ($5.6K→$10.4K/mo) but both months unbilled. BA opportunity stalled 10 weeks at rate negotiation ($6,160). No committed monthly baseline despite stable forecast. Needs immediate commercial attention.", "actions": [{"owner": "AM", "text": "Escalate rate negotiation to executive sponsor — 10 weeks is unacceptable for a warm lead"}, {"owner": "DM", "text": "Assign resources and formalize $10,400/month contract to replace $0/month committed rate"}]},
+        {"severity": "blue", "title": "Select Medical — BA opportunity stalled at rate negotiation", "subtitle": "Opportunity · AM escalation", "body": "Select Medical delivery remains stable ($5,600/mo, 100% billed, solid QA pipeline). BA opportunity stalled 10 weeks at rate negotiation ($6,160). Customer needs discussion completed, project docs received. 6-month ticket analysis presentation pending. Needs executive escalation to convert warm lead to SOW.", "actions": [{"owner": "AM", "text": "Escalate BA rate negotiation to executive sponsor — present 6-month ticket analysis to justify rate"}, {"owner": "AM", "text": "Leverage strong delivery track record (CDRNFL, Medhost reports) as proof point for expansion"}]},
         {"severity": "blue", "title": "Red Gold — AI/ML expansion opportunity forming", "subtitle": "Opportunity · POC demo this week", "body": "Client expressing strong interest in AI/ML for code optimization and SDLC improvements. Team preparing VS Code + Copilot POC demo. CSAT at 3.86 with 100% delivery completion provides credibility. Neha coordinating with Kiran on AS400 AI best practices. No formal mining thread yet.", "actions": [{"owner": "DM", "text": "Complete AI/ML POC demo prep and schedule client presentation this week"}, {"owner": "AM", "text": "Open formal mining thread and document AI expansion opportunity scope and commercials"}]},
         {"severity": "green", "title": "Flatiron — 100% delivery, zero pipeline (unchanged)", "subtitle": "This month · Growth conversation overdue", "body": "Second consecutive week as strongest delivery account with no mining activity. 100% completion (21/21 tickets), zero backlog, genomic testing enhancements delivered. Bridget offering regression testing support. Growth conversation is overdue — every week without action is missed revenue.", "actions": [{"owner": "AM", "text": "Initiate expansion conversation this week — use 100% metrics as proof point"}, {"owner": "AM", "text": "Explore COOP expansion, scheduler, billing module as concrete follow-on scope"}]}
       ]

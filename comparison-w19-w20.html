@@ -183,9 +183,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 
 <div class="main">
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- 1. PORTFOLIO SUMMARY COMPARISON                        -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 1. PORTFOLIO SUMMARY COMPARISON -->
 <div class="sh" style="margin-top:0;"><h2>1. Portfolio Summary Comparison</h2><span class="hint">W19 (Apr 15 - May 5) vs W20 (May 1 - May 12)</span></div>
 
 <div class="summary-grid" id="summary-grid"></div>
@@ -203,31 +201,23 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- 2. ACCOUNT-BY-ACCOUNT COMPARISON                       -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 2. ACCOUNT-BY-ACCOUNT COMPARISON -->
 <div class="sh"><h2>2. Account-by-Account Comparison</h2><span class="hint">Click to expand</span></div>
 <div id="account-cards"></div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- 3. MINING & PIPELINE TRACKER                           -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 3. MINING & PIPELINE TRACKER -->
 <div class="sh"><h2>3. Mining & Pipeline Tracker</h2><span class="hint">Thread progression across weeks</span></div>
 <div style="overflow-x:auto;">
   <table class="track-table" id="mining-tracker"></table>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- 4. ACTION ITEM TRACKER                                 -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 4. ACTION ITEM TRACKER -->
 <div class="sh"><h2>4. Action Item Tracker</h2><span class="hint">W19 actions -- resolution status in W20</span></div>
 <div style="overflow-x:auto;">
   <table class="track-table" id="action-tracker"></table>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- 5. PRIORITY FLAGS COMPARISON                           -->
-<!-- ═══════════════════════════════════════════════════════ -->
+<!-- 5. PRIORITY FLAGS COMPARISON -->
 <div class="sh"><h2>5. Priority Flags Comparison</h2><span class="hint">Side-by-side flag changes</span></div>
 <div id="flags-comparison"></div>
 
@@ -239,9 +229,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 </div><!-- .main -->
 
 <script>
-// ══════════════════════════════════════════════════════════
-// DATA (embedded from history.json)
-// ══════════════════════════════════════════════════════════
+// ================================================================
+// DATA (corrected from history.json)
+// ================================================================
 const W19 = {
   "week_id":"2026-W19","date":"2026-05-05","period":"Apr 15 - May 5, 2026",
   "portfolio_forecast":393680,"team_deployed":44,"tickets_resolved":114,"tickets_total":130,
@@ -302,8 +292,8 @@ const W19 = {
 
 const W20 = {
   "week_id":"2026-W20","date":"2026-05-12","period":"May 1 - May 12, 2026",
-  "portfolio_forecast":289240,"team_deployed":29,"tickets_resolved":74,"tickets_total":87,
-  "pipeline_upside":16560,"accounts_at_risk":4,"forecast_months":2,
+  "portfolio_forecast":275640,"team_deployed":28,"tickets_resolved":83,"tickets_total":96,
+  "pipeline_upside":6160,"accounts_at_risk":3,"forecast_months":2,
   "accounts":[
     {"id":"cascade","name":"Cascade","sub":"NHS - DafoNow + App Consolidation","health":"Attention","team":10.5,"forecast":81080,"billing":"100% billed","billingOk":true,"tickets_resolved":12,"tickets_total":23,"rev":[43840,37240],"billed":["Yes","Yes"],
      "wins":["Release 2.11 delivered: 20 tickets, all DafoNow prerequisites on COS -- zero regressions, quick TAT to production","DAFONow-COS integration infrastructure complete: Sales Order sync, SSO, audit logging, master data sync across 60 story points","DafoNow milestones on track: eJobAid queues (D2-D4) done, Feature UAT targeted for 3rd week of May, June 15 soft launch holds"],
@@ -317,23 +307,23 @@ const W20 = {
      "wins":["Perfect execution: 100% ticket completion (21/21) with zero backlog and 85-90.5% efficiency across 7 concurrent workstreams","High-value genomic testing enhancements: Guardant MRD + Monitoring test card, Foundation Medicine concurrent ordering restrictions","Strong billing health: 100% billed with $31,360 secured across June-July at $15,680/month"],
      "concerns":["ONC access escalation requires prompt resolution for attestation timeline -- managed via client collaboration with Bridget","No active mining pipeline despite positive delivery momentum and strong client relationship","Single engagement concentration ($15,680/month from QA & Automation only) -- warrants expansion"],
      "mining":["No active mining threads -- strongest delivery account in portfolio with no pipeline conversation","100% completion rate provides natural opening for growth conversation with client stakeholders","Adjacent opportunities: COOP expansion, scheduler enhancements, billing module improvements"]},
-    {"id":"aculocity","name":"Aculocity","sub":"DataSystems - CRM & AI Solutions","health":"Attention","team":2.5,"forecast":36160,"billing":"Unbilled gaps","billingOk":false,"tickets_resolved":null,"tickets_total":null,"rev":[15680,20480],"billed":["No","No"],
+    {"id":"aculocity","name":"Aculocity","sub":"DataSystems - CRM & AI Solutions","health":"Attention","team":2.5,"forecast":36160,"billing":"Unbilled","billingOk":false,"tickets_resolved":null,"tickets_total":null,"rev":[15680,20480],"billed":["No","No"],
      "wins":["88.93% utilization sustained with zero post-production incidents -- consistent quality and team efficiency","Microsoft Clarity implementation for user interaction analysis + ticket categorization strategies driving continuous improvement","Client confirmed 2 AI Engineers additions -- interviews ongoing (pipeline WIN from W19 hiring thread)"],
      "concerns":["Unbilled revenue across June-July ($36,160 total) -- invoicing validation needed to prevent cash flow delays","Cross-team dependency: Team Center availability (Rob out) creating delays for 400 BOM discrepancies and invoice logic"],
      "mining":["WIN: Client confirmed 2 AI Engineers additions -- interviews actively ongoing","CRM & AI agent opportunity progressing -- internal demo via delivery team scheduled (Owner: Rohan)","Thread still 16+ weeks stale in system (last updated Jan 8) but real progress happening off-tracker"]},
-    {"id":"redgold","name":"Red Gold","sub":"AS400 Modernization - Agriculture","health":"On Track","team":2,"forecast":15840,"billing":"100% billed","billingOk":true,"tickets_resolved":1,"tickets_total":3,"rev":[7920,7920],"billed":["Yes","Yes"],
-     "wins":["5 development tasks delivered maintaining velocity of 6: order acknowledgment, CROP enhancements, EDI updates, GTIN generator","Client expressing strong interest in AI/ML for code optimization -- POC demo being prepared with VS Code + Copilot","Perfect billing: 100% billed at $7,920/month with stable revenue and CSAT holding at 3.86"],
-     "concerns":["Quality concerns in RG-247 testing -- enhanced QA processes needed to sustain CSAT improvement trajectory","67% deliverables pending client validation -- slow feedback loops may delay future sprints","No active mining threads despite client AI interest -- missing opportunity to convert satisfaction into expansion"],
+    {"id":"redgold","name":"Red Gold","sub":"AS400 Modernization - Agriculture","health":"On Track","team":1,"forecast":11840,"billing":"100% billed","billingOk":true,"tickets_resolved":4,"tickets_total":5,"rev":[5920,5920],"billed":["Yes","Yes"],
+     "wins":["R5723: CROP Scale Ticket Maint Managerial Screen across Facilities delivered successfully","R5661 Sprint 2: Modernize RGE103B Ord Ack Report delivered -- overcame multiple technical and formatting challenges","R5760: Update CROP Fields by Grower Listing completed with modernization enhancements and moved to Done","R5726: Item Master Screen4 for Label Class Items initiated -- BA/requirement understanding in progress"],
+     "concerns":["Additional testing cycles and validation activities impacting timelines for modernization tasks","Complex report formatting (RGE103B) required multiple iterations -- risk of similar delays on future modernization work","Ongoing BA discussions and requirement clarifications pending for remaining enhancement tasks"],
      "mining":["AI/ML POC demonstration in preparation: VS Code + Copilot extension showcasing AS400 optimization","Neha coordinating with Kiran on AS400 AI best practices for upcoming client call","No formal mining thread open -- AM should initiate discovery conversation leveraging AI interest"]},
-    {"id":"selectmedical","name":"Select Medical","sub":"Support - BA Expansion","health":"Attention","team":1,"forecast":20800,"billing":"Unbilled gaps","billingOk":false,"tickets_resolved":null,"tickets_total":null,"rev":[10400,10400],"billed":["No","No"],
-     "wins":["Revenue nearly doubled: $5,600/mo to $10,400/mo ($20,800 total Jun-Jul) -- demonstrating growing client engagement","Active BA mining opportunity: customer needs discussion completed, project documents received","Zero escalations or CSAT issues -- smooth operational delivery and strong customer satisfaction"],
-     "concerns":["Critical billing gap: both June ($10,400) and July ($10,400) flagged as not fully billed -- $20,800 revenue at risk","Pipeline thread stalled 10 weeks at rate negotiation -- client requesting 10% increase to $6,160 but no SOW finalized","No committed monthly baseline ($0/month contracted) -- revenue predictability risk despite stable forecast"],
+    {"id":"selectmedical","name":"Select Medical","sub":"TFS Reporting - Support","health":"On Track","team":1,"forecast":11200,"billing":"100% billed","billingOk":true,"tickets_resolved":6,"tickets_total":7,"rev":[5600,5600],"billed":["Yes","Yes"],
+     "wins":["CDRNFL report completed and submitted for QA testing; Medhost Summary of Top Procedures report ready for Production with Excel/pivot table download","Turn off daily email of Medhost Procedure Edit & LOA Reports to CIRH -- ready for Production deployment","Revenue Usage Report and Medhost Contract Management Reporting Updates moved through QA pipeline; strong delivery cadence maintained"],
+     "concerns":["Fewer tickets as most tasks currently in QA testing -- velocity dip is pipeline timing, not capacity issue","Next task dependent on completing RH Greenville physician group (Vituity) data file with patient stay information","BA mining thread stalled 10 weeks at rate negotiation ($6,160) -- needs escalation to unblock SOW"],
      "mining":["BA opportunity: customer needs discussion completed, project documents received -- rate negotiation at $6,160","Action pending: present 6-month ticket analysis to Amit, PMO, and AM via delivery team","Thread 10 weeks stale (last updated Feb 23) -- requires escalation to executive sponsor to unblock SOW"]}
   ],
   "actions":[
     {"text":"Cascade: Validate engagement continuation -- secure client commitment on Q3/Q4 support team via email response; accelerate Warehouse management POC scoping","owner":"AM"},
     {"text":"Aculocity: WIN -- 2 AI Engineers confirmed by client; track interview progress weekly and target onboarding within 4-6 weeks","owner":"DM"},
-    {"text":"Billing reconciliation -- Aculocity + Select Medical: resolve $56,960 combined unbilled exposure across Jun-Jul immediately (Fabricut now billing)","owner":"AM"},
+    {"text":"Billing reconciliation -- Aculocity: resolve $36,160 unbilled exposure across Jun-Jul immediately (Fabricut + Select Medical now fully billed)","owner":"AM"},
     {"text":"Fabricut: Unblock validation sign-off to recover ~2-3 week schedule impact; coordinate parallel ETL/Validation/PBI/NetSuite streams tightly","owner":"DM"},
     {"text":"Select Medical: Escalate 10-week stalled BA rate negotiation to executive sponsor; present 6-month ticket analysis to unblock SOW","owner":"AM"},
     {"text":"Red Gold: Leverage AI/ML client interest -- complete POC demo prep (VS Code + Copilot) and schedule client presentation this week","owner":"DM"},
@@ -348,11 +338,11 @@ const W20 = {
     {"name":"Flatiron","status":"No Active Threads","priority":"none","items":[{"tag":"Status","text":"Zero mining threads -- strongest delivery account in portfolio with no pipeline"},{"tag":"Proof","text":"100% completion rate (21/21) + 85-90.5% efficiency = strongest expansion proof point"},{"tag":"Scope","text":"Adjacent opportunities: COOP expansion, scheduler, billing module improvements"},{"tag":"Action","text":"AM to initiate growth conversation immediately using perfect delivery metrics"}]}
   ],
   "flags":[
-    {"severity":"red","title":"Billing gaps -- $57K unbilled across 2 accounts","subtitle":"Immediate / AM + DM action","body":"Aculocity ($36,160) and Select Medical ($20,800) have unbilled resources across Jun-Jul. Combined $56,960 unbilled exposure. Fabricut billing resolved (now $52K/mo fully billed). Select Medical newly at risk (was 100% billed W19). Revenue recognition needs attention on these 2 accounts."},
-    {"severity":"red","title":"Cascade -- engagement wind-down risk","subtitle":"Immediate / AM action","body":"Revenue declining 15% MoM (June $43,840 to July $37,240). Zero active resources in system. Team halved from 23 to 10.5. Client email on Q3/Q4 support continuation is the make-or-break signal. Warehouse management POC is new but unscoped. Without confirmed continuation, Cascade faces structured ramp-down."},
+    {"severity":"amber","title":"Aculocity billing -- $36K unbilled","subtitle":"This week / AM action","body":"Aculocity ($36,160) has unbilled resources across Jun-Jul. Down from ~$127K W19 (3 accounts) -- Fabricut and Select Medical billing now resolved. Only 1 account with billing gaps remaining."},
+    {"severity":"red","title":"Cascade -- engagement wind-down risk","subtitle":"Immediate / AM action","body":"Revenue declining 15% MoM (June $43,840 to July $37,240). Team halved from 23 to 10.5. Client email on Q3/Q4 support continuation is the make-or-break signal. Warehouse management POC is new but unscoped. Without confirmed continuation, Cascade faces structured ramp-down."},
     {"severity":"amber","title":"Aculocity -- 2 AI Engineers WIN but billing unresolved","subtitle":"This week / DM tracking","body":"Major pipeline win: client confirmed 2 AI Engineers. Interviews ongoing -- potential +$10,400/mo. But $36,160 Jun-Jul forecast remains unbilled. Team Center dependency (Rob out) risks delivery delays on 400 BOM discrepancies."},
     {"severity":"amber","title":"Fabricut -- validation delays + parallel stream coordination","subtitle":"Monitor / DM + PM","body":"Strong delivery execution (43% normalization, 40+ support tickets, revenue growing to $52K/mo) but validation delayed ~2-3 weeks pending Fabricut sign-off and sample import availability. Four parallel streams (ETL, Validation, Power BI, NetSuite) require tight coordination. Power BI blocked until Data Mart readiness. Support ticket routing not following planned bucket process."},
-    {"severity":"amber","title":"Select Medical -- health degraded to Attention","subtitle":"New this week / Revenue + pipeline stall","body":"Dropped from On Track to Attention. Revenue doubled but both months unbilled. BA opportunity stalled 10 weeks at rate negotiation ($6,160). No committed monthly baseline despite stable forecast. Needs immediate commercial attention."},
+    {"severity":"blue","title":"Select Medical -- BA opportunity stalled at rate negotiation","subtitle":"Opportunity / AM escalation","body":"Select Medical delivery remains stable ($5,600/mo, 100% billed, solid QA pipeline). BA opportunity stalled 10 weeks at rate negotiation ($6,160). Customer needs discussion completed, project docs received. 6-month ticket analysis presentation pending. Needs executive escalation to convert warm lead to SOW."},
     {"severity":"blue","title":"Red Gold -- AI/ML expansion opportunity forming","subtitle":"Opportunity / POC demo this week","body":"Client expressing strong interest in AI/ML for code optimization and SDLC improvements. Team preparing VS Code + Copilot POC demo. CSAT at 3.86 with 100% delivery completion provides credibility. Neha coordinating with Kiran on AS400 AI best practices. No formal mining thread yet."},
     {"severity":"green","title":"Flatiron -- 100% delivery, zero pipeline (unchanged)","subtitle":"This month / Growth conversation overdue","body":"Second consecutive week as strongest delivery account with no mining activity. 100% completion (21/21 tickets), zero backlog, genomic testing enhancements delivered. Bridget offering regression testing support. Growth conversation is overdue -- every week without action is missed revenue."}
   ]
@@ -360,9 +350,9 @@ const W20 = {
 
 const COLORS = ['#1a3c6e','#BA7517','#3B6D11','#993556','#5F5E5A','#185fa5'];
 
-// ══════════════════════════════════════════════════════════
+// ================================================================
 // HELPERS
-// ══════════════════════════════════════════════════════════
+// ================================================================
 function fmt(v) { return '$' + v.toLocaleString(); }
 function pct(a, b) { return b ? Math.round((a / b) * 100) + '%' : 'N/A'; }
 function arrow(curr, prev, invert) {
@@ -370,21 +360,21 @@ function arrow(curr, prev, invert) {
   if (diff === 0) return '<span class="arrow-same">--</span>';
   const good = invert ? diff < 0 : diff > 0;
   return good
-    ? `<span class="arrow-up">&#9650;</span>`
-    : `<span class="arrow-down">&#9660;</span>`;
+    ? '<span class="arrow-up">&#9650;</span>'
+    : '<span class="arrow-down">&#9660;</span>';
 }
 function badgeHtml(health) {
   const cls = health === 'On Track' ? 'bok' : health === 'At Risk' ? 'brisk' : 'bwarn';
-  return `<span class="badge ${cls}">${health}</span>`;
+  return '<span class="badge ' + cls + '">' + health + '</span>';
 }
 function priorityPill(p) {
   const cls = {strong:'pp-strong',active:'pp-active',watch:'pp-watch',none:'pp-none'}[p] || 'pp-none';
-  return `<span class="ppill ${cls}">${p}</span>`;
+  return '<span class="ppill ' + cls + '">' + p + '</span>';
 }
 
-// ══════════════════════════════════════════════════════════
+// ================================================================
 // 1. PORTFOLIO SUMMARY
-// ══════════════════════════════════════════════════════════
+// ================================================================
 function buildSummary() {
   const el = document.getElementById('summary-grid');
   const w19rr = Math.round(W19.portfolio_forecast / W19.forecast_months);
@@ -395,28 +385,28 @@ function buildSummary() {
   const w20tc = W20.tickets_total ? Math.round((W20.tickets_resolved/W20.tickets_total)*100) : 0;
 
   const rows = [
-    {label:'Portfolio Forecast', w19: fmt(W19.portfolio_forecast) + ` <span class="note">(${W19.forecast_months}mo)</span>`, w20: fmt(W20.portfolio_forecast) + ` <span class="note">(${W20.forecast_months}mo)</span>`, arr: arrow(W20.portfolio_forecast, W19.portfolio_forecast) + ' <span class="note">Window changed 3mo to 2mo</span>'},
-    {label:'Monthly Run Rate', w19: fmt(w19rr) + '/mo', w20: fmt(w20rr) + '/mo', arr: arrow(w20rr, w19rr) + ` <span class="note">${w20rr > w19rr ? '+' : ''}${fmt(w20rr - w19rr)}/mo</span>`},
-    {label:'Team Deployed', w19: W19.team_deployed + ' people', w20: W20.team_deployed + ' people', arr: arrow(W20.team_deployed, W19.team_deployed) + ` <span class="note">${W20.team_deployed - W19.team_deployed} people</span>`},
-    {label:'Tickets Resolved / Total', w19: `${W19.tickets_resolved} / ${W19.tickets_total} (${w19tp})`, w20: `${W20.tickets_resolved} / ${W20.tickets_total} (${w20tp})`, arr: arrow(w20tc, w19tc) + ` <span class="note">${w19tp} to ${w20tp}</span>`},
-    {label:'Accounts at Risk', w19: W19.accounts_at_risk + ' / 6', w20: W20.accounts_at_risk + ' / 6', arr: arrow(W20.accounts_at_risk, W19.accounts_at_risk, true) + ` <span class="note">+${W20.accounts_at_risk - W19.accounts_at_risk}</span>`},
-    {label:'Pipeline Upside', w19: '+' + fmt(W19.pipeline_upside) + '/mo', w20: '+' + fmt(W20.pipeline_upside) + '/mo', arr: arrow(W20.pipeline_upside, W19.pipeline_upside) + ` <span class="note">+${fmt(W20.pipeline_upside - W19.pipeline_upside)}/mo</span>`}
+    {label:'Portfolio Forecast', w19: fmt(W19.portfolio_forecast) + ' <span class="note">(' + W19.forecast_months + 'mo)</span>', w20: fmt(W20.portfolio_forecast) + ' <span class="note">(' + W20.forecast_months + 'mo)</span>', arr: arrow(W20.portfolio_forecast, W19.portfolio_forecast) + ' <span class="note">Window changed 3mo to 2mo</span>'},
+    {label:'Monthly Run Rate', w19: fmt(w19rr) + '/mo', w20: fmt(w20rr) + '/mo', arr: arrow(w20rr, w19rr) + ' <span class="note">' + (w20rr > w19rr ? '+' : '') + fmt(w20rr - w19rr) + '/mo</span>'},
+    {label:'Team Deployed', w19: W19.team_deployed + ' people', w20: W20.team_deployed + ' people', arr: arrow(W20.team_deployed, W19.team_deployed) + ' <span class="note">' + (W20.team_deployed - W19.team_deployed) + ' people</span>'},
+    {label:'Tickets Resolved / Total', w19: W19.tickets_resolved + ' / ' + W19.tickets_total + ' (' + w19tp + ')', w20: W20.tickets_resolved + ' / ' + W20.tickets_total + ' (' + w20tp + ')', arr: arrow(w20tc, w19tc) + ' <span class="note">' + w19tp + ' to ' + w20tp + '</span>'},
+    {label:'Accounts at Risk', w19: W19.accounts_at_risk + ' / 6', w20: W20.accounts_at_risk + ' / 6', arr: arrow(W20.accounts_at_risk, W19.accounts_at_risk, true) + ' <span class="note">' + (W20.accounts_at_risk === W19.accounts_at_risk ? 'no change' : (W20.accounts_at_risk > W19.accounts_at_risk ? '+' : '') + (W20.accounts_at_risk - W19.accounts_at_risk)) + '</span>'},
+    {label:'Pipeline Upside', w19: '+' + fmt(W19.pipeline_upside) + '/mo', w20: '+' + fmt(W20.pipeline_upside) + '/mo', arr: arrow(W20.pipeline_upside, W19.pipeline_upside) + ' <span class="note">' + fmt(W20.pipeline_upside - W19.pipeline_upside) + '/mo</span>'}
   ];
 
-  let html = `<div class="sg-header">Metric</div><div class="sg-header">W19 (${W19.period})</div><div class="sg-header">W20 (${W20.period})</div><div class="sg-header">Change</div>`;
-  rows.forEach(r => {
-    html += `<div class="sg-cell sg-label">${r.label}</div><div class="sg-cell">${r.w19}</div><div class="sg-cell">${r.w20}</div><div class="sg-cell">${r.arr}</div>`;
+  let html = '<div class="sg-header">Metric</div><div class="sg-header">W19 (' + W19.period + ')</div><div class="sg-header">W20 (' + W20.period + ')</div><div class="sg-header">Change</div>';
+  rows.forEach(function(r) {
+    html += '<div class="sg-cell sg-label">' + r.label + '</div><div class="sg-cell">' + r.w19 + '</div><div class="sg-cell">' + r.w20 + '</div><div class="sg-cell">' + r.arr + '</div>';
   });
   el.innerHTML = html;
 }
 
-// ══════════════════════════════════════════════════════════
+// ================================================================
 // CHARTS
-// ══════════════════════════════════════════════════════════
+// ================================================================
 function buildCharts() {
-  const acctNames = W19.accounts.map(a => a.name);
-  const w19f = W19.accounts.map(a => a.forecast);
-  const w20f = W20.accounts.map(a => a.forecast);
+  const acctNames = W19.accounts.map(function(a) { return a.name; });
+  const w19f = W19.accounts.map(function(a) { return a.forecast; });
+  const w20f = W20.accounts.map(function(a) { return a.forecast; });
 
   new Chart(document.getElementById('forecastCompareChart'), {
     type: 'bar',
@@ -426,11 +416,11 @@ function buildCharts() {
     ]},
     options: {responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},
-      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'}}}}
+      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K'}}}}}
   });
 
-  const w19rr = W19.accounts.map(a => Math.round(a.forecast / W19.forecast_months));
-  const w20rr = W20.accounts.map(a => Math.round(a.forecast / W20.forecast_months));
+  const w19rr = W19.accounts.map(function(a) { return Math.round(a.forecast / W19.forecast_months); });
+  const w20rr = W20.accounts.map(function(a) { return Math.round(a.forecast / W20.forecast_months); });
 
   new Chart(document.getElementById('runRateChart'), {
     type: 'bar',
@@ -440,18 +430,18 @@ function buildCharts() {
     ]},
     options: {responsive:true,maintainAspectRatio:false,
       plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},
-      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{callback:v=>'$'+(v/1000).toFixed(0)+'K'}}}}
+      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K'}}}}}
   });
 }
 
-// ══════════════════════════════════════════════════════════
+// ================================================================
 // 2. ACCOUNT-BY-ACCOUNT
-// ══════════════════════════════════════════════════════════
+// ================================================================
 function buildAccountCards() {
   const container = document.getElementById('account-cards');
 
-  W19.accounts.forEach((w19a, idx) => {
-    const w20a = W20.accounts.find(a => a.id === w19a.id);
+  W19.accounts.forEach(function(w19a, idx) {
+    const w20a = W20.accounts.find(function(a) { return a.id === w19a.id; });
     if (!w20a) return;
 
     const healthChanged = w19a.health !== w20a.health;
@@ -461,88 +451,85 @@ function buildAccountCards() {
 
     // Build what-changed list
     const changes = [];
-    if (w19a.team !== w20a.team) changes.push(`Team: ${w19a.team} to ${w20a.team} (${w20a.team > w19a.team ? '+' : ''}${(w20a.team - w19a.team).toFixed(1)})`);
-    if (w19a.forecast !== w20a.forecast) changes.push(`Forecast: ${fmt(w19a.forecast)} (${W19.forecast_months}mo) to ${fmt(w20a.forecast)} (${W20.forecast_months}mo)`);
+    if (w19a.team !== w20a.team) changes.push('Team: ' + w19a.team + ' to ' + w20a.team + ' (' + (w20a.team > w19a.team ? '+' : '') + (w20a.team - w19a.team).toFixed(1) + ')');
+    if (w19a.forecast !== w20a.forecast) changes.push('Forecast: ' + fmt(w19a.forecast) + ' (' + W19.forecast_months + 'mo) to ' + fmt(w20a.forecast) + ' (' + W20.forecast_months + 'mo)');
     const w19rr = Math.round(w19a.forecast / W19.forecast_months);
     const w20rr = Math.round(w20a.forecast / W20.forecast_months);
-    if (w19rr !== w20rr) changes.push(`Run rate: ${fmt(w19rr)}/mo to ${fmt(w20rr)}/mo (${w20rr > w19rr ? '+' : ''}${fmt(w20rr - w19rr)})`);
-    if (w19a.billing !== w20a.billing) changes.push(`Billing: "${w19a.billing}" to "${w20a.billing}" ${w20a.billingOk && !w19a.billingOk ? '(IMPROVED)' : !w20a.billingOk && w19a.billingOk ? '(DEGRADED)' : ''}`);
-    if (healthChanged) changes.push(`Health: ${w19a.health} to ${w20a.health}`);
+    if (w19rr !== w20rr) changes.push('Run rate: ' + fmt(w19rr) + '/mo to ' + fmt(w20rr) + '/mo (' + (w20rr > w19rr ? '+' : '') + fmt(w20rr - w19rr) + ')');
+    if (w19a.billing !== w20a.billing) changes.push('Billing: "' + w19a.billing + '" to "' + w20a.billing + '" ' + (w20a.billingOk && !w19a.billingOk ? '(IMPROVED)' : !w20a.billingOk && w19a.billingOk ? '(DEGRADED)' : ''));
+    if (healthChanged) changes.push('Health: ' + w19a.health + ' to ' + w20a.health);
     if (changes.length === 0) changes.push('No significant metric changes');
 
-    const w19tickets = w19a.tickets_resolved != null ? `${w19a.tickets_resolved} / ${w19a.tickets_total}` : 'N/A';
-    const w20tickets = w20a.tickets_resolved != null ? `${w20a.tickets_resolved} / ${w20a.tickets_total}` : 'N/A';
+    const w19tickets = w19a.tickets_resolved != null ? w19a.tickets_resolved + ' / ' + w19a.tickets_total : 'N/A';
+    const w20tickets = w20a.tickets_resolved != null ? w20a.tickets_resolved + ' / ' + w20a.tickets_total : 'N/A';
 
     const card = document.createElement('div');
     card.className = 'acct-card';
-    card.innerHTML = `
-      <div class="acct-header" onclick="this.parentElement.classList.toggle('open')">
-        <div class="acct-title">
-          <div>
-            <div class="acct-name">${w19a.name}</div>
-            <div class="acct-sub">${w20a.sub}</div>
-          </div>
-          <div class="health-change">
-            ${badgeHtml(w19a.health)} ${healthArrow} ${badgeHtml(w20a.health)}
-          </div>
-        </div>
-        <span class="chv">&#9662;</span>
-      </div>
-      <div class="acct-body">
-        <!-- Metrics table -->
-        <div class="acct-metrics">
-          <div class="am-header">Metric</div><div class="am-header">W19</div><div class="am-header">W20</div><div class="am-header">Chg</div>
-          <div class="am-cell am-label">Team Size</div><div class="am-cell">${w19a.team}</div><div class="am-cell">${w20a.team}</div><div class="am-cell">${arrow(w20a.team, w19a.team)}</div>
-          <div class="am-cell am-label">Forecast</div><div class="am-cell">${fmt(w19a.forecast)} <span class="note">(${W19.forecast_months}mo)</span></div><div class="am-cell">${fmt(w20a.forecast)} <span class="note">(${W20.forecast_months}mo)</span></div><div class="am-cell">${arrow(w20rr, w19rr)}</div>
-          <div class="am-cell am-label">Run Rate</div><div class="am-cell">${fmt(w19rr)}/mo</div><div class="am-cell">${fmt(w20rr)}/mo</div><div class="am-cell">${arrow(w20rr, w19rr)}</div>
-          <div class="am-cell am-label">Billing</div><div class="am-cell" style="color:${w19a.billingOk?'var(--green)':'var(--red)'}">${w19a.billing}</div><div class="am-cell" style="color:${w20a.billingOk?'var(--green)':'var(--red)'}">${w20a.billing}</div><div class="am-cell">${w19a.billingOk === w20a.billingOk ? '<span class="arrow-same">--</span>' : w20a.billingOk ? '<span class="arrow-up">&#9650;</span>' : '<span class="arrow-down">&#9660;</span>'}</div>
-          <div class="am-cell am-label" style="border-bottom:none;">Tickets</div><div class="am-cell" style="border-bottom:none;">${w19tickets}</div><div class="am-cell" style="border-bottom:none;">${w20tickets}</div><div class="am-cell" style="border-bottom:none;">--</div>
-        </div>
-
-        <!-- Wins comparison -->
-        <div class="comp-cols">
-          <div class="comp-col"><h4 class="w19">W19 Wins</h4>${w19a.wins.map(w => `<div class="comp-item"><span class="ci-icon ci-win">&#10003;</span>${w}</div>`).join('')}</div>
-          <div class="comp-col"><h4 class="w20">W20 Wins</h4>${w20a.wins.map(w => `<div class="comp-item"><span class="ci-icon ci-win">&#10003;</span>${w}</div>`).join('')}</div>
-        </div>
-
-        <!-- Concerns comparison -->
-        <div class="comp-cols">
-          <div class="comp-col"><h4 class="w19">W19 Concerns</h4>${w19a.concerns.map(c => `<div class="comp-item"><span class="ci-icon ci-risk">&#9650;</span>${c}</div>`).join('')}</div>
-          <div class="comp-col"><h4 class="w20">W20 Concerns</h4>${w20a.concerns.map(c => `<div class="comp-item"><span class="ci-icon ci-risk">&#9650;</span>${c}</div>`).join('')}</div>
-        </div>
-
-        <!-- Mining comparison -->
-        <div class="comp-cols">
-          <div class="comp-col"><h4 class="w19">W19 Mining</h4>${w19a.mining.map(m => `<div class="comp-item"><span class="ci-icon ci-mine">&#9670;</span>${m}</div>`).join('')}</div>
-          <div class="comp-col"><h4 class="w20">W20 Mining</h4>${w20a.mining.map(m => `<div class="comp-item"><span class="ci-icon ci-mine">&#9670;</span>${m}</div>`).join('')}</div>
-        </div>
-
-        <!-- What Changed -->
-        <div class="changed-box">
-          <h4>What Changed W19 to W20</h4>
-          <ul>${changes.map(c => `<li>${c}</li>`).join('')}</ul>
-        </div>
-      </div>`;
+    card.innerHTML =
+      '<div class="acct-header" onclick="this.parentElement.classList.toggle(\'open\')">' +
+        '<div class="acct-title">' +
+          '<div>' +
+            '<div class="acct-name">' + w19a.name + '</div>' +
+            '<div class="acct-sub">' + w20a.sub + '</div>' +
+          '</div>' +
+          '<div class="health-change">' +
+            badgeHtml(w19a.health) + ' ' + healthArrow + ' ' + badgeHtml(w20a.health) +
+          '</div>' +
+        '</div>' +
+        '<span class="chv">&#9662;</span>' +
+      '</div>' +
+      '<div class="acct-body">' +
+        '<!-- Metrics table -->' +
+        '<div class="acct-metrics">' +
+          '<div class="am-header">Metric</div><div class="am-header">W19</div><div class="am-header">W20</div><div class="am-header">Chg</div>' +
+          '<div class="am-cell am-label">Team Size</div><div class="am-cell">' + w19a.team + '</div><div class="am-cell">' + w20a.team + '</div><div class="am-cell">' + arrow(w20a.team, w19a.team) + '</div>' +
+          '<div class="am-cell am-label">Forecast</div><div class="am-cell">' + fmt(w19a.forecast) + ' <span class="note">(' + W19.forecast_months + 'mo)</span></div><div class="am-cell">' + fmt(w20a.forecast) + ' <span class="note">(' + W20.forecast_months + 'mo)</span></div><div class="am-cell">' + arrow(w20rr, w19rr) + '</div>' +
+          '<div class="am-cell am-label">Run Rate</div><div class="am-cell">' + fmt(w19rr) + '/mo</div><div class="am-cell">' + fmt(w20rr) + '/mo</div><div class="am-cell">' + arrow(w20rr, w19rr) + '</div>' +
+          '<div class="am-cell am-label">Billing</div><div class="am-cell" style="color:' + (w19a.billingOk ? 'var(--green)' : 'var(--red)') + '">' + w19a.billing + '</div><div class="am-cell" style="color:' + (w20a.billingOk ? 'var(--green)' : 'var(--red)') + '">' + w20a.billing + '</div><div class="am-cell">' + (w19a.billingOk === w20a.billingOk ? '<span class="arrow-same">--</span>' : w20a.billingOk ? '<span class="arrow-up">&#9650;</span>' : '<span class="arrow-down">&#9660;</span>') + '</div>' +
+          '<div class="am-cell am-label" style="border-bottom:none;">Tickets</div><div class="am-cell" style="border-bottom:none;">' + w19tickets + '</div><div class="am-cell" style="border-bottom:none;">' + w20tickets + '</div><div class="am-cell" style="border-bottom:none;">--</div>' +
+        '</div>' +
+        '<!-- Wins comparison -->' +
+        '<div class="comp-cols">' +
+          '<div class="comp-col"><h4 class="w19">W19 Wins</h4>' + w19a.wins.map(function(w) { return '<div class="comp-item"><span class="ci-icon ci-win">&#10003;</span>' + w + '</div>'; }).join('') + '</div>' +
+          '<div class="comp-col"><h4 class="w20">W20 Wins</h4>' + w20a.wins.map(function(w) { return '<div class="comp-item"><span class="ci-icon ci-win">&#10003;</span>' + w + '</div>'; }).join('') + '</div>' +
+        '</div>' +
+        '<!-- Concerns comparison -->' +
+        '<div class="comp-cols">' +
+          '<div class="comp-col"><h4 class="w19">W19 Concerns</h4>' + w19a.concerns.map(function(c) { return '<div class="comp-item"><span class="ci-icon ci-risk">&#9650;</span>' + c + '</div>'; }).join('') + '</div>' +
+          '<div class="comp-col"><h4 class="w20">W20 Concerns</h4>' + w20a.concerns.map(function(c) { return '<div class="comp-item"><span class="ci-icon ci-risk">&#9650;</span>' + c + '</div>'; }).join('') + '</div>' +
+        '</div>' +
+        '<!-- Mining comparison -->' +
+        '<div class="comp-cols">' +
+          '<div class="comp-col"><h4 class="w19">W19 Mining</h4>' + w19a.mining.map(function(m) { return '<div class="comp-item"><span class="ci-icon ci-mine">&#9670;</span>' + m + '</div>'; }).join('') + '</div>' +
+          '<div class="comp-col"><h4 class="w20">W20 Mining</h4>' + w20a.mining.map(function(m) { return '<div class="comp-item"><span class="ci-icon ci-mine">&#9670;</span>' + m + '</div>'; }).join('') + '</div>' +
+        '</div>' +
+        '<!-- What Changed -->' +
+        '<div class="changed-box">' +
+          '<h4>What Changed W19 to W20</h4>' +
+          '<ul>' + changes.map(function(c) { return '<li>' + c + '</li>'; }).join('') + '</ul>' +
+        '</div>' +
+      '</div>';
     container.appendChild(card);
   });
 }
 
-// ══════════════════════════════════════════════════════════
+// ================================================================
 // 3. MINING & PIPELINE TRACKER
-// ══════════════════════════════════════════════════════════
+// ================================================================
 function buildMiningTracker() {
   const table = document.getElementById('mining-tracker');
 
-  // Build a merged list of mining threads by account
-  const allAccounts = [...new Set([...W19.mining_data.map(m=>m.name), ...W20.mining_data.map(m=>m.name)])];
+  const allAccounts = [];
+  W19.mining_data.forEach(function(m) { if (allAccounts.indexOf(m.name) === -1) allAccounts.push(m.name); });
+  W20.mining_data.forEach(function(m) { if (allAccounts.indexOf(m.name) === -1) allAccounts.push(m.name); });
 
-  let html = `<thead><tr>
-    <th>Account</th><th>W19 Status</th><th>W19 Priority</th><th>W20 Status</th><th>W20 Priority</th><th>Change Summary</th>
-  </tr></thead><tbody>`;
+  let html = '<thead><tr>' +
+    '<th>Account</th><th>W19 Status</th><th>W19 Priority</th><th>W20 Status</th><th>W20 Priority</th><th>Change Summary</th>' +
+  '</tr></thead><tbody>';
 
-  allAccounts.forEach(name => {
-    const w19m = W19.mining_data.find(m => m.name === name);
-    const w20m = W20.mining_data.find(m => m.name === name);
+  allAccounts.forEach(function(name) {
+    const w19m = W19.mining_data.find(function(m) { return m.name === name; });
+    const w20m = W20.mining_data.find(function(m) { return m.name === name; });
 
     let changeSummary = '';
     let changeTag = '';
@@ -559,10 +546,9 @@ function buildMiningTracker() {
         changeTag = 'st-unchanged';
       } else {
         const parts = [];
-        if (w19m.status !== w20m.status) parts.push(`Status: "${w19m.status}" to "${w20m.status}"`);
-        if (w19m.priority !== w20m.priority) parts.push(`Priority: ${w19m.priority} to ${w20m.priority}`);
+        if (w19m.status !== w20m.status) parts.push('Status: "' + w19m.status + '" to "' + w20m.status + '"');
+        if (w19m.priority !== w20m.priority) parts.push('Priority: ' + w19m.priority + ' to ' + w20m.priority);
         changeSummary = parts.join('; ');
-        // Determine if progressed or stalled
         const priorityOrder = {none:0, watch:1, active:2, strong:3};
         const w19p = priorityOrder[w19m.priority] || 0;
         const w20p = priorityOrder[w20m.priority] || 0;
@@ -570,27 +556,26 @@ function buildMiningTracker() {
       }
     }
 
-    html += `<tr>
-      <td style="font-weight:600;">${name}</td>
-      <td>${w19m ? w19m.status : '<span style="color:var(--text3);">--</span>'}</td>
-      <td>${w19m ? priorityPill(w19m.priority) : '--'}</td>
-      <td>${w20m ? w20m.status : '<span style="color:var(--text3);">--</span>'}</td>
-      <td>${w20m ? priorityPill(w20m.priority) : '--'}</td>
-      <td><span class="status-tag ${changeTag}">${changeSummary}</span></td>
-    </tr>`;
+    html += '<tr>' +
+      '<td style="font-weight:600;">' + name + '</td>' +
+      '<td>' + (w19m ? w19m.status : '<span style="color:var(--text3);">--</span>') + '</td>' +
+      '<td>' + (w19m ? priorityPill(w19m.priority) : '--') + '</td>' +
+      '<td>' + (w20m ? w20m.status : '<span style="color:var(--text3);">--</span>') + '</td>' +
+      '<td>' + (w20m ? priorityPill(w20m.priority) : '--') + '</td>' +
+      '<td><span class="status-tag ' + changeTag + '">' + changeSummary + '</span></td>' +
+    '</tr>';
   });
 
   html += '</tbody>';
   table.innerHTML = html;
 }
 
-// ══════════════════════════════════════════════════════════
+// ================================================================
 // 4. ACTION ITEM TRACKER
-// ══════════════════════════════════════════════════════════
+// ================================================================
 function buildActionTracker() {
   const table = document.getElementById('action-tracker');
 
-  // Map W19 actions to W20 resolution status
   const actionMap = [
     {
       status: 'Carried Forward',
@@ -605,7 +590,7 @@ function buildActionTracker() {
     {
       status: 'Partially Resolved',
       cls: 'as-carried',
-      notes: 'Significant progress: Cascade billing fixed (100% billed) and Fabricut billing fully resolved ($52K/mo, 100% billed). Remaining exposure: Aculocity ($36,160) + Select Medical ($20,800) = $57K across 2 accounts. Down from ~$127K across 3 accounts in W19.'
+      notes: 'Significant progress: Cascade billing fixed (100% billed) and Fabricut billing fully resolved ($52K/mo, 100% billed). Select Medical remains 100% billed. Remaining exposure: Aculocity ($36,160) only. Down from ~$127K across 3 accounts in W19 to $36K on 1 account.'
     },
     {
       status: 'Carried Forward',
@@ -620,7 +605,7 @@ function buildActionTracker() {
     {
       status: 'Carried Forward',
       cls: 'as-carried',
-      notes: 'Evolved: Now escalating 10-week stalled BA rate negotiation. Revenue doubled to $10.4K/mo but billing broke. Health degraded to Attention.'
+      notes: 'Evolved: Now escalating 10-week stalled BA rate negotiation ($6,160). Select Medical delivery remains stable and 100% billed at $5,600/mo. 6/7 tickets resolved.'
     },
     {
       status: 'Carried Forward',
@@ -629,92 +614,90 @@ function buildActionTracker() {
     }
   ];
 
-  let html = `<thead><tr>
-    <th style="width:40px;">#</th><th>W19 Action</th><th>Owner</th><th>W20 Status</th><th>Notes</th>
-  </tr></thead><tbody>`;
+  let html = '<thead><tr>' +
+    '<th style="width:40px;">#</th><th>W19 Action</th><th>Owner</th><th>W20 Status</th><th>Notes</th>' +
+  '</tr></thead><tbody>';
 
-  W19.actions.forEach((a, i) => {
+  W19.actions.forEach(function(a, i) {
     const m = actionMap[i];
-    html += `<tr>
-      <td style="font-weight:700;color:var(--text3);">${i+1}</td>
-      <td>${a.text}</td>
-      <td><span class="owpill">${a.owner}</span></td>
-      <td><span class="action-status ${m.cls}">${m.status}</span></td>
-      <td style="font-size:11px;color:var(--text2);">${m.notes}</td>
-    </tr>`;
+    html += '<tr>' +
+      '<td style="font-weight:700;color:var(--text3);">' + (i+1) + '</td>' +
+      '<td>' + a.text + '</td>' +
+      '<td><span class="owpill">' + a.owner + '</span></td>' +
+      '<td><span class="action-status ' + m.cls + '">' + m.status + '</span></td>' +
+      '<td style="font-size:11px;color:var(--text2);">' + m.notes + '</td>' +
+    '</tr>';
   });
 
   html += '</tbody>';
   table.innerHTML = html;
 }
 
-// ══════════════════════════════════════════════════════════
+// ================================================================
 // 5. PRIORITY FLAGS COMPARISON
-// ══════════════════════════════════════════════════════════
+// ================================================================
 function buildFlagsComparison() {
   const container = document.getElementById('flags-comparison');
 
-  // Map flags between weeks by similarity
   const flagMapping = [
     {w19idx: 0, w20idx: 1, change: 'Escalated', tag: 'fct-escalated', note: 'Escalated from contract gap to full engagement wind-down risk. Team halved (23 to 10.5). New warehouse POC added as mitigation.'},
-    {w19idx: 1, w20idx: 0, change: 'Improved', tag: 'fct-changed', note: 'Billing exposure reduced from ~$127K across 3 accounts to $57K across 2. Fabricut fully resolved ($52K/mo billed). Cascade fixed. Remaining: Aculocity ($36K) + Select Medical ($21K). Select Medical newly at risk.'},
+    {w19idx: 1, w20idx: 0, change: 'Improved', tag: 'fct-changed', note: 'Billing exposure reduced from ~$127K across 3 accounts to $36K on Aculocity only. Fabricut fully resolved ($52K/mo billed). Cascade fixed. Select Medical remains 100% billed.'},
     {w19idx: 2, w20idx: 2, change: 'Progressed', tag: 'fct-changed', note: 'WIN: Client confirmed 2 AI Engineers (was "in hiring"). But billing remains unresolved. Net positive movement.'},
-    {w19idx: 3, w20idx: 3, change: 'Changed', tag: 'fct-changed', note: 'Flag shifted from "July 1 go-live at risk" to "validation delays + parallel stream coordination". Billing resolved. Strong delivery (43% normalization, 40+ tickets, revenue growing). Now focused on unblocking validation and cross-stream dependencies.'},
-    {w19idx: null, w20idx: 4, change: 'New', tag: 'fct-new', note: 'Select Medical dropped from On Track to Attention. Revenue doubled but billing broke. BA rate negotiation stalled 10 weeks. New flag.'},
+    {w19idx: 3, w20idx: 3, change: 'Changed', tag: 'fct-changed', note: 'Flag shifted from "July go-live blockers" to "validation delays + parallel stream coordination". Billing resolved. Strong delivery (43% normalization, 40+ tickets, revenue growing to $52K/mo).'},
     {w19idx: 4, w20idx: 5, change: 'Progressed', tag: 'fct-changed', note: 'Moved from "awaiting response" to "POC demo preparing". Active prep underway with VS Code + Copilot. Positive momentum.'},
-    {w19idx: 5, w20idx: null, change: 'Evolved', tag: 'fct-changed', note: 'Select Medical TFS expansion flag absorbed into new Attention flag. Revenue growth validated the opportunity but commercial execution stalled.'},
+    {w19idx: 5, w20idx: 4, change: 'Changed', tag: 'fct-changed', note: 'Select Medical remains On Track and 100% billed. BA opportunity stalled 10 weeks at rate negotiation ($6,160). Focus shifted from TFS analysis to unblocking SOW.'},
     {w19idx: 6, w20idx: 6, change: 'Unchanged', tag: 'fct-same', note: 'Second consecutive week. Delivery improved (98% to 100%) but still no expansion conversation. Becoming a pattern.'}
   ];
 
   // Side-by-side
   let html = '<div class="flags-comp"><div class="flag-col"><h3 class="w19">W19 Flags</h3>';
-  W19.flags.forEach((f, i) => {
-    const mapping = flagMapping.find(m => m.w19idx === i);
-    const changeBadge = mapping ? `<span class="flag-change-tag ${mapping.tag}">${mapping.change}</span>` : '';
-    html += `<div class="flag-item">
-      <div><span class="flag-dot ${f.severity}"></span><span class="flag-title">${f.title}</span>${changeBadge}</div>
-      <div class="flag-sub">${f.subtitle}</div>
-      <div class="flag-body">${f.body}</div>
-    </div>`;
+  W19.flags.forEach(function(f, i) {
+    const mapping = flagMapping.find(function(m) { return m.w19idx === i; });
+    const changeBadge = mapping ? '<span class="flag-change-tag ' + mapping.tag + '">' + mapping.change + '</span>' : '';
+    html += '<div class="flag-item">' +
+      '<div><span class="flag-dot ' + f.severity + '"></span><span class="flag-title">' + f.title + '</span>' + changeBadge + '</div>' +
+      '<div class="flag-sub">' + f.subtitle + '</div>' +
+      '<div class="flag-body">' + f.body + '</div>' +
+    '</div>';
   });
   html += '</div><div class="flag-col"><h3 class="w20">W20 Flags</h3>';
-  W20.flags.forEach((f, i) => {
-    const mapping = flagMapping.find(m => m.w20idx === i);
-    const changeBadge = mapping ? `<span class="flag-change-tag ${mapping.tag}">${mapping.change}</span>` : '';
-    html += `<div class="flag-item">
-      <div><span class="flag-dot ${f.severity}"></span><span class="flag-title">${f.title}</span>${changeBadge}</div>
-      <div class="flag-sub">${f.subtitle}</div>
-      <div class="flag-body">${f.body}</div>
-    </div>`;
+  W20.flags.forEach(function(f, i) {
+    const mapping = flagMapping.find(function(m) { return m.w20idx === i; });
+    const changeBadge = mapping ? '<span class="flag-change-tag ' + mapping.tag + '">' + mapping.change + '</span>' : '';
+    html += '<div class="flag-item">' +
+      '<div><span class="flag-dot ' + f.severity + '"></span><span class="flag-title">' + f.title + '</span>' + changeBadge + '</div>' +
+      '<div class="flag-sub">' + f.subtitle + '</div>' +
+      '<div class="flag-body">' + f.body + '</div>' +
+    '</div>';
   });
   html += '</div></div>';
 
   // Change summary table
-  html += `<div class="sh"><h2>Flag Change Summary</h2></div>
-  <div style="overflow-x:auto;"><table class="track-table"><thead><tr>
-    <th>W19 Flag</th><th>W20 Flag</th><th>Change</th><th>Analysis</th>
-  </tr></thead><tbody>`;
+  html += '<div class="sh"><h2>Flag Change Summary</h2></div>' +
+  '<div style="overflow-x:auto;"><table class="track-table"><thead><tr>' +
+    '<th>W19 Flag</th><th>W20 Flag</th><th>Change</th><th>Analysis</th>' +
+  '</tr></thead><tbody>';
 
-  flagMapping.forEach(m => {
+  flagMapping.forEach(function(m) {
     const w19t = m.w19idx !== null ? W19.flags[m.w19idx].title : '<span style="color:var(--text3);">--</span>';
     const w20t = m.w20idx !== null ? W20.flags[m.w20idx].title : '<span style="color:var(--text3);">--</span>';
-    const w19sev = m.w19idx !== null ? `<span class="flag-dot ${W19.flags[m.w19idx].severity}"></span>` : '';
-    const w20sev = m.w20idx !== null ? `<span class="flag-dot ${W20.flags[m.w20idx].severity}"></span>` : '';
-    html += `<tr>
-      <td>${w19sev}${w19t}</td>
-      <td>${w20sev}${w20t}</td>
-      <td><span class="flag-change-tag ${m.tag}">${m.change}</span></td>
-      <td style="font-size:11px;color:var(--text2);">${m.note}</td>
-    </tr>`;
+    const w19sev = m.w19idx !== null ? '<span class="flag-dot ' + W19.flags[m.w19idx].severity + '"></span>' : '';
+    const w20sev = m.w20idx !== null ? '<span class="flag-dot ' + W20.flags[m.w20idx].severity + '"></span>' : '';
+    html += '<tr>' +
+      '<td>' + w19sev + w19t + '</td>' +
+      '<td>' + w20sev + w20t + '</td>' +
+      '<td><span class="flag-change-tag ' + m.tag + '">' + m.change + '</span></td>' +
+      '<td style="font-size:11px;color:var(--text2);">' + m.note + '</td>' +
+    '</tr>';
   });
 
   html += '</tbody></table></div>';
   container.innerHTML = html;
 }
 
-// ══════════════════════════════════════════════════════════
+// ================================================================
 // INIT
-// ══════════════════════════════════════════════════════════
+// ================================================================
 buildSummary();
 buildCharts();
 buildAccountCards();
