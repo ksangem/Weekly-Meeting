@@ -175,7 +175,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
 
 <nav class="nav">
   <div class="nav-brand">Nalashaa Solutions <span>Portfolio Review</span></div>
-  <div class="nav-meta" id="nav-meta">Period: Apr 15 – May 5, 2026 &nbsp;·&nbsp; Prepared May 5, 2026</div>
+  <div class="nav-meta" id="nav-meta">Period: May 1 – May 12, 2026 &nbsp;·&nbsp; Prepared May 12, 2026</div>
 </nav>
 
 <div class="tabs">
@@ -213,12 +213,12 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
     <div class="chart-grid">
       <div class="cc full">
         <h3>Monthly revenue by account</h3>
-        <p>3-month forecast — all accounts</p>
+        <p id="rev-chart-subtitle"></p>
         <div class="legrow" id="rev-legend"></div>
         <div class="cwt"><canvas id="revGrouped"></canvas></div>
       </div>
       <div class="cc">
-        <h3>Portfolio share — 3-month total</h3>
+        <h3 id="port-pie-title"></h3>
         <p>Contribution by account</p>
         <div class="cw"><canvas id="portPie"></canvas></div>
       </div>
@@ -260,7 +260,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-seri
     <div class="chart-grid">
       <div class="cc full">
         <h3>Portfolio forecast trend</h3>
-        <p>Total 3-month forecast over time</p>
+        <p>Total forecast over time</p>
         <div class="legrow" id="forecast-legend"></div>
         <div class="cwt"><canvas id="forecastTrend"></canvas></div>
       </div>
@@ -300,7 +300,7 @@ const HISTORY = [
   {
     "week_id":"2026-W19","date":"2026-05-05","period":"Apr 15 – May 5, 2026",
     "portfolio_forecast":393680,"team_deployed":44,"tickets_resolved":114,"tickets_total":130,
-    "pipeline_upside":10400,"accounts_at_risk":3,
+    "pipeline_upside":10400,"accounts_at_risk":3,"forecast_months":3,
     "accounts":[
       {"id":"cascade","name":"Cascade","sub":"NHS · DafoNow + App Consolidation","health":"Attention","team":23,"forecast":129080,"billing":"Billing gaps","billingOk":false,"tickets_resolved":61,"tickets_total":74,"rev":[48000,43840,37240],"billed":["Yes","Yes","Yes"],"wins":["Release 2.10: 93 tickets, 45 features, zero post-release regressions","82% completion velocity; zero client validation backlog","DafoNow June 15 soft launch target maintained"],"concerns":["Revenue declining 22% May→July; July at 51% of $73,320/mo — $36K gap","Client flagged 3-week 2.10 delay — cannot repeat for 2.11 or Q4 at risk","Dual SOWs (Dafo + Website) stuck; pipeline 3+ months stale"],"mining":["ROI presentation live: 2024–2026 $ savings from Gateway + Ops→Shipping consolidation","Pitching approved project continuation as path to additional $ savings","Dafo SOW awaiting client signature · Website SOW pending internal signoff"]},
       {"id":"fabricut","name":"Fabricut","sub":"Data Migration · AS400 → NetSuite / Power BI","health":"Attention","team":9,"forecast":127200,"billing":"Unbilled gaps","billingOk":false,"tickets_resolved":null,"tickets_total":null,"rev":[42400,42400,42400],"billed":["No","No","No"],"wins":["360 tables loaded to MySQL RAW zone from 2,800+ AS400 sources","Master entity sign-off complete: customer, vendor, product domains","42 executive reports mapped for Power BI; 11 FSDs and 6 NetSuite templates done"],"concerns":["Unbilled resources across all 3 months — $127,200 forecast at risk","July go-live blocked by VM infrastructure + unresolved data retention exec decision","Mining thread 97 days stale — no SOW or defined opportunity in pipeline"],"mining":["Parallel approach: NetSuite mapping + 180+ normalized tables across Product, Vendor, Customer and additional master entities","Hemant completed first draft from 1,000-record data analysis — needs review and scale to full dataset","Strong technical foundation built; natural expansion path post go-live"]},
@@ -335,6 +335,45 @@ const HISTORY = [
       {"severity":"blue","title":"Select Medical — TFS backlog → expansion pitch","subtitle":"Opportunity · QA upsell play","body":"Currently billed $5,600/mo. TFS data extraction underway — identifying highest-backlog departments. Analysis output will determine where to pitch additional resources including QA engagement. Evidence-led upsell approach.","actions":[{"owner":"AM","text":"Complete TFS analysis and prepare department-level pitch including QA engagement"},{"owner":"AM","text":"Frame upsell as faster backlog clearance + quality improvement narrative"}]},
       {"severity":"green","title":"Flatiron — only account with zero pipeline threads","subtitle":"This month · Growth conversation needed","body":"98% completion, Thursday live deployment, 85–90.5% hands-on-keyboard efficiency — and no mining activity. Strongest delivery account in the portfolio with no pipeline conversation. Thursday deployment is the natural trigger. Adjacent scope opportunities: COOP expansion, scheduler, billing modules.","actions":[{"owner":"AM","text":"Initiate expansion conversation using Thursday deployment as the proof point"},{"owner":"AM","text":"Identify 1–2 adjacent workstreams to scope as follow-on engagement"}]}
     ]
+  },
+  {
+    "week_id":"2026-W20","date":"2026-05-12","period":"May 1 – May 12, 2026",
+    "portfolio_forecast":270040,"team_deployed":13,"tickets_resolved":34,"tickets_total":47,
+    "pipeline_upside":16560,"accounts_at_risk":4,"forecast_months":2,
+    "accounts":[
+      {"id":"cascade","name":"Cascade","sub":"NHS · DafoNow + App Consolidation","health":"Attention","team":10.5,"forecast":81080,"billing":"100% billed","billingOk":true,"tickets_resolved":12,"tickets_total":23,"rev":[43840,37240],"billed":["Yes","Yes"],"wins":["Release 2.11 delivered: 20 tickets, all DafoNow prerequisites on COS — zero regressions, quick TAT to production","DAFONow-COS integration infrastructure complete: Sales Order sync, SSO, audit logging, master data sync across 60 story points","DafoNow milestones on track: eJobAid queues (D2-D4) done, Feature UAT targeted for 3rd week of May, June 15 soft launch holds"],"concerns":["Revenue decline: $81,080 total (June $43,840 → July $37,240), 15% MoM decline — potential engagement wind-down","Velocity pressure: 48% WIP rate (11/23 tickets) stretching team capacity; DafoNow timeline at risk if scope not controlled","Warehouse management POC proposed but Q3/Q4 continuation depends on client email confirmation on support team"],"mining":["NEW: Warehouse management POC proposed — new pipeline opportunity beyond existing SOWs","Client sent email on support team continuation for Q3 & Q4 — critical for revenue retention","Dafo SOW and Website SOW still pending signoff — 4 months stale, urgent refresh needed"]},
+      {"id":"fabricut","name":"Fabricut","sub":"Data Migration · AS400 → NetSuite / Power BI","health":"Attention","team":9,"forecast":84800,"billing":"Unbilled gaps","billingOk":false,"tickets_resolved":null,"tickets_total":null,"rev":[42400,42400],"billed":["No","No"],"wins":["Master entity normalization delivered and client-approved: customer (8 tables, 3NF), vendor (12 tables), product entities signed off","Qualified 360 tables from 2,800+ AS400 legacy tables; scoped 42 executive Power BI reports from 67 legacy reports","Raw zone operational: 346 files loaded to MySQL, foundational ETL infrastructure established"],"concerns":["Zero billed resources across June-July ($84,800 total at risk) — billing reconciliation required immediately","Three executive-level infrastructure decisions blocking ETL onboarding and July 1 go-live (data retention, hosting, incremental loading)","Mining thread dormant 4 months (since Jan 2026) — no documented opportunities or proposals"],"mining":["Growth/increase thread stale since January 2026 — requires reactivation or formal closure","Strong technical foundation for natural expansion path post July go-live","Schedule client discovery call to identify expansion opportunities (Owner: Amit)"]},
+      {"id":"flatiron","name":"Flatiron","sub":"Healthcare QA & Automation","health":"On Track","team":5,"forecast":31360,"billing":"100% billed","billingOk":true,"tickets_resolved":21,"tickets_total":21,"rev":[15680,15680],"billed":["Yes","Yes"],"wins":["Perfect execution: 100% ticket completion (21/21) with zero backlog and 85-90.5% efficiency across 7 concurrent workstreams","High-value genomic testing enhancements: Guardant MRD + Monitoring test card, Foundation Medicine concurrent ordering restrictions","Strong billing health: 100% billed with $31,360 secured across June-July at $15,680/month"],"concerns":["ONC access escalation requires prompt resolution for attestation timeline — managed via client collaboration with Bridget","No active mining pipeline despite positive delivery momentum and strong client relationship","Single engagement concentration ($15,680/month from QA & Automation only) — warrants expansion"],"mining":["No active mining threads — strongest delivery account in portfolio with no pipeline conversation","100% completion rate provides natural opening for growth conversation with client stakeholders","Adjacent opportunities: COOP expansion, scheduler enhancements, billing module improvements"]},
+      {"id":"aculocity","name":"Aculocity","sub":"DataSystems · CRM & AI Solutions","health":"Attention","team":2.5,"forecast":36160,"billing":"Unbilled gaps","billingOk":false,"tickets_resolved":null,"tickets_total":null,"rev":[15680,20480],"billed":["No","No"],"wins":["88.93% utilization sustained with zero post-production incidents — consistent quality and team efficiency","Microsoft Clarity implementation for user interaction analysis + ticket categorization strategies driving continuous improvement","Client confirmed 2 AI Engineers additions — interviews ongoing (pipeline WIN from W19 hiring thread)"],"concerns":["Unbilled revenue across June-July ($36,160 total) — invoicing validation needed to prevent cash flow delays","Cross-team dependency: Team Center availability (Rob out) creating delays for 400 BOM discrepancies and invoice logic"],"mining":["WIN: Client confirmed 2 AI Engineers additions — interviews actively ongoing","CRM & AI agent opportunity progressing — internal demo via delivery team scheduled (Owner: Rohan)","Thread still 16+ weeks stale in system (last updated Jan 8) but real progress happening off-tracker"]},
+      {"id":"redgold","name":"Red Gold","sub":"AS400 Modernization · Agriculture","health":"On Track","team":2,"forecast":15840,"billing":"100% billed","billingOk":true,"tickets_resolved":1,"tickets_total":3,"rev":[7920,7920],"billed":["Yes","Yes"],"wins":["5 development tasks delivered maintaining velocity of 6: order acknowledgment, CROP enhancements, EDI updates, GTIN generator","Client expressing strong interest in AI/ML for code optimization — POC demo being prepared with VS Code + Copilot","Perfect billing: 100% billed at $7,920/month with stable revenue and CSAT holding at 3.86"],"concerns":["Quality concerns in RG-247 testing — enhanced QA processes needed to sustain CSAT improvement trajectory","67% deliverables pending client validation — slow feedback loops may delay future sprints","No active mining threads despite client AI interest — missing opportunity to convert satisfaction into expansion"],"mining":["AI/ML POC demonstration in preparation: VS Code + Copilot extension showcasing AS400 optimization","Neha coordinating with Kiran on AS400 AI best practices for upcoming client call","No formal mining thread open — AM should initiate discovery conversation leveraging AI interest"]},
+      {"id":"selectmedical","name":"Select Medical","sub":"Support · BA Expansion","health":"Attention","team":1,"forecast":20800,"billing":"Unbilled gaps","billingOk":false,"tickets_resolved":null,"tickets_total":null,"rev":[10400,10400],"billed":["No","No"],"wins":["Revenue nearly doubled: $5,600/mo → $10,400/mo ($20,800 total Jun-Jul) — demonstrating growing client engagement","Active BA mining opportunity: customer needs discussion completed, project documents received","Zero escalations or CSAT issues — smooth operational delivery and strong customer satisfaction"],"concerns":["Critical billing gap: both June ($10,400) and July ($10,400) flagged as not fully billed — $20,800 revenue at risk","Pipeline thread stalled 10 weeks at rate negotiation — client requesting 10% increase to $6,160 but no SOW finalized","No committed monthly baseline ($0/month contracted) — revenue predictability risk despite stable forecast"],"mining":["BA opportunity: customer needs discussion completed, project documents received — rate negotiation at $6,160","Action pending: present 6-month ticket analysis to Amit, PMO, and AM via delivery team","Thread 10 weeks stale (last updated Feb 23) — requires escalation to executive sponsor to unblock SOW"]}
+    ],
+    "actions":[
+      {"text":"Cascade: Validate engagement continuation — secure client commitment on Q3/Q4 support team via email response; accelerate Warehouse management POC scoping","owner":"AM"},
+      {"text":"Aculocity: WIN — 2 AI Engineers confirmed by client; track interview progress weekly and target onboarding within 4-6 weeks","owner":"DM"},
+      {"text":"Billing reconciliation — Aculocity, Fabricut, Select Medical: resolve $141,760 combined unbilled exposure across Jun-Jul immediately","owner":"AM"},
+      {"text":"Fabricut: Escalate 3 infrastructure decisions (data retention, hosting, incremental loading) to Gabriel/exec level to protect July 1 go-live","owner":"DM"},
+      {"text":"Select Medical: Escalate 10-week stalled BA rate negotiation to executive sponsor; present 6-month ticket analysis to unblock SOW","owner":"AM"},
+      {"text":"Red Gold: Leverage AI/ML client interest — complete POC demo prep (VS Code + Copilot) and schedule client presentation this week","owner":"DM"},
+      {"text":"Flatiron: Convert 100% delivery execution into growth conversation — identify COOP expansion or adjacent workstream for follow-on","owner":"AM"}
+    ],
+    "mining_data":[
+      {"name":"Aculocity","status":"2 AI Engineers Confirmed","priority":"strong","items":[{"tag":"WIN","text":"Client confirmed 2 AI Engineers additions — interviews actively ongoing"},{"tag":"CRM/AI","text":"Internal AI agent demo scheduled via delivery team (Owner: Rohan)"},{"tag":"Upside","text":"2 engineers = +$10,400/mo potential on top of $15,680 baseline"},{"tag":"Risk","text":"Thread 16+ weeks stale in system — real progress not reflected in tracker"}]},
+      {"name":"Cascade","status":"New POC + SOWs Pending","priority":"active","items":[{"tag":"NEW","text":"Warehouse management POC proposed — first new pipeline item in 4 months"},{"tag":"Retention","text":"Client email on support team continuation for Q3 & Q4 — must confirm"},{"tag":"Dafo SOW","text":"Still awaiting client signature — 4 months stale (Owner: Rohan)"},{"tag":"Website SOW","text":"Still pending internal stakeholder signoff — 4 months past target"}]},
+      {"name":"Select Medical","status":"BA Rate Negotiation Stalled","priority":"watch","items":[{"tag":"Opportunity","text":"BA role — customer needs discussion completed, project documents received"},{"tag":"Rate","text":"Client requesting 10% increase to $6,160 — commercial interest confirmed"},{"tag":"Blocker","text":"10 weeks stalled at rate negotiation — needs executive escalation"},{"tag":"Action","text":"Present 6-month ticket analysis to stakeholders to justify rate and close SOW"}]},
+      {"name":"Red Gold","status":"AI POC Demo Preparing","priority":"watch","items":[{"tag":"Interest","text":"Client expressing strong interest in AI/ML for SDLC improvements and code optimization"},{"tag":"POC","text":"VS Code + Copilot demo being prepared — Neha coordinating with Kiran on AS400 AI best practices"},{"tag":"Potential","text":"20-30% account expansion potential if AI engagement lands"},{"tag":"Gap","text":"No formal mining thread open — AM needs to initiate discovery conversation"}]},
+      {"name":"Fabricut","status":"Embedded in Delivery","priority":"active","items":[{"tag":"Foundation","text":"Master entity normalization complete; 360 tables qualified; raw zone operational"},{"tag":"Post Go-Live","text":"Natural expansion path after July 1 NetSuite/Power BI launch"},{"tag":"Stale","text":"Growth thread dormant since Jan 2026 — requires reactivation (Owner: Amit)"},{"tag":"July 1","text":"Go-live dependent on 3 exec decisions — expansion pitch follows successful launch"}]},
+      {"name":"Flatiron","status":"No Active Threads","priority":"none","items":[{"tag":"Status","text":"Zero mining threads — strongest delivery account in portfolio with no pipeline"},{"tag":"Proof","text":"100% completion rate (21/21) + 85-90.5% efficiency = strongest expansion proof point"},{"tag":"Scope","text":"Adjacent opportunities: COOP expansion, scheduler, billing module improvements"},{"tag":"Action","text":"AM to initiate growth conversation immediately using perfect delivery metrics"}]}
+    ],
+    "flags":[
+      {"severity":"red","title":"Billing crisis — $141K unbilled across 3 accounts","subtitle":"Immediate · AM + DM action","body":"Aculocity ($36,160), Fabricut ($84,800), and Select Medical ($20,800) have zero billed resources across Jun-Jul. Combined $141,760 unbilled exposure — up from $127,200 last week. Select Medical newly at risk (was 100% billed). Revenue recognition failing despite active delivery.","actions":[{"owner":"AM","text":"Reconcile all 3 accounts — confirm resource allocation and complete billing entries for Jun-Jul this week"},{"owner":"DM","text":"Verify Fabricut resource deployment and Select Medical support team billing status"}]},
+      {"severity":"red","title":"Cascade — engagement wind-down risk","subtitle":"Immediate · AM action","body":"Revenue declining 15% MoM (June $43,840 → July $37,240). Zero active resources in system. Team halved from 23 to 10.5. Client email on Q3/Q4 support continuation is the make-or-break signal. Warehouse management POC is new but unscoped. Without confirmed continuation, Cascade faces structured ramp-down.","actions":[{"owner":"AM","text":"Secure client confirmation on Q3/Q4 support team continuation immediately"},{"owner":"AM","text":"Scope Warehouse management POC and position as next engagement phase"}]},
+      {"severity":"amber","title":"Aculocity — 2 AI Engineers WIN but billing unresolved","subtitle":"This week · DM tracking","body":"Major pipeline win: client confirmed 2 AI Engineers. Interviews ongoing — potential +$10,400/mo. But $36,160 Jun-Jul forecast remains unbilled. Team Center dependency (Rob out) risks delivery delays on 400 BOM discrepancies.","actions":[{"owner":"DM","text":"Track AI Engineer interview progress weekly — target onboarding in 4-6 weeks"},{"owner":"AM","text":"Resolve Jun-Jul billing immediately — $36,160 exposure cannot persist"}]},
+      {"severity":"amber","title":"Fabricut — July 1 go-live at risk from 3 exec decisions","subtitle":"Escalation needed · DM","body":"Three critical-path decisions remain: (1) data retention period, (2) hosting model cloud vs VM, (3) incremental loading ownership. All require Gabriel/executive sign-off. VM connectivity issues also blocking ETL developer onboarding. Security/SOC compliance concerns raised by Marty.","actions":[{"owner":"DM","text":"Escalate all 3 decisions to Gabriel/exec level — schedule resolution meeting this week"},{"owner":"PM","text":"Validate July 1 timeline against current delivery pace and communicate revised date if needed"}]},
+      {"severity":"amber","title":"Select Medical — health degraded to Attention","subtitle":"New this week · Revenue + pipeline stall","body":"Select Medical dropped from On Track to Attention. Revenue doubled ($5.6K→$10.4K/mo) but both months unbilled. BA opportunity stalled 10 weeks at rate negotiation ($6,160). No committed monthly baseline despite stable forecast. Needs immediate commercial attention.","actions":[{"owner":"AM","text":"Escalate rate negotiation to executive sponsor — 10 weeks is unacceptable for a warm lead"},{"owner":"DM","text":"Assign resources and formalize $10,400/month contract to replace $0/month committed rate"}]},
+      {"severity":"blue","title":"Red Gold — AI/ML expansion opportunity forming","subtitle":"Opportunity · POC demo this week","body":"Client expressing strong interest in AI/ML for code optimization and SDLC improvements. Team preparing VS Code + Copilot POC demo. CSAT at 3.86 with 100% delivery completion provides credibility. Neha coordinating with Kiran on AS400 AI best practices. No formal mining thread yet.","actions":[{"owner":"DM","text":"Complete AI/ML POC demo prep and schedule client presentation this week"},{"owner":"AM","text":"Open formal mining thread and document AI expansion opportunity scope and commercials"}]},
+      {"severity":"green","title":"Flatiron — 100% delivery, zero pipeline (unchanged)","subtitle":"This month · Growth conversation overdue","body":"Second consecutive week as strongest delivery account with no mining activity. 100% completion (21/21 tickets), zero backlog, genomic testing enhancements delivered. Bridget offering regression testing support. Growth conversation is overdue — every week without action is missed revenue.","actions":[{"owner":"AM","text":"Initiate expansion conversation this week — use 100% metrics as proof point"},{"owner":"AM","text":"Explore COOP expansion, scheduler, billing module as concrete follow-on scope"}]}
+    ]
   }
 ];
 
@@ -346,6 +385,7 @@ const MINING_DATA = CURRENT.mining_data;
 const FLAGS = CURRENT.flags;
 const COLORS = ['#1a3c6e','#BA7517','#3B6D11','#993556','#5F5E5A','#185fa5'];
 const MAX_REV = Math.max(...ACCOUNTS.map(a => a.forecast));
+const FM = CURRENT.forecast_months || ACCOUNTS[0].rev.length;
 
 // ─── NAV META ───
 document.getElementById('nav-meta').innerHTML = `Period: ${CURRENT.period} &nbsp;·&nbsp; Prepared ${CURRENT.date}`;
@@ -356,7 +396,7 @@ function buildOverviewMetrics() {
   const ticketPct = CURRENT.tickets_total ? Math.round((CURRENT.tickets_resolved / CURRENT.tickets_total) * 100) : 0;
   const riskAccts = ACCOUNTS.filter(a => a.health !== 'On Track');
   el.innerHTML = `
-    <div class="mc hi"><div class="ml">3-month forecast</div><div class="mv">$${CURRENT.portfolio_forecast.toLocaleString()}</div><div class="ms">${ACCOUNTS.length} accounts</div></div>
+    <div class="mc hi"><div class="ml">${FM}-month forecast</div><div class="mv">$${CURRENT.portfolio_forecast.toLocaleString()}</div><div class="ms">${ACCOUNTS.length} accounts</div></div>
     <div class="mc"><div class="ml">Team deployed</div><div class="mv">${CURRENT.team_deployed}+</div><div class="ms">Across ${ACCOUNTS.length} accounts</div></div>
     <div class="mc"><div class="ml">Tickets resolved</div><div class="mv">${CURRENT.tickets_resolved} / ${CURRENT.tickets_total}</div><div class="ms">${ticketPct}% completion rate</div></div>
     <div class="mc"><div class="ml">Pipeline upside</div><div class="mv">+$${CURRENT.pipeline_upside.toLocaleString()}</div><div class="ms">New roles if closed</div></div>
@@ -373,10 +413,11 @@ function buildTable(id) {
     const row = document.createElement('div');
     row.className = 'ar';
     const tickets = a.tickets_resolved != null ? `${a.tickets_resolved} / ${a.tickets_total}` : 'N/A';
+    const numMonths = a.rev.length;
     row.innerHTML = `
       <div class="asm">
         <div><div class="an">${a.name}</div><div class="asub">${a.sub}</div></div>
-        <div><div class="sl">3M Forecast</div><div class="sv">$${a.forecast.toLocaleString()}</div></div>
+        <div><div class="sl">${numMonths}M Forecast</div><div class="sv">$${a.forecast.toLocaleString()}</div></div>
         <div class="hide-sm"><div class="sl">Team</div><div class="sv">${a.team} people</div></div>
         <div><span class="badge ${badgeCls}">${a.health}</span></div>
         <div class="hide-sm"><div class="sl">Billing</div><div class="sv" style="font-size:12px;color:${a.billingOk ? 'var(--green)' : 'var(--red)'}">${a.billing}</div></div>
@@ -390,7 +431,7 @@ function buildTable(id) {
           <div class="dc"><h4>Concerns &amp; risks</h4>${a.concerns.map(x => `<div class="bl"><span class="bi r">▲</span>${x}</div>`).join('')}</div>
           <div class="dc"><h4>Mining &amp; pipeline</h4>${a.mining.map(m => `<div class="bl"><span class="bi m">◆</span>${m}</div>`).join('')}
             <div style="margin-top:10px;"><div class="sl">Monthly revenue</div>
-            <div class="rms">${['Mo 1', 'Mo 2', 'Mo 3'].map((mo, mi) => `<div class="rm"><div class="rml">${mo}</div><div class="rmv">$${a.rev[mi].toLocaleString()}</div><div class="rmb ${a.billed[mi] === 'Yes' ? 'rmy' : 'rmn'}">${a.billed[mi] === 'Yes' ? '✓ Billed' : '✗ Gap'}</div></div>`).join('')}</div></div>
+            <div class="rms">${a.rev.map((v, mi) => `<div class="rm"><div class="rml">Mo ${mi + 1}</div><div class="rmv">$${v.toLocaleString()}</div><div class="rmb ${a.billed[mi] === 'Yes' ? 'rmy' : 'rmn'}">${a.billed[mi] === 'Yes' ? '✓ Billed' : '✗ Gap'}</div></div>`).join('')}</div></div>
           </div>
         </div>
       </div>`;
@@ -406,7 +447,7 @@ function buildRevMetrics() {
   const largestPct = Math.round((largest.forecast / CURRENT.portfolio_forecast) * 100);
   const fullyBilled = ACCOUNTS.filter(a => a.billingOk).length;
   el.innerHTML = `
-    <div class="mc hi"><div class="ml">Total 3M forecast</div><div class="mv">$${CURRENT.portfolio_forecast.toLocaleString()}</div><div class="ms">All ${ACCOUNTS.length} accounts</div></div>
+    <div class="mc hi"><div class="ml">Total ${FM}M forecast</div><div class="mv">$${CURRENT.portfolio_forecast.toLocaleString()}</div><div class="ms">All ${ACCOUNTS.length} accounts</div></div>
     <div class="mc"><div class="ml">Largest account</div><div class="mv">$${largest.forecast.toLocaleString()}</div><div class="ms">${largest.name} · ${largestPct}% of portfolio</div></div>
     <div class="mc"><div class="ml">Revenue at risk</div><div class="mv">~$${Math.round(ACCOUNTS.filter(a=>!a.billingOk).reduce((s,a)=>s+a.forecast,0)/1000)}K</div><div class="ms">Billing gaps + shortfalls</div></div>
     <div class="mc"><div class="ml">Fully billed</div><div class="mv">${fullyBilled} / ${ACCOUNTS.length}</div><div class="ms">${ACCOUNTS.filter(a=>a.billingOk).map(a=>a.name).join(' · ')}</div></div>
@@ -422,7 +463,7 @@ function buildMiningMetrics() {
     <div class="mc"><div class="ml">Pipeline upside</div><div class="mv">+$${CURRENT.pipeline_upside.toLocaleString()}</div><div class="ms">If all roles close</div></div>
     <div class="mc"><div class="ml">Accounts</div><div class="mv">${ACCOUNTS.length}</div><div class="ms">In portfolio</div></div>
     <div class="mc"><div class="ml">Team size</div><div class="mv">${CURRENT.team_deployed}+</div><div class="ms">People deployed</div></div>
-    <div class="mc"><div class="ml">Forecast</div><div class="mv">$${CURRENT.portfolio_forecast.toLocaleString()}</div><div class="ms">3-month total</div></div>`;
+    <div class="mc"><div class="ml">Forecast</div><div class="mv">$${CURRENT.portfolio_forecast.toLocaleString()}</div><div class="ms">${FM}-month total</div></div>`;
 }
 
 // ─── ACTIONS ───
@@ -466,7 +507,13 @@ function buildFlags() {
 
 // ─── REVENUE CHARTS ───
 function buildCharts() {
-  const months = ['Month 1', 'Month 2', 'Month 3'];
+  const numMonths = FM;
+  const months = Array.from({length: numMonths}, (_, i) => `Month ${i + 1}`);
+
+  // Set dynamic subtitles/titles
+  document.getElementById('rev-chart-subtitle').textContent = `${numMonths}-month forecast — all accounts`;
+  document.getElementById('port-pie-title').textContent = `Portfolio share — ${numMonths}-month total`;
+
   new Chart(document.getElementById('revGrouped'), {
     type: 'bar',
     data: {labels: months, datasets: ACCOUNTS.map((a, i) => ({label: a.name, data: a.rev, backgroundColor: COLORS[i % COLORS.length], borderRadius: 3, borderSkipped: false}))},
@@ -486,11 +533,12 @@ function buildCharts() {
 
   const cascadeAcct = ACCOUNTS.find(a => a.id === 'cascade');
   if (cascadeAcct) {
+    const cascadeMonths = Array.from({length: cascadeAcct.rev.length}, (_, i) => `Month ${i + 1}`);
     new Chart(document.getElementById('cascadeChart'), {
       type: 'line',
-      data: {labels: months, datasets: [
+      data: {labels: cascadeMonths, datasets: [
         {label: 'Actual', data: cascadeAcct.rev, borderColor: '#1a3c6e', backgroundColor: 'rgba(26,60,110,0.07)', fill: true, tension: 0.3, pointRadius: 5, pointBackgroundColor: '#1a3c6e'},
-        {label: 'Commitment', data: [73320, 73320, 73320], borderColor: '#A32D2D', borderDash: [6, 3], pointRadius: 0, fill: false, tension: 0}
+        {label: 'Commitment', data: cascadeAcct.rev.map(() => 73320), borderColor: '#A32D2D', borderDash: [6, 3], pointRadius: 0, fill: false, tension: 0}
       ]},
       options: {responsive: true, maintainAspectRatio: false,
         plugins: {legend: {position: 'bottom', labels: {font: {size: 11}, padding: 10}}, tooltip: {callbacks: {label: ctx => ` ${ctx.dataset.label}: $${ctx.parsed.y.toLocaleString()}`}}},
