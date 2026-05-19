@@ -491,6 +491,248 @@
         {"severity": "blue", "title": "Red Gold — AI/ML expansion opportunity forming", "subtitle": "Opportunity · POC demo this week", "body": "Client expressing strong interest in AI/ML for code optimization and SDLC improvements. Team preparing VS Code + Copilot POC demo. CSAT at 3.86 with 100% delivery completion provides credibility. Neha coordinating with Kiran on AS400 AI best practices. No formal mining thread yet.", "actions": [{"owner": "DM", "text": "Complete AI/ML POC demo prep and schedule client presentation this week"}, {"owner": "AM", "text": "Open formal mining thread and document AI expansion opportunity scope and commercials"}]},
         {"severity": "green", "title": "Flatiron — 100% delivery, zero pipeline (unchanged)", "subtitle": "This month · Growth conversation overdue", "body": "Second consecutive week as strongest delivery account with no mining activity. 100% completion (21/21 tickets), zero backlog, genomic testing enhancements delivered. Bridget offering regression testing support. Growth conversation is overdue — every week without action is missed revenue.", "actions": [{"owner": "AM", "text": "Initiate expansion conversation this week — use 100% metrics as proof point"}, {"owner": "AM", "text": "Explore COOP expansion, scheduler, billing module as concrete follow-on scope"}]}
       ]
+    },
+    {
+      "week_id": "2026-W21",
+      "date": "2026-05-19",
+      "period": "May 11 – May 19, 2026",
+      "portfolio_forecast": 273640,
+      "team_deployed": 28,
+      "tickets_resolved": 97,
+      "tickets_total": 105,
+      "pipeline_upside": 6160,
+      "accounts_at_risk": 3,
+      "forecast_months": 2,
+      "accounts": [
+        {
+          "id": "cascade",
+          "name": "Cascade",
+          "sub": "NHS · DafoNow + App Consolidation",
+          "health": "Attention",
+          "team": 11,
+          "forecast": 79080,
+          "billing": "100% billed",
+          "billingOk": true,
+          "tickets_resolved": 13,
+          "tickets_total": 18,
+          "rev": [41840, 37240],
+          "billed": ["Yes", "Yes"],
+          "wins": [
+            "Release 2.11 deployed to production: 20 tickets, 5 mapping data migrated, 1000+ tests executed, zero regressions",
+            "Bidirectional Sales Order sync between DAFONow and COS with archived order search, Rush Order toggle, and international selling validations",
+            "eJobAid station queues completed for D2-D4 with non-linear workflow support; DafoNow pre-requisites advanced to Feature UAT-ready status"
+          ],
+          "concerns": [
+            "3-week delay in Release 2.10 cannot be repeated — UAT deployment planned May 3rd week, June 15 soft launch at risk if scope not controlled",
+            "CRITICAL: Timeout errors persist post-2.10 release (likely server config); VM slowness compounding — both threaten DafoNow UAT schedule",
+            "Revenue declining: June $41,840 → July $37,240 (11% drop); DafoNow Phase 2 sign-off pending alongside compliance terms discussions"
+          ],
+          "mining": [
+            "Warehouse Management POC pitched — awaiting client confirmation to kick start",
+            "Website SOW awaiting internal stakeholder signoff via Delivery — target May 19 (Owner: Rohan)",
+            "DafoNow Phase 2 sign-off still pending alongside unresolved compliance terms"
+          ]
+        },
+        {
+          "id": "fabricut",
+          "name": "Fabricut",
+          "sub": "Data Migration · AS400 → NetSuite / Power BI + Support",
+          "health": "Attention",
+          "team": 8,
+          "forecast": 104000,
+          "billing": "100% billed",
+          "billingOk": true,
+          "tickets_resolved": 40,
+          "tickets_total": 40,
+          "rev": [52000, 52000],
+          "billed": ["Yes", "Yes"],
+          "wins": [
+            "Sprint 5 & 6 delivered across BA, ETL, and NS Zone tracks — 149/346 (43%) source table normalization complete with 184 normalized tables created",
+            "11/40 NetSuite template mappings done; Customer, Vendor, Location entities import-tested in NS Zone; 12/42 Power BI report requirements finalized",
+            "40+ AS400 support tickets closed in May — strong support execution alongside data project; revenue growing to $52K/mo"
+          ],
+          "concerns": [
+            "Validation activities delayed pending Fabricut sign-off and sample import availability — ~2-3 week schedule impact on Data Project",
+            "Parallel execution streams (ETL, Validation, Power BI, NetSuite) require tight coordination and timely dependency resolution",
+            "Power BI development blocked until Data Mart readiness and business validation requirements are finalized"
+          ],
+          "mining": [
+            "Revenue growth confirmed: $48K → $52K/mo with new ETL person addition for Jun-Jul",
+            "Strong technical foundation across both Data and Support projects — natural expansion path post go-live",
+            "Growth thread stale since Jan 2026 — but delivery momentum creates organic expansion opportunity"
+          ]
+        },
+        {
+          "id": "flatiron",
+          "name": "Flatiron",
+          "sub": "Healthcare QA & Automation",
+          "health": "On Track",
+          "team": 4.5,
+          "forecast": 31360,
+          "billing": "100% billed",
+          "billingOk": true,
+          "tickets_resolved": 34,
+          "tickets_total": 35,
+          "rev": [15680, 15680],
+          "billed": ["Yes", "Yes"],
+          "wins": [
+            "97% completion rate (34/35 tickets) across GNOME, COCORX, PACE, COOP, PI, and TDS modules with 90.5% hands-to-keyboard efficiency",
+            "Guardant MRD + Monitoring ordering workflow released to production; Quest form enhancements deployed to patch environment",
+            "4-5 regression cycles (90-100 tests each) with critical defect fixes: deceased patient cleanup, multi-submit prevention, drug unapproval fix"
+          ],
+          "concerns": [
+            "Both mining threads stalled — QA staffing blocked by existing vendor, Chatbot/Voicebot declined by Amri; zero revenue pipeline",
+            "ONC Carespace accessibility and missing XML editor license blocking testing; network updates causing recurring access issues",
+            "Zero active resources assigned to engagement — potential transition risk despite strong delivery; no CSAT survey on record"
+          ],
+          "mining": [
+            "QA Staffing thread stalled — blocked by existing vendor conflict, no action defined (Owner: Rohan)",
+            "Chatbot/Voicebot thread declined by Amri — no current need, thread inactive (Owner: Rohan)",
+            "Account shows low receptivity to new offerings; needs relationship deepening or strategic realignment before further mining"
+          ]
+        },
+        {
+          "id": "aculocity",
+          "name": "Aculocity",
+          "sub": "DataSystems · CRM & AI Solutions",
+          "health": "Attention",
+          "team": 2.5,
+          "forecast": 36160,
+          "billing": "Unbilled gaps",
+          "billingOk": false,
+          "tickets_resolved": null,
+          "tickets_total": null,
+          "rev": [15680, 20480],
+          "billed": ["No", "No"],
+          "wins": [
+            "88.93% utilization sustained with zero post-production incidents — consistent quality and team efficiency",
+            "Microsoft Clarity implementation for user interaction analysis + ticket categorization strategies driving continuous improvement",
+            "Client confirmed 2 AI Engineers additions — interviews ongoing (pipeline WIN from W19 hiring thread)"
+          ],
+          "concerns": [
+            "Unbilled revenue across June-July ($36,160 total) — invoicing validation needed to prevent cash flow delays",
+            "Cross-team dependency: Team Center availability (Rob out) creating delays for 400 BOM discrepancies and invoice logic"
+          ],
+          "mining": [
+            "WIN: Client confirmed 2 AI Engineers additions — interviews actively ongoing",
+            "CRM & AI agent opportunity progressing — internal demo via delivery team scheduled (Owner: Rohan)",
+            "Thread still 16+ weeks stale in system (last updated Jan 8) but real progress happening off-tracker"
+          ]
+        },
+        {
+          "id": "redgold",
+          "name": "Red Gold",
+          "sub": "AS400 Modernization · Agriculture",
+          "health": "On Track",
+          "team": 1,
+          "forecast": 11840,
+          "billing": "100% billed",
+          "billingOk": true,
+          "tickets_resolved": 4,
+          "tickets_total": 5,
+          "rev": [5920, 5920],
+          "billed": ["Yes", "Yes"],
+          "wins": [
+            "R5723: CROP Scale Ticket Maint Managerial Screen across Facilities delivered successfully",
+            "R5661 Sprint 2: Modernize RGE103B Ord Ack Report delivered — overcame multiple technical and formatting challenges",
+            "R5760: Update CROP Fields by Grower Listing completed with modernization enhancements and moved to Done"
+          ],
+          "concerns": [
+            "Additional testing cycles and validation activities impacting timelines for modernization tasks",
+            "Complex report formatting (RGE103B) required multiple iterations — risk of similar delays on future modernization work",
+            "Ongoing BA discussions and requirement clarifications pending for remaining enhancement tasks"
+          ],
+          "mining": [
+            "AI/ML POC demonstration in preparation: VS Code + Copilot extension showcasing AS400 optimization",
+            "Neha coordinating with Kiran on AS400 AI best practices for upcoming client call",
+            "No formal mining thread open — AM should initiate discovery conversation leveraging AI interest"
+          ]
+        },
+        {
+          "id": "selectmedical",
+          "name": "Select Medical",
+          "sub": "TFS Reporting · Support",
+          "health": "On Track",
+          "team": 1,
+          "forecast": 11200,
+          "billing": "100% billed",
+          "billingOk": true,
+          "tickets_resolved": 6,
+          "tickets_total": 7,
+          "rev": [5600, 5600],
+          "billed": ["Yes", "Yes"],
+          "wins": [
+            "CDRNFL report completed and submitted for QA testing; Medhost Summary of Top Procedures report ready for Production with Excel/pivot table download",
+            "Turn off daily email of Medhost Procedure Edit & LOA Reports to CIRH — ready for Production deployment",
+            "Revenue Usage Report and Medhost Contract Management Reporting Updates moved through QA pipeline; strong delivery cadence maintained"
+          ],
+          "concerns": [
+            "Fewer tickets as most tasks currently in QA testing — velocity dip is pipeline timing, not capacity issue",
+            "Next task dependent on completing RH Greenville physician group (Vituity) data file with patient stay information",
+            "BA mining thread stalled 10 weeks at rate negotiation ($6,160) — needs escalation to unblock SOW"
+          ],
+          "mining": [
+            "BA opportunity: customer needs discussion completed, project documents received — rate negotiation at $6,160",
+            "Action pending: present 6-month ticket analysis to Amit, PMO, and AM via delivery team",
+            "Thread 10 weeks stale (last updated Feb 23) — requires escalation to executive sponsor to unblock SOW"
+          ]
+        }
+      ],
+      "actions": [
+        {"text": "Cascade: Resolve timeout errors and VM slowness urgently — both threaten DafoNow UAT schedule and June 15 soft launch target", "owner": "DM"},
+        {"text": "Cascade: Secure Warehouse Management POC confirmation; push Website SOW internal signoff (target overdue since May 19)", "owner": "AM"},
+        {"text": "Flatiron: Strategic account review — both mining threads dead (vendor conflict + Amri decline); identify new expansion angle", "owner": "AM"},
+        {"text": "Aculocity: Resolve $36,160 unbilled exposure across Jun-Jul immediately; track AI Engineer interview progress weekly", "owner": "AM"},
+        {"text": "Fabricut: Unblock validation sign-off to recover ~2-3 week schedule impact; coordinate parallel streams tightly", "owner": "DM"},
+        {"text": "Select Medical: Escalate 10-week stalled BA rate negotiation ($6,160) to executive sponsor; present 6-month ticket analysis", "owner": "AM"},
+        {"text": "Red Gold: Complete AI/ML POC demo prep (VS Code + Copilot) and schedule client presentation this week", "owner": "DM"}
+      ],
+      "mining_data": [
+        {"name": "Aculocity", "status": "2 AI Engineers Confirmed", "priority": "strong", "items": [
+          {"tag": "WIN", "text": "Client confirmed 2 AI Engineers additions — interviews actively ongoing"},
+          {"tag": "CRM/AI", "text": "Internal AI agent demo scheduled via delivery team (Owner: Rohan)"},
+          {"tag": "Upside", "text": "2 engineers = +$10,400/mo potential on top of $15,680 baseline"},
+          {"tag": "Risk", "text": "Thread 16+ weeks stale in system — real progress not reflected in tracker"}
+        ]},
+        {"name": "Cascade", "status": "Warehouse POC + Website SOW", "priority": "active", "items": [
+          {"tag": "NEW", "text": "Warehouse Management POC pitched — awaiting client confirmation to kick start"},
+          {"tag": "Website SOW", "text": "Awaiting internal stakeholder signoff via Delivery — target May 19 (Owner: Rohan)"},
+          {"tag": "Phase 2", "text": "DafoNow Phase 2 sign-off pending alongside compliance terms discussions"},
+          {"tag": "Risk", "text": "Revenue declining 11% MoM; engagement continuation depends on Phase 2 + POC landing"}
+        ]},
+        {"name": "Fabricut", "status": "Growing — ETL Addition", "priority": "active", "items": [
+          {"tag": "Revenue", "text": "Growing $48K → $52K/mo with new ETL person addition for Jun-Jul ($104K total forecast)"},
+          {"tag": "Data Project", "text": "43% normalization complete (149/346 tables); 184 normalized tables created; 11/40 NS templates done"},
+          {"tag": "Support", "text": "40+ AS400 tickets closed in May — strong parallel execution alongside data migration"},
+          {"tag": "Risk", "text": "Validation delayed ~2-3 weeks pending Fabricut sign-off; PBI blocked on Data Mart readiness"}
+        ]},
+        {"name": "Select Medical", "status": "BA Rate Negotiation Stalled", "priority": "watch", "items": [
+          {"tag": "Opportunity", "text": "BA role — customer needs discussion completed, project documents received"},
+          {"tag": "Rate", "text": "Client requesting 10% increase to $6,160 — commercial interest confirmed"},
+          {"tag": "Blocker", "text": "10 weeks stalled at rate negotiation — needs executive escalation"},
+          {"tag": "Action", "text": "Present 6-month ticket analysis to stakeholders to justify rate and close SOW"}
+        ]},
+        {"name": "Red Gold", "status": "AI POC Demo Preparing", "priority": "watch", "items": [
+          {"tag": "Interest", "text": "Client expressing strong interest in AI/ML for SDLC improvements and code optimization"},
+          {"tag": "POC", "text": "VS Code + Copilot demo being prepared — Neha coordinating with Kiran on AS400 AI best practices"},
+          {"tag": "Potential", "text": "20-30% account expansion potential if AI engagement lands"},
+          {"tag": "Gap", "text": "No formal mining thread open — AM needs to initiate discovery conversation"}
+        ]},
+        {"name": "Flatiron", "status": "Both Threads Stalled", "priority": "none", "items": [
+          {"tag": "QA Staffing", "text": "Stalled — blocked by existing vendor conflict, no action defined (Owner: Rohan)"},
+          {"tag": "Chatbot", "text": "Declined by Amri — no current need, thread inactive (Owner: Rohan)"},
+          {"tag": "Pipeline", "text": "Zero revenue pipeline despite 2 logged threads — all prospecting hit dead ends"},
+          {"tag": "Strategy", "text": "Account needs relationship deepening or strategic pivot before further mining attempts"}
+        ]}
+      ],
+      "flags": [
+        {"severity": "red", "title": "Cascade — production stability + revenue decline", "subtitle": "Immediate · DM + AM action", "body": "Timeout errors persist post-2.10 release (likely server config issue) and VM slowness reported — both threaten DafoNow UAT schedule and June 15 soft launch. Revenue declining 11% MoM (June $41,840 → July $37,240). Phase 2 sign-off and compliance terms still unresolved. Client warned 3-week delay in 2.10 cannot be repeated.", "actions": [{"owner": "DM", "text": "Resolve timeout errors and VM slowness urgently — protect UAT schedule and June 15 launch"}, {"owner": "AM", "text": "Push DafoNow Phase 2 sign-off and compliance terms; use Warehouse POC as engagement continuation lever"}]},
+        {"severity": "amber", "title": "Flatiron — mining pipeline dead despite 97% delivery", "subtitle": "This week · Strategic review needed", "body": "Both mining threads have hit dead ends: QA staffing blocked by existing vendor, Chatbot/Voicebot declined by Amri. Zero revenue pipeline despite strongest delivery metrics in portfolio (34/35 tickets, 90.5% efficiency). Account shows low receptivity to new offerings. Third consecutive week with no viable pipeline conversation.", "actions": [{"owner": "AM", "text": "Conduct strategic account review — identify new expansion angles beyond QA staffing and chatbot"}, {"owner": "AM", "text": "Leverage 97% delivery metrics and Guardant/Quest releases as proof points for adjacent scope conversation"}]},
+        {"severity": "amber", "title": "Aculocity billing — $36K unbilled", "subtitle": "This week · AM action", "body": "Aculocity ($36,160) has unbilled resources across Jun-Jul. Only account with billing gaps remaining. 2 AI Engineers confirmed by client — interviews ongoing. Team Center dependency (Rob out) causing delivery delays.", "actions": [{"owner": "AM", "text": "Reconcile Aculocity billing — confirm resource allocation and complete billing entries for Jun-Jul"}, {"owner": "DM", "text": "Track AI Engineer interview progress and billing resolution in parallel"}]},
+        {"severity": "amber", "title": "Fabricut — validation delays + parallel stream coordination", "subtitle": "Monitor · DM + PM", "body": "Strong delivery execution (43% normalization, 40+ support tickets, revenue growing to $52K/mo) but validation delayed ~2-3 weeks pending Fabricut sign-off. Four parallel streams require tight coordination. Power BI blocked until Data Mart readiness.", "actions": [{"owner": "DM", "text": "Unblock validation sign-off with Fabricut — recover 2-3 week schedule impact"}, {"owner": "PM", "text": "Tighten cross-stream coordination; ensure support ticket routing follows planned bucket process"}]},
+        {"severity": "blue", "title": "Select Medical — BA opportunity stalled at rate negotiation", "subtitle": "Opportunity · AM escalation", "body": "BA opportunity stalled 10+ weeks at rate negotiation ($6,160). Customer needs discussion completed, project docs received. 6-month ticket analysis presentation pending. Needs executive escalation to convert warm lead to SOW.", "actions": [{"owner": "AM", "text": "Escalate BA rate negotiation to executive sponsor — present 6-month ticket analysis"}, {"owner": "AM", "text": "Leverage strong delivery track record as proof point for expansion"}]},
+        {"severity": "blue", "title": "Red Gold — AI/ML expansion opportunity forming", "subtitle": "Opportunity · POC demo pending", "body": "Client expressing strong interest in AI/ML for code optimization and SDLC improvements. Team preparing VS Code + Copilot POC demo. Neha coordinating with Kiran on AS400 AI best practices. No formal mining thread yet.", "actions": [{"owner": "DM", "text": "Complete AI/ML POC demo prep and schedule client presentation"}, {"owner": "AM", "text": "Open formal mining thread and document AI expansion opportunity scope and commercials"}]}
+      ]
     }
   ]
 }
