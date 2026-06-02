@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>W22 vs W23 Comparison | Nalashaa Portfolio</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --bg:#f7f6f3;--surface:#fff;--surface2:#f0efe9;
+  --border:rgba(0,0,0,0.08);--border-md:rgba(0,0,0,0.14);
+  --text:#1a1a18;--text2:#5f5e5a;--text3:#8c8b86;
+  --green:#3B6D11;--green-bg:#eaf3de;--green-text:#27500a;
+  --amber:#BA7517;--amber-bg:#faeeda;--amber-text:#854f0b;
+  --red:#A32D2D;--red-bg:#fcebeb;--red-text:#791f1f;
+  --blue:#185fa5;--blue-bg:#e6f1fb;--blue-text:#0c447c;
+  --nalashaa:#1a3c6e;--nalashaa-light:#e8eef7;
+  --radius:10px;--radius-sm:6px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:14px;line-height:1.5;}
+
+/* Nav */
+.nav{background:var(--nalashaa);padding:0 2rem;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100;}
+.nav-brand{font-size:16px;font-weight:600;color:#fff;letter-spacing:-.01em;}
+.nav-brand span{opacity:.55;font-weight:400;font-size:13px;margin-left:10px;}
+.nav-meta{font-size:12px;color:rgba(255,255,255,.55);}
+
+.main{max-width:1200px;margin:0 auto;padding:2rem;}
+
+/* Section headers */
+.sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;margin-top:2rem;}
+.sh:first-child{margin-top:0;}
+.sh h2{font-size:13px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.05em;}
+.sh .hint{font-size:11px;color:var(--text3);}
+
+/* Cards */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;margin-bottom:14px;}
+
+/* Summary metrics grid */
+.summary-grid{display:grid;grid-template-columns:200px 1fr 1fr 1fr;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.75rem;}
+.sg-header{background:var(--nalashaa);color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;padding:10px 14px;}
+.sg-cell{padding:10px 14px;font-size:13px;color:var(--text);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;}
+.sg-label{font-weight:600;color:var(--text2);font-size:12px;}
+.sg-cell.highlight{background:var(--nalashaa-light);}
+.arrow-up{color:var(--green);font-weight:700;font-size:14px;}
+.arrow-down{color:var(--red);font-weight:700;font-size:14px;}
+.arrow-same{color:var(--text3);font-weight:700;font-size:14px;}
+.note{font-size:11px;color:var(--text3);font-style:italic;}
+
+/* Badges */
+.badge{font-size:11px;font-weight:600;padding:3px 10px;border-radius:20px;display:inline-block;white-space:nowrap;}
+.bok{background:var(--green-bg);color:var(--green-text);}
+.bwarn{background:var(--amber-bg);color:var(--amber-text);}
+.brisk{background:var(--red-bg);color:var(--red-text);}
+
+/* Account cards - collapsible */
+.acct-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;overflow:hidden;transition:border-color .15s;}
+.acct-card.open{border-color:var(--nalashaa);}
+.acct-header{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;cursor:pointer;user-select:none;}
+.acct-header:hover{background:var(--surface2);}
+.acct-title{display:flex;align-items:center;gap:12px;}
+.acct-name{font-size:16px;font-weight:600;color:var(--text);}
+.acct-sub{font-size:12px;color:var(--text3);margin-top:2px;}
+.health-change{display:flex;align-items:center;gap:6px;font-size:12px;}
+.health-arrow{font-size:14px;font-weight:700;color:var(--text3);margin:0 2px;}
+.chv{font-size:13px;color:var(--text3);transition:transform .2s;}
+.acct-card.open .chv{transform:rotate(180deg);}
+.acct-body{display:none;padding:0 18px 18px;border-top:1px solid var(--border);}
+.acct-card.open .acct-body{display:block;}
+
+/* Metrics comparison inside account */
+.acct-metrics{display:grid;grid-template-columns:140px 1fr 1fr 60px;gap:0;margin:14px 0;border:1px solid var(--border);border-radius:var(--radius-sm);overflow:hidden;}
+.am-header{background:var(--surface2);font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;padding:8px 12px;}
+.am-cell{padding:8px 12px;font-size:13px;color:var(--text);border-bottom:1px solid var(--border);}
+.am-label{font-weight:600;color:var(--text2);font-size:12px;}
+
+/* Two-column comparison */
+.comp-cols{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:14px 0;}
+.comp-col h4{font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;padding-bottom:6px;border-bottom:2px solid var(--border);}
+.comp-col h4.w22{border-bottom-color:var(--amber);}
+.comp-col h4.w23{border-bottom-color:var(--blue);}
+.comp-item{font-size:12px;color:var(--text2);padding:5px 0;border-bottom:1px solid var(--border);line-height:1.4;display:flex;gap:6px;}
+.comp-item:last-child{border-bottom:none;}
+.ci-icon{flex-shrink:0;font-size:11px;font-weight:700;}
+.ci-win{color:var(--green);}
+.ci-risk{color:var(--amber);}
+.ci-mine{color:var(--blue);}
+
+/* What changed box */
+.changed-box{background:var(--nalashaa-light);border:1px solid rgba(26,60,110,0.15);border-radius:var(--radius-sm);padding:12px 16px;margin-top:14px;}
+.changed-box h4{font-size:11px;font-weight:700;color:var(--nalashaa);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px;}
+.changed-box ul{margin:0;padding-left:18px;}
+.changed-box li{font-size:12px;color:var(--text);line-height:1.5;margin-bottom:3px;}
+
+/* Mining tracker table */
+.track-table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:1.75rem;}
+.track-table th{background:var(--surface2);font-size:10px;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.04em;padding:10px 12px;text-align:left;}
+.track-table td{padding:10px 12px;font-size:12px;color:var(--text);border-top:1px solid var(--border);vertical-align:top;line-height:1.4;}
+.track-table tr:hover td{background:var(--surface2);}
+.status-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:12px;display:inline-block;white-space:nowrap;}
+.st-progressed{background:var(--green-bg);color:var(--green-text);}
+.st-stalled{background:var(--amber-bg);color:var(--amber-text);}
+.st-new{background:var(--blue-bg);color:var(--blue-text);}
+.st-dropped{background:var(--red-bg);color:var(--red-text);}
+.st-unchanged{background:var(--surface2);color:var(--text3);}
+
+/* Priority pills */
+.ppill{font-size:10px;font-weight:600;padding:2px 8px;border-radius:12px;display:inline-block;}
+.pp-strong{background:var(--green-bg);color:var(--green-text);}
+.pp-active{background:var(--blue-bg);color:var(--blue-text);}
+.pp-watch{background:var(--amber-bg);color:var(--amber-text);}
+.pp-none{background:var(--surface2);color:var(--text3);}
+
+/* Action tracker */
+.action-status{font-size:10px;font-weight:600;padding:2px 8px;border-radius:12px;display:inline-block;}
+.as-resolved{background:var(--green-bg);color:var(--green-text);}
+.as-carried{background:var(--amber-bg);color:var(--amber-text);}
+.as-dropped{background:var(--red-bg);color:var(--red-text);}
+
+/* Owner pill */
+.owpill{font-size:10px;font-weight:700;color:var(--nalashaa);background:var(--nalashaa-light);padding:2px 7px;border-radius:20px;white-space:nowrap;}
+
+/* Flags comparison */
+.flags-comp{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.75rem;}
+.flag-col h3{font-size:12px;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.04em;margin-bottom:10px;padding-bottom:6px;border-bottom:2px solid var(--border);}
+.flag-col h3.w22{border-bottom-color:var(--amber);}
+.flag-col h3.w23{border-bottom-color:var(--blue);}
+.flag-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:8px;}
+.flag-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle;}
+.flag-dot.red{background:var(--red);}
+.flag-dot.amber{background:var(--amber);}
+.flag-dot.green{background:var(--green);}
+.flag-dot.blue{background:var(--blue);}
+.flag-title{font-size:13px;font-weight:600;color:var(--text);}
+.flag-sub{font-size:11px;color:var(--text3);margin-top:2px;}
+.flag-body{font-size:12px;color:var(--text2);margin-top:6px;line-height:1.5;}
+.flag-change-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:12px;display:inline-block;margin-left:6px;}
+.fct-new{background:var(--blue-bg);color:var(--blue-text);}
+.fct-resolved{background:var(--green-bg);color:var(--green-text);}
+.fct-escalated{background:var(--red-bg);color:var(--red-text);}
+.fct-changed{background:var(--amber-bg);color:var(--amber-text);}
+.fct-same{background:var(--surface2);color:var(--text3);}
+
+/* Charts */
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.75rem;}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;}
+.chart-card h3{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.chart-card p{font-size:12px;color:var(--text3);margin-bottom:14px;}
+.chart-wrap{position:relative;height:220px;}
+
+/* Footer */
+.footer{text-align:center;padding:2rem 0;font-size:11px;color:var(--text3);border-top:1px solid var(--border);margin-top:2rem;}
+
+/* Responsive */
+@media(max-width:900px){
+  .summary-grid{grid-template-columns:140px 1fr 1fr 50px;}
+  .comp-cols,.flags-comp,.chart-row{grid-template-columns:1fr;}
+  .acct-metrics{grid-template-columns:100px 1fr 1fr 50px;}
+}
+@media(max-width:600px){
+  .main{padding:1rem;}
+  .summary-grid{grid-template-columns:1fr;}.sg-header:nth-child(n+2){display:none;}
+}
+
+/* Print */
+@media print{
+  .nav{position:static;print-color-adjust:exact;-webkit-print-color-adjust:exact;}
+  .acct-card .acct-body{display:block !important;}
+  .chv{display:none;}
+  body{font-size:11px;}
+  .main{padding:0.5rem;}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-brand">Nalashaa Solutions <span>W22 vs W23 Comparison</span></div>
+  <div class="nav-meta">Generated June 2, 2026</div>
+  <a href="index.html" style="font-size:12px;color:rgba(255,255,255,.75);text-decoration:none;border:1px solid rgba(255,255,255,.25);padding:4px 12px;border-radius:20px;transition:all .15s;" onmouseover="this.style.background='rgba(255,255,255,.12)';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='rgba(255,255,255,.75)'">&larr; Back to Dashboard</a>
+</nav>
+
+<div class="main">
+
+<!-- 1. PORTFOLIO SUMMARY COMPARISON -->
+<div class="sh" style="margin-top:0;"><h2>1. Portfolio Summary Comparison</h2><span class="hint">W22 (May 18 - May 26) vs W23 (May 25 - June 2)</span></div>
+
+<div class="summary-grid" id="summary-grid"></div>
+
+<div class="chart-row">
+  <div class="chart-card">
+    <h3>Forecast by account</h3>
+    <p>W21 vs W22 side by side (Both 3-month forecasts)</p>
+    <div class="chart-wrap"><canvas id="forecastCompareChart"></canvas></div>
+  </div>
+  <div class="chart-card">
+    <h3>Monthly run rate comparison</h3>
+    <p>Forecast / months -- apples-to-apples</p>
+    <div class="chart-wrap"><canvas id="runRateChart"></canvas></div>
+  </div>
+</div>
+
+<!-- 2. ACCOUNT-BY-ACCOUNT COMPARISON -->
+<div class="sh"><h2>2. Account-by-Account Comparison</h2><span class="hint">Click to expand</span></div>
+<div id="account-cards"></div>
+
+<!-- 3. MINING & PIPELINE TRACKER -->
+<div class="sh"><h2>3. Mining & Pipeline Tracker</h2><span class="hint">Thread progression across weeks</span></div>
+<div style="overflow-x:auto;">
+  <table class="track-table" id="mining-tracker"></table>
+</div>
+
+<!-- 4. ACTION ITEM TRACKER -->
+<div class="sh"><h2>4. Action Item Tracker</h2><span class="hint">W22 actions -- resolution status in W23</span></div>
+<div style="overflow-x:auto;">
+  <table class="track-table" id="action-tracker"></table>
+</div>
+
+<!-- 5. PRIORITY FLAGS COMPARISON -->
+<div class="sh"><h2>5. Priority Flags Comparison</h2><span class="hint">Side-by-side flag changes</span></div>
+<div id="flags-comparison"></div>
+
+<div class="footer">
+  Generated on June 2, 2026 | Nalashaa Solutions -- Portfolio W22 vs W23 Comparison<br>
+  Data sourced from history.json
+</div>
+
+</div><!-- .main -->
+
+<script>
+// ================================================================
+// DATA (from history.json)
+// ================================================================
+const W22 = {"week_id": "2026-W22", "date": "2026-05-26", "period": "May 18 - May 26, 2026", "portfolio_forecast": 388960, "team_deployed": 43.5, "tickets_resolved": 84, "tickets_total": 113, "pipeline_upside": 16560, "accounts_at_risk": 4, "forecast_months": 3, "accounts": [{"id": "cascade", "name": "Cascade", "sub": "NHS · DafoNow + App Consolidation", "health": "Attention", "team": 23, "forecast": 144000, "billing": "100% billed", "billingOk": true, "tickets_resolved": 18, "tickets_total": 32, "rev": [48000, 48000, 48000], "billed": ["Yes", "Yes", "Yes"], "wins": ["Dual releases 2.10 and 2.11 delivered on schedule — 18 tickets, 50 story points, zero blockers", "DAFONow production readiness achieved: Customer/Contact Master, Product Master, and material configs live", "eJobAid non-linear workflow released with all stations integrated into Cascade metrics for real-time tracking"], "concerns": ["6-7 regressions after 2.10 release requiring immediate fixes (TAP files, rule validation, cascade metrics)", "PCI 5OP server issues caused 2 days downtime; Prod/UAT index mismatch causing 500 errors", "D2 queue rollout delayed from June to July due to DafoNow UAT and Cascade metrics testing"], "mining": ["Dafo SOW signoff in progress — awaiting final approval (Owner: Rohan)", "Website SOW delayed — awaiting client internal stakeholder signoff", "Warehouse Management deferred to Q3; AI chatbot planned for DafoNow P2/P3 future phases"]}, {"id": "fabricut", "name": "Fabricut", "sub": "Data Migration · AS400 to NetSuite / Power BI + Support", "health": "Attention", "team": 9, "forecast": 127200, "billing": "100% billed", "billingOk": true, "tickets_resolved": 12, "tickets_total": 21, "rev": [42400, 42400, 42400], "billed": ["Yes", "Yes", "Yes"], "wins": ["43% data normalization complete (149/346 tables) across 5 entities: Customer, Vendor, Product, Warehouse, Inventory", "12 data mart zones delivered (ARR241-ARR247 + ARR360) for analytics-ready AR reporting", "14 NetSuite template mappings produced across two iterations; Vendor data loaded into normalized DB"], "concerns": ["3-4 week schedule delay due to pending Fabricut validation sign-off blocking normalization progression", "Power BI development blocked pending Data Mart readiness and finalized BI requirements", "Expanded project scope requires budget alignment and formal approval to proceed"], "mining": ["Data Insights groundwork in progress — not yet pitched to client (Owner: Amit)", "Power BI expansion and Data cleansing blocked by NetSuite Migration timeline", "Growth thread stale since Jan 2026 — no client call scheduled for 4+ months"]}, {"id": "flatiron", "name": "Flatiron", "sub": "Healthcare QA & Automation", "health": "On Track", "team": 5, "forecast": 47040, "billing": "100% billed", "billingOk": true, "tickets_resolved": 52, "tickets_total": 52, "rev": [15680, 15680, 15680], "billed": ["Yes", "Yes", "Yes"], "wins": ["100% ticket completion: 52/52 resolved (21 Stories, 18 Bugs, 12 Tasks, 1 Sub-task) — zero carryover", "Patch 5/22 deployed: Guardant G360 CDx fix, F1M timepoint update, OncoExTra IHC deprecation", "4 targeted regression cycles (90-100 tests each) + WCAG accessibility testing + SchedulerV2 regression"], "concerns": ["Both mining threads rejected: QA staffing declined (vendor in place), Chatbot/Voicebot not needed", "Zero pipeline momentum — all proposed solutions met with 'not in need' response", "No CSAT survey on record — recommend scheduling baseline this quarter"], "mining": ["QA Staffing thread rejected — client has existing vendor in place (Owner: Rohan)", "Chatbot/Voicebot thread rejected — client not in need (Owner: Rohan)", "Account mining stalled — needs strategic reset or new expansion angle"]}, {"id": "aculocity", "name": "Aculocity", "sub": "DataSystems · CRM & AI Solutions", "health": "Attention", "team": 2.5, "forecast": 36160, "billing": "Unbilled gaps", "billingOk": false, "tickets_resolved": null, "tickets_total": null, "rev": [15680, 20480], "billed": ["No", "No"], "wins": ["88.93% utilization sustained with zero post-production incidents — consistent quality and team efficiency", "Microsoft Clarity implementation for user interaction analysis + ticket categorization strategies driving continuous improvement", "Client confirmed 2 AI Engineers additions — interviews ongoing (pipeline WIN from W19 hiring thread)"], "concerns": ["Unbilled revenue across June-July ($36,160 total) — invoicing validation needed to prevent cash flow delays", "Cross-team dependency: Team Center availability (Rob out) creating delays for 400 BOM discrepancies and invoice logic"], "mining": ["WIN: Client confirmed 2 AI Engineers additions — interviews actively ongoing", "CRM & AI agent opportunity progressing — internal demo via delivery team scheduled (Owner: Rohan)", "Thread still 16+ weeks stale in system (last updated Jan 8) but real progress happening off-tracker"]}, {"id": "redgold", "name": "Red Gold", "sub": "AS400 Modernization · Agriculture", "health": "On Track", "team": 2, "forecast": 17760, "billing": "100% billed", "billingOk": true, "tickets_resolved": 0, "tickets_total": 1, "rev": [5920, 5920, 5920], "billed": ["Yes", "Yes", "Yes"], "wins": ["R5726 Item Master screen for label class items completed — display and edit functionality ready for production", "100% delivery completion with 1 ticket completed and awaiting client validation", "CSAT score 3.86/5 maintaining upward trend; strongest dimensions: Information Access (5), Technical Meetings (5)"], "concerns": ["AI PoC pitched but no concrete commitment, SOW, or timeline — needs structured proposal by month end", "P360 score at 55% (below 60% threshold) — data last updated January 2026, stale", "Client flagged testing thoroughness as area for improvement"], "mining": ["AI PoC covering Business Knowledge Base, code optimization, test case coverage — early exploration (Owner: Neha)", "No clear action items or timelines documented despite PoC in progress", "Account represents only 5% of pipeline with single thread — minimal mining momentum"]}, {"id": "selectmedical", "name": "Select Medical", "sub": "Revenue Reporting · Contract Management", "health": "Attention", "team": 2, "forecast": 16800, "billing": "100% billed", "billingOk": true, "tickets_resolved": 2, "tickets_total": 7, "rev": [5600, 5600, 5600], "billed": ["Yes", "Yes", "Yes"], "wins": ["9 production enhancements deployed: Revenue Usage CPT codes, Contract Listing, FC 5SN, Cash Receipt, PROCSUM2", "3 high-priority items moved to QA: AR Collector Code, CDRNFL2 discharge ordering, 100% Contractual Report", "Vituity Data File tech spec finalized with client approval; Medicare FC 5SN development completed"], "concerns": ["Tasks spilling over multiple months — client (Meghan) concerned about prolonged delivery perception", "100% Contractual Report blocked by unresolved authority issue", "P360 at 0% with no dimensional or trend data captured; no CSAT survey on record"], "mining": ["BA opportunity stale 3+ months — rate negotiation pending ($6,160); ticket analysis presentation outstanding", "AI Voice Agent pitched but not demonstrated — no demo scheduled or timeline set (Owner: Rohan)", "Both threads lack clear SOW/proposal status and closure timelines"]}], "actions": [{"text": "Cascade: Address Prod/UAT index mismatch and load testing env alignment — prevent recurring 500 errors and performance degradation", "owner": "DM"}, {"text": "Cascade: Push Dafo SOW final signoff; unblock Website SOW client internal approvals (Owner: Rohan)", "owner": "AM"}, {"text": "Fabricut: Obtain Fabricut validation sign-off urgently — 3-4 week delay blocking normalization progression and downstream Power BI work", "owner": "DM"}, {"text": "Select Medical: Implement sprint discipline — fewer items per sprint, complete before pulling new work; address Meghan's delivery perception concern", "owner": "PM"}, {"text": "Flatiron: Strategic mining reset — close rejected threads, identify new expansion angles leveraging 100% delivery and Patch 5/22 success", "owner": "AM"}, {"text": "Red Gold: Structure AI PoC proposal with scope, success criteria, and timeline; obtain client commitment by end of May", "owner": "AM"}, {"text": "Select Medical: Escalate BA rate negotiation ($6,160) stalled 3+ months; schedule AI Voice Agent demo to advance pipeline", "owner": "AM"}], "mining_data": [{"name": "Aculocity", "status": "2 AI Engineers Confirmed", "priority": "strong", "items": [{"tag": "WIN", "text": "Client confirmed 2 AI Engineers additions — interviews actively ongoing"}, {"tag": "CRM/AI", "text": "Internal AI agent demo scheduled via delivery team (Owner: Rohan)"}, {"tag": "Upside", "text": "2 engineers = +$10,400/mo potential on top of $15,680 baseline"}, {"tag": "Risk", "text": "Thread 16+ weeks stale in system — real progress not reflected in tracker"}]}, {"name": "Cascade", "status": "Dafo SOW Signoff + 3 Threads", "priority": "active", "items": [{"tag": "Dafo SOW", "text": "Signoff in progress — awaiting final client approval (Owner: Rohan)"}, {"tag": "Website SOW", "text": "Delayed — awaiting client internal stakeholder signoff via Delivery"}, {"tag": "Warehouse", "text": "Pitched Q2, deferred to Q3 2026 — revisit discussion planned"}, {"tag": "AI Chatbot", "text": "Future pipeline for DafoNow P2/P3 phases — no immediate action"}]}, {"name": "Fabricut", "status": "Data Insights Discovery", "priority": "watch", "items": [{"tag": "Data Insights", "text": "Groundwork in progress, not yet pitched to client (Owner: Amit)"}, {"tag": "Power BI", "text": "Expansion opportunity blocked by NetSuite Migration timeline"}, {"tag": "Data Cleansing", "text": "Identified but deprioritized pending migration completion"}, {"tag": "Stale", "text": "Growth thread no update since Jan 2026 — 4+ months without client call"}]}, {"name": "Flatiron", "status": "Both Threads Rejected", "priority": "none", "items": [{"tag": "QA Staffing", "text": "Rejected — client has existing vendor in place (Owner: Rohan)"}, {"tag": "Chatbot", "text": "Rejected — client confirmed 'not in need' (Owner: Rohan)"}, {"tag": "Pipeline", "text": "Zero viable opportunities — all proposals met with rejection"}, {"tag": "Strategy", "text": "Needs strategic reset — new expansion angle required despite 100% delivery"}]}, {"name": "Red Gold", "status": "AI PoC Early Stage", "priority": "watch", "items": [{"tag": "AI PoC", "text": "Business Knowledge Base + code optimization + test coverage pitched (Owner: Neha)"}, {"tag": "Status", "text": "Early exploration — no defined scope, success criteria, or commitment"}, {"tag": "Gap", "text": "No action items, timelines, or next steps documented despite PoC discussion"}, {"tag": "Risk", "text": "Only 5% of org pipeline — minimal momentum, needs structured proposal"}]}, {"name": "Select Medical", "status": "BA + AI Voice Agent Stalled", "priority": "watch", "items": [{"tag": "BA Opportunity", "text": "Stale 3+ months — rate negotiation at $6,160 pending Kiran's approval"}, {"tag": "AI Voice Agent", "text": "Pitched May 19 but no demo scheduled or timeline defined (Owner: Rohan)"}, {"tag": "Blocker", "text": "Rate negotiation may be blocking SOW progression on BA thread"}, {"tag": "Action", "text": "Present 6-month ticket analysis to Amit/PMO/AM; schedule AI Voice Agent demo"}]}], "flags": [{"severity": "red", "title": "Cascade — post-release regressions + infrastructure downtime", "subtitle": "Immediate · DM action", "body": "6-7 regressions after Release 2.10 required immediate fixes (TAP files, rule validation, cascade metrics). PCI 5OP server issues caused 2 days downtime. Prod/UAT index mismatch causing 500 errors. Load testing environment not matching production configuration. D2 queue rollout delayed from June to July.", "actions": [{"owner": "DM", "text": "Resolve Prod/UAT index mismatch and load testing environment alignment urgently"}, {"owner": "DM", "text": "Implement pre-release regression testing protocol to prevent repeat of 6-7 post-release defects"}]}, {"severity": "amber", "title": "Fabricut — 3-4 week schedule delay blocking progression", "subtitle": "This week · DM escalation", "body": "Fabricut validation sign-off not yet received, blocking normalization workstream progression. Power BI development also blocked pending Data Mart readiness. Expanded project scope requires budget alignment and formal approval. Strong technical execution (43% normalization, 12 data marts, 14 NS mappings) being held back by client dependencies.", "actions": [{"owner": "DM", "text": "Escalate validation sign-off with Fabricut — recover 3-4 week schedule impact"}, {"owner": "PM", "text": "Align expanded scope with budget and obtain formal approval to proceed"}]}, {"severity": "amber", "title": "Select Medical — client concerned about prolonged delivery", "subtitle": "This week · PM + DM action", "body": "Client (Meghan) expressed concern that tasks are spanning multiple months due to shifting priorities and requirements churn. Requested fewer items per sprint and completing work before pulling new items. 100% Contractual Report blocked by authority issue. Team implementing sprint discipline improvements.", "actions": [{"owner": "PM", "text": "Implement sprint discipline: fewer items per sprint, complete before pulling new work"}, {"owner": "AM", "text": "Schedule client check-in with Meghan to address perception and align on sprint cadence"}]}, {"severity": "amber", "title": "Flatiron — mining dead despite flawless 100% delivery", "subtitle": "Strategic review needed · AM", "body": "Both mining threads formally rejected: QA staffing declined due to existing vendor, Chatbot/Voicebot not needed. Zero pipeline momentum despite best delivery metrics in portfolio (52/52 tickets, Patch 5/22 deployed, WCAG testing complete). Fourth consecutive week with no viable expansion conversation.", "actions": [{"owner": "AM", "text": "Close dead threads and conduct strategic account review — identify new expansion angles"}, {"owner": "AM", "text": "Leverage Patch 5/22 success and 100% completion as proof points for adjacent scope conversation"}]}, {"severity": "blue", "title": "Red Gold — AI PoC opportunity needs structured proposal", "subtitle": "Opportunity · AM action by month end", "body": "Multiple AI use cases pitched (Business Knowledge Base, code optimization, test case coverage) but no concrete PoC commitment, SOW, or timeline established. CSAT at 3.86/5 provides strong credibility. Account represents only 5% of pipeline — needs structured proposal to convert interest into commitment.", "actions": [{"owner": "AM", "text": "Structure AI PoC proposal with defined scope, success criteria, and timeline"}, {"owner": "AM", "text": "Obtain client commitment by end of May — momentum will stall without follow-up"}]}, {"severity": "green", "title": "Portfolio billing health — 100% billed across all 5 accounts", "subtitle": "Positive · First time in 4 weeks", "body": "All 5 accounts are fully billed this week — a significant improvement from previous weeks where Aculocity, Fabricut, and Cascade had billing gaps. Total portfolio forecast of $352,800 over 3 months (June-August) with zero revenue leakage risk. Note: Aculocity not reporting this period.", "actions": [{"owner": "AM", "text": "Maintain billing discipline — ensure Aculocity billing is also current when they return to reporting"}, {"owner": "AM", "text": "Confirm all invoices submitted for May billing cycle across all accounts"}]}]};
+
+const W23 = {"week_id": "2026-W23", "date": "2026-06-02", "period": "May 25 - June 2, 2026", "portfolio_forecast": 388960, "team_deployed": 43.5, "tickets_resolved": 2, "tickets_total": 27, "pipeline_upside": 16560, "accounts_at_risk": 5, "forecast_months": 3, "accounts": [{"id": "cascade", "name": "Cascade", "sub": "NHS · DafoNow + App Consolidation", "health": "Attention", "team": 23, "forecast": 144000, "billing": "100% billed", "billingOk": true, "tickets_resolved": 2, "tickets_total": 2, "rev": [48000, 48000, 48000], "billed": ["Yes", "Yes", "Yes"], "wins": ["100% sprint completion (2/2 tickets) with zero backlog — version 2.11 released on time, zero blockers", "Fixed Digital QC workflow: orders no longer assigned to Programming before tap files are ready (C2-9753)", "Restored Receiving Metrics data integrity — processing hold orders now appear correctly in queue reports (C2-9742)"], "concerns": ["D2 queue delayed JunetoJuly, D3 delayed JulytoAugust due to concurrent DafoNow UAT and metrics testing", "Prod/UAT index mismatch still causing 500 errors — synchronization in progress", "Spec history query optimization needed — slow performance in production identified"], "mining": ["Dafo SOW pending signoff — no timeline specified (Owner: Rohan)", "Website SOW awaiting internal stakeholder approval — delayed past May 19 target", "Warehouse Management deferred to Q3 2026; AI chatbot for DafoNow P2/P3 future phases"]}, {"id": "fabricut", "name": "Fabricut", "sub": "Data Migration · AS400 to NetSuite / Power BI + Support", "health": "Attention", "team": 9, "forecast": 127200, "billing": "100% billed", "billingOk": true, "tickets_resolved": 0, "tickets_total": 25, "rev": [42400, 42400, 42400], "billed": ["Yes", "Yes", "Yes"], "wins": ["Normalization jumped to 73% (255/346 tables) — up from 43% last period; 311 normalized tables across 11 entities", "6 of 21 NetSuite mappings complete; first draft NS zones for Customer, Vendor, Location, Product delivered", "NetSuite scope refined from 40 templates down to 21 — improved focus and delivery efficiency"], "concerns": ["Validation sign-off delay worsened to 4-5 weeks (was 3-4) — blocking multiple workstreams", "Project scope expansion requires budget realignment and formal client approval", "Power BI development still blocked pending Data Mart and BI requirements completion"], "mining": ["Data Insights groundwork in progress — not yet pitched (Owner: Amit)", "Growth thread stale 5+ months since Jan 2026 — no client call scheduled", "Power BI and Data cleansing blocked by NetSuite Migration timeline"]}, {"id": "flatiron", "name": "Flatiron", "sub": "Healthcare QA & Automation", "health": "On Track", "team": 5, "forecast": 47040, "billing": "100% billed", "billingOk": true, "tickets_resolved": null, "tickets_total": null, "rev": [15680, 15680, 15680], "billed": ["Yes", "Yes", "Yes"], "wins": ["3 major releases delivered: FCS minor, F1M integration, ONC completion", "360+ regression tests across 4 cycles (90-100 each) + SchedulerV2 + Reports regression", "QA coverage across 7 concurrent streams: COOP, COCORx, CROC, Gnome, PACE, FIRE, TDS + WCAG accessibility"], "concerns": ["Both mining threads formally closed/lost — QA staffing (vendor in place) and Chatbot (not needed)", "Zero pipeline momentum — 10+ days stale with no follow-up action items", "No CSAT survey on record — recommend scheduling baseline this quarter"], "mining": ["QA Staffing: Closed/Lost — client has existing vendor (Owner: Rohan)", "Chatbot/Voicebot: Closed/Lost — client confirmed not in need (Owner: Rohan)", "Account needs complete mining strategy reset — no viable threads remaining"]}, {"id": "aculocity", "name": "Aculocity", "sub": "DataSystems · CRM & AI Solutions", "health": "Attention", "team": 2.5, "forecast": 36160, "billing": "Unbilled gaps", "billingOk": false, "tickets_resolved": null, "tickets_total": null, "rev": [15680, 20480], "billed": ["No", "No"], "wins": ["Team 83% occupied with current work — business as usual on two support initiatives, no major setbacks", "Sourcing AI Implementation Engineer with Azure Foundry expertise — active recruitment underway", "Rohan (AM) confirmed 1-year minimum commitment will be included in SOW he is preparing"], "concerns": ["Unbilled revenue across June-July ($36,160 total) — billing gaps persist from prior periods", "AI Engineer sourcing dependent on finding Azure Foundry specialist — niche skill requirement"], "mining": ["AI Implementation Engineer with Azure Foundry expertise — sourcing active, 1-year SOW in preparation by Rohan", "CRM & AI agent opportunity progressing — SOW being drafted to include new role commitment", "Two support initiatives running — 83% team utilization provides stable base for expansion"]}, {"id": "redgold", "name": "Red Gold", "sub": "AS400 Modernization · Agriculture", "health": "Attention", "team": 2, "forecast": 17760, "billing": "100% billed", "billingOk": true, "tickets_resolved": null, "tickets_total": null, "rev": [5920, 5920, 5920], "billed": ["Yes", "Yes", "Yes"], "wins": ["Task 5723 crop screen maintenance testing completed with fixes", "Task 5748 PMO entry updates delivered for project management operations", "CSAT 3.86/5 maintained; client positive on upcoming AI PoC planning"], "concerns": ["Task 5661 required 3-4 rework cycles — quality issue now prioritized for resolution", "AI PoC start date delayed to July 13 (from TBD) due to July 4th holiday + client vacation", "India holiday June 28 may impact planned delivery dates"], "mining": ["AI PoC start date confirmed: July 13, 2026 — client wants to review SOW and scope document before signing", "PoC covers Business Knowledge Base, code optimization, test case coverage (Owner: Neha)", "Client actively engaged in planning — positive sentiment during May 26 review meeting"]}, {"id": "selectmedical", "name": "Select Medical", "sub": "Revenue Reporting · Contract Management", "health": "Attention", "team": 2, "forecast": 16800, "billing": "100% billed", "billingOk": true, "tickets_resolved": null, "tickets_total": null, "rev": [5600, 5600, 5600], "billed": ["Yes", "Yes", "Yes"], "wins": ["148 hours logged in April; 6-7 dev/bug tasks completed monthly — consistent delivery velocity", "Critical financial reporting deployed: Revenue Usage CPT codes, Cash Receipt check numbers, AR Collector changes", "Multiple reports advancing through QA: 100% Contractual, CDRNFL2, FC 5SN, PROSUM2"], "concerns": ["Client escalated to 3 formal concerns — tasks spanning JantoFebtoMar with requirements evolving mid-development", "Meghan requesting clearer requirements upfront to avoid back-and-forth rework cycles", "100% Contractual Report still blocked by authority issue; no CSAT survey on record"], "mining": ["BA opportunity 13+ weeks stale — rate negotiation at $6,160 pending Kiran's approval and ticket analysis presentation", "AI Voice Agent pitched May 19 but not demonstrated — no demo scheduled (Owner: Rohan)", "Both threads lack defined timelines, SOW status, or closure milestones"]}], "actions": [{"text": "Cascade: Resolve Prod/UAT index mismatch and spec history query performance — both impacting production stability", "owner": "DM"}, {"text": "Cascade: Push Dafo SOW signoff and Website SOW internal approval — both stalled with no timeline (Owner: Rohan)", "owner": "AM"}, {"text": "Fabricut: Escalate 4-5 week validation delay — obtain client sign-off and align expanded scope with revised budget", "owner": "DM"}, {"text": "Aculocity: Track AI Implementation Engineer sourcing (Azure Foundry); confirm Rohan's SOW includes 1-year commitment terms", "owner": "AM"}, {"text": "Red Gold: Prepare SOW and scope document for client review before July 13 PoC start — resolve Task 5661 quality issue immediately", "owner": "DM"}, {"text": "Select Medical: Implement leaner sprint planning per Meghan's feedback — fewer items, complete before pulling new; improve requirement documentation", "owner": "PM"}, {"text": "Flatiron: Formally close dead mining threads; initiate new discovery effort leveraging 3-release delivery proof point", "owner": "AM"}], "mining_data": [{"name": "Aculocity", "status": "AI Engineer Sourcing + SOW", "priority": "strong", "items": [{"tag": "Sourcing", "text": "AI Implementation Engineer with Azure Foundry expertise — active recruitment"}, {"tag": "SOW", "text": "Rohan preparing SOW with 1-year minimum commitment for new role"}, {"tag": "Base", "text": "Two support initiatives running; team 83% occupied — stable, no setbacks"}, {"tag": "Upside", "text": "New role + existing pipeline = expansion on top of $15,680 baseline"}]}, {"name": "Cascade", "status": "SOW Approvals Stalled", "priority": "active", "items": [{"tag": "Dafo SOW", "text": "Pending signoff — no timeline specified (Owner: Rohan)"}, {"tag": "Website SOW", "text": "Delayed past May 19 target — awaiting internal stakeholder approval"}, {"tag": "Warehouse", "text": "Deferred to Q3 2026 — revisit discussion planned"}, {"tag": "Risk", "text": "All 3 threads stalled on approval dependencies with no defined timelines"}]}, {"name": "Red Gold", "status": "AI PoC Confirmed July 13", "priority": "active", "items": [{"tag": "WIN", "text": "PoC start date confirmed: July 13, 2026 — client actively engaged in planning"}, {"tag": "SOW", "text": "Client wants to review SOW and scope document before signing"}, {"tag": "Scope", "text": "Business Knowledge Base + code optimization + test case coverage (Owner: Neha)"}, {"tag": "Risk", "text": "July 4 holiday + client vacations caused delay; India holiday June 28 may impact prep"}]}, {"name": "Fabricut", "status": "Data Insights Discovery", "priority": "watch", "items": [{"tag": "Progress", "text": "Normalization at 73% (up from 43%) — strong technical momentum"}, {"tag": "Data Insights", "text": "Groundwork in progress, not yet pitched to client (Owner: Amit)"}, {"tag": "Blocked", "text": "Power BI and Data cleansing tied to NetSuite Migration — no defined date"}, {"tag": "Stale", "text": "Growth thread 5+ months without client call — needs AM intervention"}]}, {"name": "Select Medical", "status": "BA + AI Voice Agent Stalled", "priority": "watch", "items": [{"tag": "BA Opportunity", "text": "13+ weeks stale — rate negotiation at $6,160 pending approval"}, {"tag": "AI Voice Agent", "text": "Pitched May 19 but no demo scheduled (Owner: Rohan)"}, {"tag": "Escalation", "text": "Client escalated 3 formal concerns about task spillover and rework cycles"}, {"tag": "Action", "text": "Present ticket analysis to Amit/PMO/AM; schedule AI Voice Agent demo"}]}, {"name": "Flatiron", "status": "Both Threads Closed/Lost", "priority": "none", "items": [{"tag": "QA Staffing", "text": "Closed/Lost — client has existing vendor in place"}, {"tag": "Chatbot", "text": "Closed/Lost — client confirmed not in need"}, {"tag": "Delivery", "text": "3 releases + 360 tests this period — strongest QA account, zero pipeline"}, {"tag": "Action", "text": "Formally close threads; initiate new discovery leveraging FCS/F1M/ONC success"}]}], "flags": [{"severity": "red", "title": "Select Medical — 3 formal client escalations on delivery perception", "subtitle": "Immediate · PM + AM action", "body": "Client Meghan escalated formally: tasks spanning JantoFebtoMar with requirements evolving mid-development. Requesting fewer items per sprint, clearer requirements upfront, and no carry-over of unworked items. 100% Contractual Report still blocked by authority issue. Mixed sentiment — relationship at risk if sprint discipline not implemented immediately.", "actions": [{"owner": "PM", "text": "Implement leaner sprint planning immediately — fewer items, complete before pulling new work"}, {"owner": "AM", "text": "Schedule client check-in with Meghan to address escalation and align on improved requirement documentation process"}]}, {"severity": "red", "title": "Fabricut — 4-5 week delay worsening + scope/budget misalignment", "subtitle": "Immediate · DM escalation", "body": "Validation sign-off delay worsened from 3-4 weeks to 4-5 weeks, blocking normalization and downstream workstreams. Scope expanded beyond original estimates but budget not yet realigned. Despite strong technical progress (73% normalization, 6 NS mappings), client dependencies creating cascading delays. Power BI still blocked.", "actions": [{"owner": "DM", "text": "Escalate validation sign-off urgently — 4-5 week delay now impacting multiple workstreams"}, {"owner": "PM", "text": "Present revised budget aligned to expanded scope for formal client approval"}]}, {"severity": "amber", "title": "Cascade — D2/D3 queue delays + persistent infrastructure issues", "subtitle": "Monitor · DM action", "body": "D2 queue delayed JunetoJuly, D3 delayed JulytoAugust due to concurrent testing. Prod/UAT index mismatch still causing 500 errors (carried from W22). New concern: spec history query slow in production. Post-2.10 regressions resolved but infrastructure alignment still incomplete. Revenue stable at $48K/mo.", "actions": [{"owner": "DM", "text": "Complete Prod/UAT index synchronization and address spec history query performance"}, {"owner": "AM", "text": "Push SOW approvals — all 3 mining threads stalled with no timelines defined"}]}, {"severity": "amber", "title": "Red Gold — Task 5661 quality issues + PoC prep needed before July 13", "subtitle": "This month · DM action", "body": "Task 5661 required 3-4 rework cycles — quality issue now prioritized. AI PoC start date confirmed July 13 but client wants SOW and scope review before signing. Health downgraded from On Track to Attention. India holiday June 28 may impact prep timeline. CSAT remains strong at 3.86/5.", "actions": [{"owner": "DM", "text": "Resolve Task 5661 quality issue immediately — prevent further rework cycles"}, {"owner": "AM", "text": "Prepare SOW and scope document for client review well before July 13 PoC start"}]}, {"severity": "amber", "title": "Flatiron — mining dead, 5th consecutive week with zero pipeline", "subtitle": "Strategic review overdue · AM", "body": "Both mining threads now formally Closed/Lost. QA staffing declined (vendor in place), Chatbot not needed. 5th consecutive week with no viable expansion conversation despite delivering 3 releases and 360+ regression tests. Strongest delivery account in portfolio with zero growth trajectory.", "actions": [{"owner": "AM", "text": "Formally close dead threads in system and initiate new discovery effort"}, {"owner": "AM", "text": "Use FCS/F1M/ONC triple release as proof point for adjacent scope conversation with client"}]}, {"severity": "blue", "title": "Aculocity — AI Engineer sourcing + SOW in preparation", "subtitle": "Opportunity · AM tracking", "body": "Sourcing AI Implementation Engineer with Azure Foundry expertise. Rohan (AM) confirmed 1-year minimum commitment will be included in SOW being prepared. Team 83% occupied on two support initiatives with no setbacks. Billing gaps ($36,160) persist but role commitment formalizes expansion path.", "actions": [{"owner": "AM", "text": "Track Azure Foundry engineer sourcing progress weekly — niche skill may require extended search"}, {"owner": "AM", "text": "Ensure SOW includes 1-year commitment terms and billing gap resolution for current resources"}]}, {"severity": "green", "title": "Fabricut normalization — 43% to 73% in one period", "subtitle": "Positive · Major technical progress", "body": "Normalization jumped from 149 to 255 of 346 tables (73% complete), creating 311 normalized tables across 11 entities. NetSuite scope refined from 40 to 21 templates. Data Mart zones built for ARR245 and NVT201. Strong execution despite client validation delays.", "actions": [{"owner": "DM", "text": "Maintain normalization momentum — target 90%+ completion next period"}, {"owner": "PM", "text": "Use 73% milestone to reinforce urgency on client validation sign-off"}]}]};
+
+const COLORS = ['#1a3c6e','#BA7517','#3B6D11','#993556','#5F5E5A','#185fa5'];
+
+// ================================================================
+// HELPERS
+// ================================================================
+function fmt(v) { return '$' + v.toLocaleString(); }
+function pct(a, b) { return b ? Math.round((a / b) * 100) + '%' : 'N/A'; }
+function arrow(curr, prev, invert) {
+  const diff = curr - prev;
+  if (diff === 0) return '<span class="arrow-same">--</span>';
+  const good = invert ? diff < 0 : diff > 0;
+  return good
+    ? '<span class="arrow-up">&#9650;</span>'
+    : '<span class="arrow-down">&#9660;</span>';
+}
+function badgeHtml(health) {
+  const cls = health === 'On Track' ? 'bok' : health === 'At Risk' ? 'brisk' : 'bwarn';
+  return '<span class="badge ' + cls + '">' + health + '</span>';
+}
+function priorityPill(p) {
+  const cls = {strong:'pp-strong',active:'pp-active',watch:'pp-watch',none:'pp-none'}[p] || 'pp-none';
+  return '<span class="ppill ' + cls + '">' + p + '</span>';
+}
+
+// ================================================================
+// 1. PORTFOLIO SUMMARY
+// ================================================================
+function buildSummary() {
+  const el = document.getElementById('summary-grid');
+  const w21rr = Math.round(W22.portfolio_forecast / W22.forecast_months);
+  const w22rr = Math.round(W23.portfolio_forecast / W23.forecast_months);
+  const w21tp = W22.tickets_total ? pct(W22.tickets_resolved, W22.tickets_total) : 'N/A';
+  const w22tp = W23.tickets_total ? pct(W23.tickets_resolved, W23.tickets_total) : 'N/A';
+  const w21tc = W22.tickets_total ? Math.round((W22.tickets_resolved/W22.tickets_total)*100) : 0;
+  const w22tc = W23.tickets_total ? Math.round((W23.tickets_resolved/W23.tickets_total)*100) : 0;
+
+  const rows = [
+    {label:'Portfolio Forecast', w21: fmt(W22.portfolio_forecast) + ' <span class="note">(' + W22.forecast_months + 'mo)</span>', w22: fmt(W23.portfolio_forecast) + ' <span class="note">(' + W23.forecast_months + 'mo)</span>', arr: arrow(W23.portfolio_forecast, W22.portfolio_forecast) + ' <span class="note">' + fmt(W23.portfolio_forecast - W22.portfolio_forecast) + '</span>'},
+    {label:'Monthly Run Rate', w21: fmt(w21rr) + '/mo', w22: fmt(w22rr) + '/mo', arr: arrow(w22rr, w21rr) + ' <span class="note">' + (w22rr > w21rr ? '+' : '') + fmt(w22rr - w21rr) + '/mo</span>'},
+    {label:'Team Deployed', w21: W22.team_deployed + ' people', w22: W23.team_deployed + ' people', arr: arrow(W23.team_deployed, W22.team_deployed) + ' <span class="note">' + (W23.team_deployed === W22.team_deployed ? 'no change' : (W23.team_deployed - W22.team_deployed) + ' people') + '</span>'},
+    {label:'Tickets Resolved / Total', w21: W22.tickets_resolved + ' / ' + W22.tickets_total + ' (' + w21tp + ')', w22: W23.tickets_resolved + ' / ' + W23.tickets_total + ' (' + w22tp + ')', arr: arrow(w22tc, w21tc) + ' <span class="note">' + w21tp + ' to ' + w22tp + '</span>'},
+    {label:'Accounts at Risk', w21: W22.accounts_at_risk + ' / 6', w22: W23.accounts_at_risk + ' / 6', arr: arrow(W23.accounts_at_risk, W22.accounts_at_risk, true) + ' <span class="note">' + (W23.accounts_at_risk === W22.accounts_at_risk ? 'no change' : (W23.accounts_at_risk > W22.accounts_at_risk ? '+' : '') + (W23.accounts_at_risk - W22.accounts_at_risk)) + '</span>'},
+    {label:'Pipeline Upside', w21: '+' + fmt(W22.pipeline_upside) + '/mo', w22: '+' + fmt(W23.pipeline_upside) + '/mo', arr: arrow(W23.pipeline_upside, W22.pipeline_upside) + ' <span class="note">' + (W23.pipeline_upside === W22.pipeline_upside ? 'no change' : fmt(W23.pipeline_upside - W22.pipeline_upside) + '/mo') + '</span>'}
+  ];
+
+  let html = '<div class="sg-header">Metric</div><div class="sg-header">W22 (' + W22.period + ')</div><div class="sg-header">W23 (' + W23.period + ')</div><div class="sg-header">Change</div>';
+  rows.forEach(function(r) {
+    html += '<div class="sg-cell sg-label">' + r.label + '</div><div class="sg-cell">' + r.w22 + '</div><div class="sg-cell">' + r.w23 + '</div><div class="sg-cell">' + r.arr + '</div>';
+  });
+  el.innerHTML = html;
+}
+
+// ================================================================
+// CHARTS
+// ================================================================
+function buildCharts() {
+  const acctNames = W22.accounts.map(function(a) { return a.name; });
+  const w21f = W22.accounts.map(function(a) { return a.forecast; });
+  const w22f = W23.accounts.map(function(a) { return a.forecast; });
+
+  new Chart(document.getElementById('forecastCompareChart'), {
+    type: 'bar',
+    data: {labels: acctNames, datasets: [
+      {label: 'W22 (' + W22.forecast_months + 'mo)', data: w21f, backgroundColor: 'rgba(26,60,110,0.7)', borderRadius: 3},
+      {label: 'W23 (' + W23.forecast_months + 'mo)', data: w22f, backgroundColor: 'rgba(186,117,23,0.7)', borderRadius: 3}
+    ]},
+    options: {responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},
+      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K'}}}}}
+  });
+
+  const w21rr = W22.accounts.map(function(a) { return Math.round(a.forecast / W22.forecast_months); });
+  const w22rr = W23.accounts.map(function(a) { return Math.round(a.forecast / W23.forecast_months); });
+
+  new Chart(document.getElementById('runRateChart'), {
+    type: 'bar',
+    data: {labels: acctNames, datasets: [
+      {label: 'W22 Run Rate', data: w21rr, backgroundColor: 'rgba(26,60,110,0.7)', borderRadius: 3},
+      {label: 'W23 Run Rate', data: w22rr, backgroundColor: 'rgba(186,117,23,0.7)', borderRadius: 3}
+    ]},
+    options: {responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{position:'bottom',labels:{font:{size:11}}}},
+      scales:{x:{grid:{display:false}},y:{grid:{color:'rgba(128,128,128,0.08)'},ticks:{callback:function(v){return '$'+(v/1000).toFixed(0)+'K'}}}}}
+  });
+}
+
+// ================================================================
+// 2. ACCOUNT-BY-ACCOUNT
+// ================================================================
+function buildAccountCards() {
+  const container = document.getElementById('account-cards');
+
+  W22.accounts.forEach(function(w21a, idx) {
+    const w22a = W23.accounts.find(function(a) { return a.id === w21a.id; });
+    if (!w22a) return;
+
+    const healthChanged = w21a.health !== w22a.health;
+    const healthArrow = healthChanged
+      ? (w22a.health === 'On Track' ? '<span class="arrow-up" style="margin:0 4px;">&#9650;</span>' : '<span class="arrow-down" style="margin:0 4px;">&#9660;</span>')
+      : '<span class="arrow-same" style="margin:0 4px;">&#8594;</span>';
+
+    // Build what-changed list
+    const changes = [];
+    if (w21a.team !== w22a.team) changes.push('Team: ' + w21a.team + ' to ' + w22a.team + ' (' + (w22a.team > w21a.team ? '+' : '') + (w22a.team - w21a.team).toFixed(1) + ')');
+    if (w21a.forecast !== w22a.forecast) changes.push('Forecast: ' + fmt(w21a.forecast) + ' to ' + fmt(w22a.forecast) + ' (' + (w22a.forecast > w21a.forecast ? '+' : '') + fmt(w22a.forecast - w21a.forecast) + ')');
+    const w21rr = Math.round(w21a.forecast / W22.forecast_months);
+    const w22rr = Math.round(w22a.forecast / W23.forecast_months);
+    if (w21rr !== w22rr) changes.push('Run rate: ' + fmt(w21rr) + '/mo to ' + fmt(w22rr) + '/mo (' + (w22rr > w21rr ? '+' : '') + fmt(w22rr - w21rr) + ')');
+    if (w21a.billing !== w22a.billing) changes.push('Billing: "' + w21a.billing + '" to "' + w22a.billing + '" ' + (w22a.billingOk && !w21a.billingOk ? '(IMPROVED)' : !w22a.billingOk && w21a.billingOk ? '(DEGRADED)' : ''));
+    if (healthChanged) changes.push('Health: ' + w21a.health + ' to ' + w22a.health);
+    if (changes.length === 0) changes.push('No significant metric changes');
+
+    const w21tickets = w21a.tickets_resolved != null ? w21a.tickets_resolved + ' / ' + w21a.tickets_total : 'N/A';
+    const w22tickets = w22a.tickets_resolved != null ? w22a.tickets_resolved + ' / ' + w22a.tickets_total : 'N/A';
+
+    const card = document.createElement('div');
+    card.className = 'acct-card';
+    card.innerHTML =
+      '<div class="acct-header" onclick="this.parentElement.classList.toggle(\'open\')">' +
+        '<div class="acct-title">' +
+          '<div>' +
+            '<div class="acct-name">' + w21a.name + '</div>' +
+            '<div class="acct-sub">' + w22a.sub + '</div>' +
+          '</div>' +
+          '<div class="health-change">' +
+            badgeHtml(w21a.health) + ' ' + healthArrow + ' ' + badgeHtml(w22a.health) +
+          '</div>' +
+        '</div>' +
+        '<span class="chv">&#9662;</span>' +
+      '</div>' +
+      '<div class="acct-body">' +
+        '<!-- Metrics table -->' +
+        '<div class="acct-metrics">' +
+          '<div class="am-header">Metric</div><div class="am-header">W22</div><div class="am-header">W23</div><div class="am-header">Chg</div>' +
+          '<div class="am-cell am-label">Team Size</div><div class="am-cell">' + w21a.team + '</div><div class="am-cell">' + w22a.team + '</div><div class="am-cell">' + arrow(w22a.team, w21a.team) + '</div>' +
+          '<div class="am-cell am-label">Forecast</div><div class="am-cell">' + fmt(w21a.forecast) + '</div><div class="am-cell">' + fmt(w22a.forecast) + '</div><div class="am-cell">' + arrow(w22a.forecast, w21a.forecast) + '</div>' +
+          '<div class="am-cell am-label">Run Rate</div><div class="am-cell">' + fmt(w21rr) + '/mo</div><div class="am-cell">' + fmt(w22rr) + '/mo</div><div class="am-cell">' + arrow(w22rr, w21rr) + '</div>' +
+          '<div class="am-cell am-label">Billing</div><div class="am-cell" style="color:' + (w21a.billingOk ? 'var(--green)' : 'var(--red)') + '">' + w21a.billing + '</div><div class="am-cell" style="color:' + (w22a.billingOk ? 'var(--green)' : 'var(--red)') + '">' + w22a.billing + '</div><div class="am-cell">' + (w21a.billingOk === w22a.billingOk ? '<span class="arrow-same">--</span>' : w22a.billingOk ? '<span class="arrow-up">&#9650;</span>' : '<span class="arrow-down">&#9660;</span>') + '</div>' +
+          '<div class="am-cell am-label" style="border-bottom:none;">Tickets</div><div class="am-cell" style="border-bottom:none;">' + w21tickets + '</div><div class="am-cell" style="border-bottom:none;">' + w22tickets + '</div><div class="am-cell" style="border-bottom:none;">--</div>' +
+        '</div>' +
+        '<!-- Wins comparison -->' +
+        '<div class="comp-cols">' +
+          '<div class="comp-col"><h4 class="w22">W22 Wins</h4>' + w21a.wins.map(function(w) { return '<div class="comp-item"><span class="ci-icon ci-win">&#10003;</span>' + w + '</div>'; }).join('') + '</div>' +
+          '<div class="comp-col"><h4 class="w23">W23 Wins</h4>' + w22a.wins.map(function(w) { return '<div class="comp-item"><span class="ci-icon ci-win">&#10003;</span>' + w + '</div>'; }).join('') + '</div>' +
+        '</div>' +
+        '<!-- Concerns comparison -->' +
+        '<div class="comp-cols">' +
+          '<div class="comp-col"><h4 class="w22">W22 Concerns</h4>' + w21a.concerns.map(function(c) { return '<div class="comp-item"><span class="ci-icon ci-risk">&#9650;</span>' + c + '</div>'; }).join('') + '</div>' +
+          '<div class="comp-col"><h4 class="w23">W23 Concerns</h4>' + w22a.concerns.map(function(c) { return '<div class="comp-item"><span class="ci-icon ci-risk">&#9650;</span>' + c + '</div>'; }).join('') + '</div>' +
+        '</div>' +
+        '<!-- Mining comparison -->' +
+        '<div class="comp-cols">' +
+          '<div class="comp-col"><h4 class="w22">W22 Mining</h4>' + w21a.mining.map(function(m) { return '<div class="comp-item"><span class="ci-icon ci-mine">&#9670;</span>' + m + '</div>'; }).join('') + '</div>' +
+          '<div class="comp-col"><h4 class="w23">W23 Mining</h4>' + w22a.mining.map(function(m) { return '<div class="comp-item"><span class="ci-icon ci-mine">&#9670;</span>' + m + '</div>'; }).join('') + '</div>' +
+        '</div>' +
+        '<!-- What Changed -->' +
+        '<div class="changed-box">' +
+          '<h4>What Changed W22 to W23</h4>' +
+          '<ul>' + changes.map(function(c) { return '<li>' + c + '</li>'; }).join('') + '</ul>' +
+        '</div>' +
+      '</div>';
+    container.appendChild(card);
+  });
+}
+
+// ================================================================
+// 3. MINING & PIPELINE TRACKER
+// ================================================================
+function buildMiningTracker() {
+  const table = document.getElementById('mining-tracker');
+
+  const allAccounts = [];
+  W22.mining_data.forEach(function(m) { if (allAccounts.indexOf(m.name) === -1) allAccounts.push(m.name); });
+  W23.mining_data.forEach(function(m) { if (allAccounts.indexOf(m.name) === -1) allAccounts.push(m.name); });
+
+  let html = '<thead><tr>' +
+    '<th>Account</th><th>W22 Status</th><th>W22 Priority</th><th>W23 Status</th><th>W23 Priority</th><th>Change Summary</th>' +
+  '</tr></thead><tbody>';
+
+  allAccounts.forEach(function(name) {
+    const w21m = W22.mining_data.find(function(m) { return m.name === name; });
+    const w22m = W23.mining_data.find(function(m) { return m.name === name; });
+
+    let changeSummary = '';
+    let changeTag = '';
+
+    if (!w21m && w22m) {
+      changeSummary = 'New mining thread in W23';
+      changeTag = 'st-new';
+    } else if (w21m && !w22m) {
+      changeSummary = 'Thread disappeared in W23';
+      changeTag = 'st-dropped';
+    } else if (w21m && w22m) {
+      if (w21m.status === w22m.status && w21m.priority === w22m.priority) {
+        changeSummary = 'No change in status or priority';
+        changeTag = 'st-unchanged';
+      } else {
+        const parts = [];
+        if (w21m.status !== w22m.status) parts.push('Status: "' + w21m.status + '" to "' + w22m.status + '"');
+        if (w21m.priority !== w22m.priority) parts.push('Priority: ' + w21m.priority + ' to ' + w22m.priority);
+        changeSummary = parts.join('; ');
+        const priorityOrder = {none:0, watch:1, active:2, strong:3};
+        const w21p = priorityOrder[w21m.priority] || 0;
+        const w22p = priorityOrder[w22m.priority] || 0;
+        changeTag = w22p > w21p ? 'st-progressed' : w22p < w21p ? 'st-stalled' : (w21m.status !== w22m.status ? 'st-progressed' : 'st-unchanged');
+      }
+    }
+
+    html += '<tr>' +
+      '<td style="font-weight:600;">' + name + '</td>' +
+      '<td>' + (w21m ? w21m.status : '<span style="color:var(--text3);">--</span>') + '</td>' +
+      '<td>' + (w21m ? priorityPill(w21m.priority) : '--') + '</td>' +
+      '<td>' + (w22m ? w22m.status : '<span style="color:var(--text3);">--</span>') + '</td>' +
+      '<td>' + (w22m ? priorityPill(w22m.priority) : '--') + '</td>' +
+      '<td><span class="status-tag ' + changeTag + '">' + changeSummary + '</span></td>' +
+    '</tr>';
+  });
+
+  html += '</tbody>';
+  table.innerHTML = html;
+}
+
+// ================================================================
+// 4. ACTION ITEM TRACKER
+// ================================================================
+function buildActionTracker() {
+  const table = document.getElementById('action-tracker');
+
+  const actionMap = [
+    {
+      status: 'Partially Resolved',
+      cls: 'as-carried',
+      notes: 'Timeout errors addressed but new issues emerged: 6-7 regressions after 2.10 release and PCI 5OP server issues caused 2 days downtime. Prod/UAT index mismatch now causing 500 errors. VM slowness concern evolved into broader infrastructure stability issue.'
+    },
+    {
+      status: 'Progressed',
+      cls: 'as-carried',
+      notes: 'Warehouse Management POC deferred to Q3 2026. Website SOW still awaiting client internal stakeholder signoff. However, Dafo SOW signoff is now actively in progress -- awaiting final approval. New AI chatbot thread added for DafoNow P2/P3 future phases.'
+    },
+    {
+      status: 'Carried Forward',
+      cls: 'as-carried',
+      notes: 'Strategic review ongoing. Both mining threads now formally rejected (upgraded from "stalled" to "rejected"). QA staffing declined due to vendor in place, Chatbot not needed. Fourth consecutive week with no viable expansion conversation. Account still needs new expansion angle.'
+    },
+    {
+      status: 'Carried Forward',
+      cls: 'as-carried',
+      notes: 'Unresolved: Aculocity $36,160 unbilled exposure persists across Jun-Jul. AI Engineer interviews still ongoing. No billing reconciliation completed. Fourth consecutive week flagged.'
+    },
+    {
+      status: 'Carried Forward',
+      cls: 'as-carried',
+      notes: 'Validation sign-off still pending. Delay worsened from ~2-3 weeks to 3-4 weeks. Expanded project scope now also requires budget alignment and formal approval. Power BI remains blocked on Data Mart readiness.'
+    },
+    {
+      status: 'Carried Forward',
+      cls: 'as-carried',
+      notes: 'BA rate negotiation now stale 3+ months (upgraded from 10 weeks). New AI Voice Agent thread pitched May 19 but no demo scheduled. Both threads lack clear SOW/proposal status and closure timelines. Ticket analysis still pending presentation.'
+    },
+    {
+      status: 'Progressed',
+      cls: 'as-carried',
+      notes: 'AI PoC advanced from demo preparation to early exploration stage covering Business Knowledge Base, code optimization, and test coverage. However, no concrete commitment, SOW, or timeline established. Needs structured proposal with scope and success criteria by month end.'
+    }
+  ];
+
+  let html = '<thead><tr>' +
+    '<th style="width:40px;">#</th><th>W22 Action</th><th>Owner</th><th>W23 Status</th><th>Notes</th>' +
+  '</tr></thead><tbody>';
+
+  W22.actions.forEach(function(a, i) {
+    const m = actionMap[i];
+    html += '<tr>' +
+      '<td style="font-weight:700;color:var(--text3);">' + (i+1) + '</td>' +
+      '<td>' + a.text + '</td>' +
+      '<td><span class="owpill">' + a.owner + '</span></td>' +
+      '<td><span class="action-status ' + m.cls + '">' + m.status + '</span></td>' +
+      '<td style="font-size:11px;color:var(--text2);">' + m.notes + '</td>' +
+    '</tr>';
+  });
+
+  html += '</tbody>';
+  table.innerHTML = html;
+}
+
+// ================================================================
+// 5. PRIORITY FLAGS COMPARISON
+// ================================================================
+function buildFlagsComparison() {
+  const container = document.getElementById('flags-comparison');
+
+  const flagMapping = [
+    {w21idx: 0, w22idx: 0, change: 'Evolved', tag: 'fct-changed', note: 'Cascade flag evolved from production stability + revenue decline to post-release regressions + infrastructure downtime. Timeout errors replaced by 6-7 regressions and PCI 5OP server downtime. Severity remains red but root cause shifted from server config to release quality and infrastructure alignment.'},
+    {w21idx: 1, w22idx: 3, change: 'Escalated', tag: 'fct-escalated', note: 'Flatiron mining escalated from "threads stalled" to "threads formally rejected." Both QA staffing and Chatbot/Voicebot now confirmed rejected by client, not just stalled. Fourth consecutive week. Upgraded from amber to amber but with worse prognosis -- all proposals met with rejection.'},
+    {w21idx: 2, w22idx: null, change: 'Absorbed', tag: 'fct-changed', note: 'Aculocity billing flag absorbed into new portfolio-wide billing health flag (green). While Aculocity still has unbilled gaps, the portfolio-level view shows improvement with 5 of 6 accounts fully billed.'},
+    {w21idx: 3, w22idx: 1, change: 'Worsened', tag: 'fct-escalated', note: 'Fabricut validation delay worsened from ~2-3 weeks to 3-4 weeks. New concerns: expanded scope requires budget alignment. Power BI still blocked. Strong execution being held back by client dependencies.'},
+    {w21idx: 4, w22idx: null, change: 'Evolved', tag: 'fct-changed', note: 'Select Medical BA opportunity evolved into broader concern: client now concerned about prolonged delivery perception. BA rate negotiation upgraded from 10 weeks to 3+ months stale. New AI Voice Agent thread added but no demo scheduled.'},
+    {w21idx: 5, w22idx: 4, change: 'Progressed', tag: 'fct-same', note: 'Red Gold AI/ML opportunity progressed from "forming" to "needs structured proposal." AI PoC use cases now defined (Business Knowledge Base, code optimization, test coverage) but still lacks commitment, SOW, or timeline. Action deadline set for month end.'},
+    {w21idx: null, w22idx: 2, change: 'New', tag: 'fct-new', note: 'New flag: Select Medical client (Meghan) concerned about tasks spanning multiple months. Sprint discipline improvements being implemented. 100% Contractual Report blocked by authority issue.'},
+    {w21idx: null, w22idx: 5, change: 'New', tag: 'fct-new', note: 'New positive flag: Portfolio billing health improved to 100% billed across all 5 reporting accounts. First time in 4 weeks. Significant improvement from previous weeks.'}
+  ];
+
+  // Side-by-side
+  let html = '<div class="flags-comp"><div class="flag-col"><h3 class="w22">W22 Flags</h3>';
+  W22.flags.forEach(function(f, i) {
+    const mapping = flagMapping.find(function(m) { return m.w22idx === i; });
+    const changeBadge = mapping ? '<span class="flag-change-tag ' + mapping.tag + '">' + mapping.change + '</span>' : '';
+    html += '<div class="flag-item">' +
+      '<div><span class="flag-dot ' + f.severity + '"></span><span class="flag-title">' + f.title + '</span>' + changeBadge + '</div>' +
+      '<div class="flag-sub">' + f.subtitle + '</div>' +
+      '<div class="flag-body">' + f.body + '</div>' +
+    '</div>';
+  });
+  html += '</div><div class="flag-col"><h3 class="w23">W23 Flags</h3>';
+  W23.flags.forEach(function(f, i) {
+    const mapping = flagMapping.find(function(m) { return m.w23idx === i; });
+    const changeBadge = mapping ? '<span class="flag-change-tag ' + mapping.tag + '">' + mapping.change + '</span>' : '';
+    html += '<div class="flag-item">' +
+      '<div><span class="flag-dot ' + f.severity + '"></span><span class="flag-title">' + f.title + '</span>' + changeBadge + '</div>' +
+      '<div class="flag-sub">' + f.subtitle + '</div>' +
+      '<div class="flag-body">' + f.body + '</div>' +
+    '</div>';
+  });
+  html += '</div></div>';
+
+  // Change summary table
+  html += '<div class="sh"><h2>Flag Change Summary</h2></div>' +
+  '<div style="overflow-x:auto;"><table class="track-table"><thead><tr>' +
+    '<th>W22 Flag</th><th>W23 Flag</th><th>Change</th><th>Analysis</th>' +
+  '</tr></thead><tbody>';
+
+  flagMapping.forEach(function(m) {
+    const w21t = m.w22idx !== null ? W22.flags[m.w22idx].title : '<span style="color:var(--text3);">--</span>';
+    const w22t = m.w23idx !== null ? W23.flags[m.w23idx].title : '<span style="color:var(--text3);">--</span>';
+    const w21sev = m.w22idx !== null ? '<span class="flag-dot ' + W22.flags[m.w22idx].severity + '"></span>' : '';
+    const w22sev = m.w23idx !== null ? '<span class="flag-dot ' + W23.flags[m.w23idx].severity + '"></span>' : '';
+    html += '<tr>' +
+      '<td>' + w21sev + w21t + '</td>' +
+      '<td>' + w22sev + w22t + '</td>' +
+      '<td><span class="flag-change-tag ' + m.tag + '">' + m.change + '</span></td>' +
+      '<td style="font-size:11px;color:var(--text2);">' + m.note + '</td>' +
+    '</tr>';
+  });
+
+  html += '</tbody></table></div>';
+  container.innerHTML = html;
+}
+
+// ================================================================
+// INIT
+// ================================================================
+buildSummary();
+buildCharts();
+buildAccountCards();
+buildMiningTracker();
+buildActionTracker();
+buildFlagsComparison();
+</script>
+</body>
+</html>
